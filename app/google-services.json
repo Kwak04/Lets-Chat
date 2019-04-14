@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "465428557228",
+    "firebase_url": "https://soen-32b17.firebaseio.com",
+    "project_id": "soen-32b17",
+    "storage_bucket": "soen-32b17.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:465428557228:android:281a601b4e07d502",
+        "android_client_info": {
+          "package_name": "com.example.soenapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "465428557228-sdh5hhp2tt4tqrtnh06q47pp75i2uk9t.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.soenapp",
+            "certificate_hash": "b30ab9922c1581c3c3196d04c3f9e2fe41fad108"
+          }
+        },
+        {
+          "client_id": "465428557228-prt95lfrdhiqmc6h1iuahruuhmh9urm0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCs9pyOv-sU70F17GkrXAJQ7vjgrYYIMgs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "465428557228-prt95lfrdhiqmc6h1iuahruuhmh9urm0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

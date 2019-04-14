@@ -1,6 +1,7 @@
 package com.example.soenapp;
 
 import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
@@ -8,7 +9,23 @@ import android.text.TextWatcher;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.util.HashMap;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+
 public class RegisterSchoolActivity extends AppCompatActivity {
+
+    Retrofit retrofit = new Retrofit.Builder()
+            .baseUrl(RetrofitService.URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build();
+    RetrofitService retrofitService = retrofit.create(RetrofitService.class);
+    HashMap<String, Object> input = new HashMap<>();
+    SchoolData body;
 
     TextWatcher textWatcher;
 
@@ -19,7 +36,7 @@ public class RegisterSchoolActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register_school);
 
-        editText = findViewById(R.id.edittext);
+        editText = findViewById(R.id.input);
 
         editText.addTextChangedListener(new TextWatcher() {
             @Override
@@ -29,7 +46,23 @@ public class RegisterSchoolActivity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                System.out.println(s);
+                retrofitService.getSchool(input).enqueue(new Callback<SchoolData>() {
+                    @Override
+                    public void onResponse(@NonNull Call<SchoolData> call, @NonNull Response<SchoolData> response) {
+                        if (response.isSuccessful()) {
+                            body = response.body();
+                            if (body.message.equals("success")) {
+                                System.out.println(body.toString());
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(@NonNull Call<SchoolData> call, @NonNull Throwable t) {
+
+                    }
+                });
+
             }
 
             @Override

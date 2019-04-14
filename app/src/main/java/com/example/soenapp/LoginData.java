@@ -1,6 +1,6 @@
 package com.example.soenapp;
 
-public class Data {
+public class LoginData {
     public String message;
     public Result[] results;
 
