@@ -4,12 +4,15 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import java.util.HashMap;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -27,9 +30,13 @@ public class RegisterSchoolActivity extends AppCompatActivity {
     HashMap<String, Object> input = new HashMap<>();
     SchoolData body;
 
-    TextWatcher textWatcher;
+    private RecyclerView recyclerView;
+    private RecyclerView.Adapter mAdapter;
+    private RecyclerView.LayoutManager layoutManager;
 
+    TextWatcher textWatcher;
     EditText editText;
+    RecyclerView schoolList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +44,17 @@ public class RegisterSchoolActivity extends AppCompatActivity {
         setContentView(R.layout.activity_register_school);
 
         editText = findViewById(R.id.input);
+        schoolList = findViewById(R.id.schoollist);
+
+        // use this setting to improve performance if you know that changes
+        // in content do not change the layout size of the RecyclerView
+        recyclerView.setHasFixedSize(true);
+
+        // use a linear layout manager
+        layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
+
+
 
         editText.addTextChangedListener(new TextWatcher() {
             @Override
@@ -46,12 +64,17 @@ public class RegisterSchoolActivity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                retrofitService.getSchool(input).enqueue(new Callback<SchoolData>() {
+                retrofitService.getSchool(s.toString()).enqueue(new Callback<SchoolData>() {
                     @Override
                     public void onResponse(@NonNull Call<SchoolData> call, @NonNull Response<SchoolData> response) {
                         if (response.isSuccessful()) {
                             body = response.body();
                             if (body.message.equals("success")) {
+
+                                // specify an adapter (see also next example)
+                                mAdapter = new MyAdapter(body.results);
+                                recyclerView.setAdapter(mAdapter);
+
                                 System.out.println(body.toString());
                             }
                         }

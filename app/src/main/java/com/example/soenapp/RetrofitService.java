@@ -1,16 +1,18 @@
 package com.example.soenapp;
 
 import java.util.HashMap;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.Query;
 
 public interface RetrofitService {
 
-    String ip = "54.180.123.66";
+    String ip = "52.78.134.109";
     String URL = "http://" + ip + ":3000/";
 
     @FormUrlEncoded
@@ -19,7 +21,7 @@ public interface RetrofitService {
 
 
     @GET("/user/privacy/register/school")
-    Call<SchoolData> getSchool(@FieldMap HashMap<String, Object> param);
+    Call<SchoolData> getSchool(@Query("schoolname") String schoolname);
 
 
 }
