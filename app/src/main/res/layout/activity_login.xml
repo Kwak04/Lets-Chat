@@ -64,6 +64,12 @@
 
         </LinearLayout>
 
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="채팅 화면 테스트"
+            android:id="@+id/gotochat"/>
+
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>
