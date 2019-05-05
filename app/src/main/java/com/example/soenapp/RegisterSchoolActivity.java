@@ -30,13 +30,13 @@ public class RegisterSchoolActivity extends AppCompatActivity {
     HashMap<String, Object> input = new HashMap<>();
     SchoolData body;
 
-    private RecyclerView recyclerView;
+    private RecyclerView schoolList;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager layoutManager;
 
     TextWatcher textWatcher;
     EditText editText;
-    RecyclerView schoolList;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,12 +48,11 @@ public class RegisterSchoolActivity extends AppCompatActivity {
 
         // use this setting to improve performance if you know that changes
         // in content do not change the layout size of the RecyclerView
-        recyclerView.setHasFixedSize(true);
+        schoolList.setHasFixedSize(true);
 
         // use a linear layout manager
         layoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(layoutManager);
-
+        schoolList.setLayoutManager(layoutManager);
 
 
         editText.addTextChangedListener(new TextWatcher() {
@@ -72,8 +71,8 @@ public class RegisterSchoolActivity extends AppCompatActivity {
                             if (body.message.equals("success")) {
 
                                 // specify an adapter (see also next example)
-                                mAdapter = new MyAdapter(body.results);
-                                recyclerView.setAdapter(mAdapter);
+                                mAdapter = new MyAdapter(body);
+                                schoolList.setAdapter(mAdapter);
 
                                 System.out.println(body.toString());
                             }

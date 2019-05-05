@@ -12,7 +12,7 @@ import retrofit2.http.Query;
 
 public interface RetrofitService {
 
-    String ip = "52.78.134.109";
+    String ip = "13.125.146.255";
     String URL = "http://" + ip + ":3000/";
 
     @FormUrlEncoded
