@@ -9,7 +9,6 @@ import android.widget.TextView;
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     private SchoolData mDataset;
 
-
     // Provide a reference to the views for each data item
     // Complex data items may need more than one view per item, and
     // you provide access to all the views for a data item in a view holder
@@ -42,6 +41,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
         holder.name.setText(mDataset.results[position].name);
+        holder.address.setText(mDataset.results[position].address);
     }
 
     // Return the size of your dataset (invoked by the layout manager)

@@ -72,8 +72,8 @@ public class LoginActivity extends AppCompatActivity {
         });
 
         //채팅 화면 테스트 (임시)
-        Button chat = (Button)findViewById(R.id.gotochat);
-        chat.setOnClickListener(new View.OnClickListener() {
+
+        findViewById(R.id.gotochat).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 final Intent chat_intent = new Intent(getApplicationContext(), ChatActivity.class);
