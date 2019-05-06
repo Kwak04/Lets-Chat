@@ -1,9 +1,5 @@
 package com.example.soenapp;
 
-import java.util.ArrayList;
-import java.util.List;
-
-
 public class Chat {
     String text;
     String person;
@@ -16,6 +12,7 @@ public class Chat {
                 "text='" + text + '\'' +
                 ", person='" + person + '\'' +
                 ", time='" + time + '\'' +
+                ", user_key='" + user_key + '\'' +
                 '}';
     }
 }

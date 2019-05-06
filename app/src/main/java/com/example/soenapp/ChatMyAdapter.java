@@ -10,21 +10,24 @@ import java.util.List;
 
 public class ChatMyAdapter extends RecyclerView.Adapter<ChatMyAdapter.MyViewHolder> {
     private List<Chat> mDataset;
+    private String myUserKey;
 
     public static class MyViewHolder extends RecyclerView.ViewHolder{
 
-        public TextView chat_text, chat_person, chat_time;
+        public TextView chat_text, chat_person, chat_time, who;
 
         public MyViewHolder(View v) {
             super(v);
             chat_text = v.findViewById(R.id.chat_text);
             chat_person = v.findViewById(R.id.chat_person);
             chat_time = v.findViewById(R.id.chat_time);
+            who = v.findViewById(R.id.chat_who);
         }
     }
 
-    public ChatMyAdapter(List<Chat> myDataset) {
+    public ChatMyAdapter(List<Chat> myDataset, String my_user_key) {
         mDataset = myDataset;
+        myUserKey = my_user_key;
     }
 
     @Override
@@ -42,6 +45,13 @@ public class ChatMyAdapter extends RecyclerView.Adapter<ChatMyAdapter.MyViewHold
         holder.chat_text.setText(mDataset.get(position).text);
         holder.chat_person.setText(mDataset.get(position).person);
         holder.chat_time.setText(mDataset.get(position).time);
+
+        if (myUserKey.equals(mDataset.get(position).user_key)) {
+            holder.who.setText("나");
+        } else {
+            holder.who.setText("너");
+        }
+
     }
 
     // Return the size of your dataset (invoked by the layout manager)
