@@ -1,12 +1,14 @@
 package com.example.soenapp;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.HashMap;
@@ -23,6 +25,9 @@ public class LoginActivity extends AppCompatActivity {
     String id, pw;
     Button login, register;
 
+    SharedPreferences sharedPreferences;
+    SharedPreferences.Editor editor;
+
     Retrofit retrofit = new Retrofit.Builder()
             .baseUrl(RetrofitService.URL)
             .addConverterFactory(GsonConverterFactory.create())
@@ -30,6 +35,10 @@ public class LoginActivity extends AppCompatActivity {
     RetrofitService retrofitService = retrofit.create(RetrofitService.class);
     HashMap<String, Object> input = new HashMap<>();
     LoginData body;
+
+    // temporary
+    // TODO remove this after the test
+    TextView myUserKey;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +49,15 @@ public class LoginActivity extends AppCompatActivity {
         editPW = findViewById(R.id.PW);
         login = findViewById(R.id.login_bt);
         register = findViewById(R.id.register_bt);
+
+        sharedPreferences = getSharedPreferences("appData", MODE_PRIVATE);
+
+        // temporary
+//        editor = sharedPreferences.edit();
+//        editor.putString("text", "");
+//        editor.apply();
+        myUserKey = findViewById(R.id.my_user_key);
+        myUserKey.setText(sharedPreferences.getString("text", ""));
 
         login.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -57,6 +75,9 @@ public class LoginActivity extends AppCompatActivity {
                             body = response.body();
                             if (body.message.equals("success")) {
                                 Toast.makeText(getApplicationContext(), "성공!" + " userKey : " + body.results[0].user_key, Toast.LENGTH_SHORT).show();
+                                editor = sharedPreferences.edit();
+                                editor.putString("user_key", body.results[0].user_key);
+                                editor.apply();
                             } else if (body.message.equals("fail")) {
                                 Toast.makeText(getApplicationContext(), "실패", Toast.LENGTH_SHORT).show();
                             }
@@ -72,7 +93,6 @@ public class LoginActivity extends AppCompatActivity {
         });
 
         //채팅 화면 테스트 (임시)
-
         findViewById(R.id.gotochat).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -85,10 +105,7 @@ public class LoginActivity extends AppCompatActivity {
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
                 startActivity(intent);
-
             }
         });
     }

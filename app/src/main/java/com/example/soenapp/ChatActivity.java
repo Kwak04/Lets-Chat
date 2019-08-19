@@ -68,7 +68,6 @@ public class ChatActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 Chat chat = new Chat();
-
                 chat.person = "test";
                 chat.time = "test";
                 chat.user_key = "1";
@@ -81,7 +80,6 @@ public class ChatActivity extends AppCompatActivity {
                 }
                 mAdapter = new ChatMyAdapter(chats, my_user_key);
                 recyclerView.setAdapter(mAdapter);
-
             }
         });
     }

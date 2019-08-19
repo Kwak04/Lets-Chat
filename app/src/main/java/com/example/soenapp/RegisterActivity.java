@@ -15,7 +15,6 @@ public class RegisterActivity extends AppCompatActivity {
     EditText makePW;
     EditText makePW_check;
     Button login;
-    static final String URL = "http://13.209.49.105:3000/";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,14 +31,22 @@ public class RegisterActivity extends AppCompatActivity {
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (makePW.getText().toString().equals(makePW_check.getText().toString())) {
-                    intent.putExtra("name", makeName.getText().toString());
-                    intent.putExtra("id", makeID.getText().toString());
-                    intent.putExtra("pw", makePW.getText().toString());
+                String name = makeName.getText().toString();
+                String id = makeID.getText().toString();
+                String pw = makePW.getText().toString();
+                String pw_check = makePW_check.getText().toString();
 
-                    startActivity(intent);
-                } else {
-                    Toast.makeText(getApplicationContext(), "비밀번호가 일치하지 않습니다.", Toast.LENGTH_SHORT).show();
+                if (!(name.equals("")) || !(id.equals("")) || !(pw.equals("")) || !(pw_check.equals(""))) {
+                    if (pw.equals(pw_check)) {
+                        intent.putExtra("name", name);
+                        intent.putExtra("id", id);
+                        intent.putExtra("pw", pw);
+
+                        startActivity(intent);
+                        
+                    } else {
+                        Toast.makeText(getApplicationContext(), "비밀번호가 일치하지 않습니다.", Toast.LENGTH_SHORT).show();
+                    }
                 }
             }
         });
