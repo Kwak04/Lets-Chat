@@ -14,7 +14,7 @@ public class RegisterActivity extends AppCompatActivity {
     EditText makeID;
     EditText makePW;
     EditText makePW_check;
-    Button login;
+    Button next;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,10 +25,10 @@ public class RegisterActivity extends AppCompatActivity {
         makeID = findViewById(R.id.newID);
         makePW = findViewById(R.id.newPW);
         makePW_check = findViewById(R.id.newPW_check);
-        login = findViewById(R.id.next);
+        next = findViewById(R.id.next);
 
         final Intent intent = new Intent(getApplicationContext(), RegisterSchoolActivity.class);
-        login.setOnClickListener(new View.OnClickListener() {
+        next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String name = makeName.getText().toString();
@@ -43,7 +43,7 @@ public class RegisterActivity extends AppCompatActivity {
                         intent.putExtra("pw", pw);
 
                         startActivity(intent);
-                        
+
                     } else {
                         Toast.makeText(getApplicationContext(), "비밀번호가 일치하지 않습니다.", Toast.LENGTH_SHORT).show();
                     }

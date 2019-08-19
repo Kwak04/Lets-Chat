@@ -49,6 +49,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:orientation="vertical"
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp">
 
@@ -57,6 +58,26 @@
                 android:scrollbars="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp">
+
+            <Button
+                android:id="@+id/next"
+                android:layout_width="130dp"
+                android:layout_height="wrap_content"
+                android:background="@android:color/holo_blue_dark"
+                android:textColor="#ffffff"
+                android:textSize="20sp"
+                android:layout_gravity="right"
+                android:layout_marginTop="20dp"
+                android:text="다음" />
 
         </LinearLayout>
 

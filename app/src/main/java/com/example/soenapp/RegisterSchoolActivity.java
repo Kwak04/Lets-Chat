@@ -8,6 +8,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -36,6 +38,7 @@ public class RegisterSchoolActivity extends AppCompatActivity {
 
     TextWatcher textWatcher;
     EditText editText;
+    Button next;
 
 
     @Override
@@ -93,12 +96,20 @@ public class RegisterSchoolActivity extends AppCompatActivity {
             }
         });
 
-        Intent getIntent = getIntent();
+        final Intent getIntent = getIntent();
+//        final Intent newIntent = new Intent(getApplicationContext(), )  // TODO register complete class
 
         String name = getIntent.getExtras().getString("name");
         String id = getIntent.getExtras().getString("id");
         String pw = getIntent.getExtras().getString("pw");
 
         Toast.makeText(getApplicationContext(), "이름: " + name + " 아이디: " + id + " 비번: " + pw, Toast.LENGTH_LONG).show();
+
+        next.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
     }
 }
