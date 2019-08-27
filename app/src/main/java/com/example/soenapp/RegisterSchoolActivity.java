@@ -46,6 +46,8 @@ public class RegisterSchoolActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register_school);
 
+        next = findViewById(R.id.next);
+
         editText = findViewById(R.id.input);
         schoolList = findViewById(R.id.schoollist);
 
@@ -97,18 +99,22 @@ public class RegisterSchoolActivity extends AppCompatActivity {
         });
 
         final Intent getIntent = getIntent();
-//        final Intent newIntent = new Intent(getApplicationContext(), )  // TODO register complete class
+        final Intent newIntent = new Intent(getApplicationContext(), RegisterCompletedActivity.class);  // TODO register complete class
 
-        String name = getIntent.getExtras().getString("name");
-        String id = getIntent.getExtras().getString("id");
-        String pw = getIntent.getExtras().getString("pw");
+        final String name = getIntent.getExtras().getString("name");
+        final String id = getIntent.getExtras().getString("id");
+        final String pw = getIntent.getExtras().getString("pw");
 
         Toast.makeText(getApplicationContext(), "이름: " + name + " 아이디: " + id + " 비번: " + pw, Toast.LENGTH_LONG).show();
 
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                newIntent.putExtra("name", name);
+                newIntent.putExtra("id", id);
+                newIntent.putExtra("pw", pw);
 
+                startActivity(newIntent);
             }
         });
     }
