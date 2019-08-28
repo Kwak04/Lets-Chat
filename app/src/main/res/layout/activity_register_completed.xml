@@ -80,6 +80,21 @@
                     android:textSize="20sp"
                     android:id="@+id/pw"/>
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="학교"
+                    android:textColor="#000000"
+                    android:textSize="15sp"
+                    android:layout_marginTop="12dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="YourSchool"
+                    android:textSize="20sp"
+                    android:id="@+id/school"/>
+
             </LinearLayout>
 
             <Button
