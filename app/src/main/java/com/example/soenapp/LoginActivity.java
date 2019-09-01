@@ -101,6 +101,15 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+        //메인 화면 테스트 (임시)
+        findViewById(R.id.go_to_main).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final Intent main_intent = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(main_intent);
+            }
+        });
+
         final Intent intent = new Intent(getApplicationContext(), RegisterActivity.class);
         register.setOnClickListener(new View.OnClickListener() {
             @Override
