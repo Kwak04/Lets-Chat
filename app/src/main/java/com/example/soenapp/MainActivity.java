@@ -1,14 +1,15 @@
 package com.example.soenapp;
 
-import android.graphics.drawable.GradientDrawable;
+import android.graphics.drawable.ShapeDrawable;
+import android.graphics.drawable.shapes.OvalShape;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.Button;
 import android.widget.ImageView;
 
 public class MainActivity extends AppCompatActivity {
 
     ImageView userImage;
-    GradientDrawable rounding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,8 +18,8 @@ public class MainActivity extends AppCompatActivity {
 
         userImage = findViewById(R.id.user_photo);
 
-        rounding = (GradientDrawable) getApplicationContext().getDrawable(R.drawable.photo_rounding);
-        userImage.setBackground(rounding);
+        // 원형
+        userImage.setBackground(new ShapeDrawable(new OvalShape()));
         userImage.setClipToOutline(true);
     }
 }
