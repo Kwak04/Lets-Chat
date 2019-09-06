@@ -32,7 +32,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="최연욱"
+            android:text="곽현민"
             android:textSize="20sp"
             android:textColor="#000000"
             android:layout_gravity="center"
@@ -42,7 +42,7 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:id="@+id/user_photo"
-            android:src="@drawable/cyw_painter"
+            android:src="@drawable/tronix_logo"
             android:layout_marginEnd="40dp"
             android:layout_gravity="center"/>
 
@@ -72,13 +72,163 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:id="@+id/content1">
+                    android:id="@+id/content1"
+                    android:layout_margin="30dp">
 
-                    <TextView
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:text="안녕하세요 이곳은 내 클럽 화면입니다!"/>
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="나의 학교"
+                                android:textColor="#000000"
+                                android:textSize="25sp"
+                                android:textStyle="bold"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="목일중학교"
+                                android:textColor="#000000"
+                                android:textSize="15sp"
+                                android:id="@+id/my_school"/>
+
+                        </LinearLayout>
+
+                        <View
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"/>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:layout_gravity="center">
+
+                            <Button
+                                android:layout_width="80dp"
+                                android:layout_height="35dp"
+                                android:text="입장"
+                                android:background="@android:color/holo_blue_dark"
+                                android:textSize="15sp"
+                                android:textColor="#FFFFFF" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="15dp">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="나의 반"
+                                android:textColor="#000000"
+                                android:textSize="25sp"
+                                android:textStyle="bold"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="11반"
+                                android:textColor="#000000"
+                                android:textSize="15sp"
+                                android:id="@+id/my_class"/>
+
+                        </LinearLayout>
+
+                        <View
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"/>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:layout_gravity="center">
+
+                            <Button
+                                android:layout_width="80dp"
+                                android:layout_height="35dp"
+                                android:text="입장"
+                                android:background="@android:color/holo_blue_dark"
+                                android:textSize="15sp"
+                                android:textColor="#FFFFFF" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="15dp">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="나의 성별"
+                                android:textColor="#000000"
+                                android:textSize="25sp"
+                                android:textStyle="bold"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="남자"
+                                android:textColor="#000000"
+                                android:textSize="15sp"
+                                android:id="@+id/my_gender"/>
+
+                        </LinearLayout>
+
+                        <View
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"/>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:layout_gravity="center">
+
+                            <Button
+                                android:layout_width="80dp"
+                                android:layout_height="35dp"
+                                android:text="입장"
+                                android:background="@android:color/holo_blue_dark"
+                                android:textSize="15sp"
+                                android:textColor="#FFFFFF" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
 
                 </LinearLayout>
 
