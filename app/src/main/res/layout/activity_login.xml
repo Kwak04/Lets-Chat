@@ -73,11 +73,24 @@
 
         </LinearLayout>
 
-        <Button
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="채팅 화면 테스트"
-            android:id="@+id/gotochat"/>
+            android:orientation="horizontal">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="채팅 화면 테스트"
+                android:id="@+id/gotochat"/>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="메인 화면 테스트"
+                android:id="@+id/go_to_main"/>
+
+        </LinearLayout>
 
     </LinearLayout>
 
