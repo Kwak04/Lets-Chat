@@ -10,7 +10,14 @@
     <string name="action_sign_up">회원가입</string>
     <string name="text_id">아이디</string>
     <string name="text_pw">비밀번호</string>
+    <string name="text_pw_check">비밀번호 확인</string>
+    <string name="text_name">이름</string>
+    <string name="text_school">학교</string>
     <string name="error_invalid_password">비밀번호가 너무 짧습니다.</string>
     <string name="error_incorrect_password">비밀번호가 올바르지 않습니다.</string>
     <string name="error_field_required">내용을 입력해 주세요.</string>
+
+    <!-- Strings related to buttons -->
+    <string name="action_next">다음</string>
+    <string name="action_previous">이전</string>
 </resources>
