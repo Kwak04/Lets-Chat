@@ -1,17 +1,54 @@
 <resources>
-    <string name="app_name">SoenApp</string>
-    <string name="title_activity_login2">Sign in</string>
+    <string name="app_name">Let\'s Chat!</string>
+
+    <!-- Sort by Uses -->
+
+    <!-- Strings for test -->
+    <string name="test_chat_screen">채팅 화면 테스트</string>
+    <string name="test_main_screen">메인 화면 테스트</string>
+
+    <!-- Sample Strings -->
+    <string name="sample_name">곽현민</string>
+    <string name="sample_id">myID</string>
+    <string name="sample_pw">myPassword</string>
+    <string name="sample_school">우리학교</string>
+    <string name="sample_class">11반</string>
+    <string name="sample_gender">남성</string>
+
     <!-- Strings related to login -->
-    <string name="prompt_email">Email</string>
-    <string name="prompt_password">Password (optional)</string>
-    <string name="action_sign_in">Sign in or register</string>
-    <string name="action_sign_in_short">Sign in</string>
-    <string name="error_invalid_email">This email address is invalid</string>
-    <string name="error_invalid_password">This password is too short</string>
-    <string name="error_incorrect_password">This password is incorrect</string>
-    <string name="error_field_required">This field is required</string>
-    <string name="permission_rationale">"Contacts permissions are needed for providing email
-        completions."
-    </string>
-    <string name="title_activity_register_school">RegisterSchoolActivity</string>
+    <string name="action_sign_in">로그인</string>
+    <string name="action_sign_up">회원가입</string>
+    <string name="text_id">아이디</string>
+    <string name="text_pw">비밀번호</string>
+    <string name="text_pw_check">비밀번호 확인</string>
+    <string name="text_name">이름</string>
+    <string name="text_school">학교</string>
+    <string name="text_school_name">학교이름</string>
+    <string name="text_school_address">학교주소</string>
+    <string name="hint_school_search">학교명 입력</string>
+    <string name="text_school_search">학교검색</string>
+    <string name="error_invalid_password">비밀번호가 너무 짧습니다.</string>
+    <string name="error_incorrect_password">비밀번호가 올바르지 않습니다.</string>
+    <string name="error_field_required">내용을 입력해 주세요.</string>
+
+    <!-- Strings related to buttons -->
+    <string name="action_next">다음</string>
+    <string name="action_previous">이전</string>
+    <string name="action_join">참가</string>
+
+    <!-- Sort by Activities -->
+
+    <!-- activity_register_completed -->
+    <string name="text_register_completed_your_name">홍길동님,</string>
+    <string name="text_register_completed_message">회원가입이 완료되었습니다!</string>
+    <string name="text_register_completed_your_id">YourID</string>
+    <string name="text_register_completed_your_pw">YourPassword</string>
+    <string name="text_register_completed_your_school">YourSchool</string>
+    <string name="action_go_to_login_screen">로그인 화면으로 가기</string>
+
+    <!-- activity_main -->
+    <string name="text_main">메인</string>
+    <string name="text_main_my_school">나의 학교</string>
+    <string name="text_main_my_class">나의 반</string>
+    <string name="text_main_my_gender">나의 성별</string>
 </resources>

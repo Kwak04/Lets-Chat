@@ -16,7 +16,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="메인"
+            android:text="@string/text_main"
             android:textSize="50sp"
             android:textColor="#000000"
             android:layout_marginStart="30dp"
@@ -32,7 +32,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="곽현민"
+            android:text="@string/sample_name"
             android:textSize="20sp"
             android:textColor="#000000"
             android:layout_gravity="center"
@@ -88,7 +88,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="나의 학교"
+                                android:text="@string/text_main_my_school"
                                 android:textColor="#000000"
                                 android:textSize="25sp"
                                 android:textStyle="bold"/>
@@ -96,7 +96,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="목일중학교"
+                                android:text="@string/sample_school"
                                 android:textColor="#000000"
                                 android:textSize="15sp"
                                 android:id="@+id/my_school"/>
@@ -104,7 +104,7 @@
                         </LinearLayout>
 
                         <View
-                            android:layout_width="wrap_content"
+                            android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:layout_weight="1"/>
 
@@ -117,7 +117,7 @@
                             <Button
                                 android:layout_width="80dp"
                                 android:layout_height="35dp"
-                                android:text="입장"
+                                android:text="@string/action_join"
                                 android:background="@android:color/holo_blue_dark"
                                 android:textSize="15sp"
                                 android:textColor="#FFFFFF" />
@@ -140,7 +140,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="나의 반"
+                                android:text="@string/text_main_my_class"
                                 android:textColor="#000000"
                                 android:textSize="25sp"
                                 android:textStyle="bold"/>
@@ -148,7 +148,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="11반"
+                                android:text="@string/sample_class"
                                 android:textColor="#000000"
                                 android:textSize="15sp"
                                 android:id="@+id/my_class"/>
@@ -156,7 +156,7 @@
                         </LinearLayout>
 
                         <View
-                            android:layout_width="wrap_content"
+                            android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:layout_weight="1"/>
 
@@ -169,7 +169,7 @@
                             <Button
                                 android:layout_width="80dp"
                                 android:layout_height="35dp"
-                                android:text="입장"
+                                android:text="@string/action_join"
                                 android:background="@android:color/holo_blue_dark"
                                 android:textSize="15sp"
                                 android:textColor="#FFFFFF" />
@@ -192,7 +192,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="나의 성별"
+                                android:text="@string/text_main_my_gender"
                                 android:textColor="#000000"
                                 android:textSize="25sp"
                                 android:textStyle="bold"/>
@@ -200,7 +200,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="남자"
+                                android:text="@string/sample_gender"
                                 android:textColor="#000000"
                                 android:textSize="15sp"
                                 android:id="@+id/my_gender"/>
@@ -208,7 +208,7 @@
                         </LinearLayout>
 
                         <View
-                            android:layout_width="wrap_content"
+                            android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:layout_weight="1"/>
 
@@ -221,7 +221,7 @@
                             <Button
                                 android:layout_width="80dp"
                                 android:layout_height="35dp"
-                                android:text="입장"
+                                android:text="@string/action_join"
                                 android:background="@android:color/holo_blue_dark"
                                 android:textSize="15sp"
                                 android:textColor="#FFFFFF" />

@@ -21,7 +21,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="30dp"
-            android:text="회원가입"
+            android:text="@string/action_sign_up"
             android:textColor="@android:color/black"
             android:textSize="50sp" />
 
@@ -34,7 +34,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="이름"
+                android:text="@string/text_name"
                 android:textColor="@android:color/black"
                 android:textSize="16sp" />
 
@@ -43,12 +43,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:background="@drawable/rounded_edittext"
-                android:hint="이름" />
+                android:hint="@string/text_name" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="아이디"
+                android:text="@string/text_id"
                 android:textColor="@android:color/black"
                 android:textSize="16sp" />
 
@@ -57,12 +57,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:background="@drawable/rounded_edittext"
-                android:hint="ID" />
+                android:hint="@string/text_id" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="비밀번호"
+                android:text="@string/text_pw"
                 android:textColor="@android:color/black"
                 android:textSize="16sp" />
 
@@ -71,12 +71,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:background="@drawable/rounded_edittext"
-                android:hint="PW" />
+                android:hint="@string/text_pw" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="비밀번호 확인"
+                android:text="@string/text_pw_check"
                 android:textColor="@android:color/black"
                 android:textSize="16sp" />
 
@@ -85,7 +85,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:background="@drawable/rounded_edittext"
-                android:hint="PW" />
+                android:hint="@string/text_pw" />
 
             <Button
                 android:id="@+id/next"
@@ -94,9 +94,9 @@
                 android:background="@android:color/holo_blue_dark"
                 android:textColor="#ffffff"
                 android:textSize="20sp"
-                android:layout_gravity="right"
+                android:layout_gravity="end"
                 android:layout_marginTop="20dp"
-                android:text="다음" />
+                android:text="@string/action_next" />
 
         </LinearLayout>
 

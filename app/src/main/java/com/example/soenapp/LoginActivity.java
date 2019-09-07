@@ -56,8 +56,9 @@ public class LoginActivity extends AppCompatActivity {
 //        editor = sharedPreferences.edit();
 //        editor.putString("text", "");
 //        editor.apply();
-        myUserKey = findViewById(R.id.my_user_key);
-        myUserKey.setText(sharedPreferences.getString("text", ""));
+
+//        myUserKey = findViewById(R.id.my_user_key);
+//        myUserKey.setText(sharedPreferences.getString("text", ""));
 
         login.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -93,7 +94,7 @@ public class LoginActivity extends AppCompatActivity {
         });
 
         //채팅 화면 테스트 (임시)
-        findViewById(R.id.gotochat).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.go_to_chat).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 final Intent chat_intent = new Intent(getApplicationContext(), ChatActivity.class);
