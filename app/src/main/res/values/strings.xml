@@ -1,11 +1,17 @@
 <resources>
     <string name="app_name">Let\'s Chat!</string>
 
+    <!-- Sort by Uses -->
+
     <!-- Strings for test -->
     <string name="test_chat_screen">채팅 화면 테스트</string>
     <string name="test_main_screen">메인 화면 테스트</string>
 
-    <!-- Sort by Uses -->
+    <!-- Sample Strings -->
+    <string name="sample_name">곽현민</string>
+    <string name="sample_id">myID</string>
+    <string name="sample_pw">myPassword</string>
+    <string name="sample_school">우리학교</string>
 
     <!-- Strings related to login -->
     <string name="action_sign_in">로그인</string>
@@ -36,4 +42,7 @@
     <string name="text_register_completed_your_pw">YourPassword</string>
     <string name="text_register_completed_your_school">YourSchool</string>
     <string name="action_go_to_login_screen">로그인 화면으로 가기</string>
+
+    <!-- activity_main -->
+    <string name="text_main">메인</string>
 </resources>

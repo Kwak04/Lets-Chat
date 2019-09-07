@@ -61,7 +61,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/text_register_completed_your_id"
+                    android:text="@string/sample_id"
                     android:textSize="20sp"
                     android:id="@+id/id"/>
 
@@ -76,7 +76,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/text_register_completed_your_pw"
+                    android:text="@string/sample_pw"
                     android:textSize="20sp"
                     android:id="@+id/pw"/>
 
@@ -91,7 +91,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/text_register_completed_your_school"
+                    android:text="@string/sample_school"
                     android:textSize="20sp"
                     android:id="@+id/school"/>
 
