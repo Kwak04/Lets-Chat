@@ -49,7 +49,7 @@ public class RegisterSchoolActivity extends AppCompatActivity {
         next = findViewById(R.id.next);
 
         editText = findViewById(R.id.input);
-        schoolList = findViewById(R.id.schoollist);
+        schoolList = findViewById(R.id.school_list);
 
         // use this setting to improve performance if you know that changes
         // in content do not change the layout size of the RecyclerView

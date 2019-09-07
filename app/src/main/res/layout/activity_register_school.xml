@@ -20,7 +20,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="100dp"
-            android:text="회원가입"
+            android:text="@string/action_sign_up"
             android:textColor="@android:color/black"
             android:textSize="50sp" />
 
@@ -33,7 +33,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="학교검색"
+                android:text="@string/text_school_search"
                 android:textColor="#000000"
                 android:textSize="16sp"/>
 
@@ -41,7 +41,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:id="@+id/input"
-                android:hint="학교명 입력"
+                android:hint="@string/hint_school_search"
                 android:background="@drawable/rounded_edittext"/>
 
         </LinearLayout>
@@ -54,7 +54,7 @@
             android:layout_marginRight="30dp">
 
             <android.support.v7.widget.RecyclerView
-                android:id="@+id/schoollist"
+                android:id="@+id/school_list"
                 android:scrollbars="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
@@ -75,9 +75,9 @@
                 android:background="@android:color/holo_blue_dark"
                 android:textColor="#ffffff"
                 android:textSize="20sp"
-                android:layout_gravity="right"
+                android:layout_gravity="end"
                 android:layout_marginTop="20dp"
-                android:text="다음" />
+                android:text="@string/action_next" />
 
         </LinearLayout>
 
