@@ -5,6 +5,8 @@
     <string name="test_chat_screen">채팅 화면 테스트</string>
     <string name="test_main_screen">메인 화면 테스트</string>
 
+    <!-- Sort by Uses -->
+
     <!-- Strings related to login -->
     <string name="action_sign_in">로그인</string>
     <string name="action_sign_up">회원가입</string>
@@ -24,4 +26,14 @@
     <!-- Strings related to buttons -->
     <string name="action_next">다음</string>
     <string name="action_previous">이전</string>
+
+    <!-- Sort by Activities -->
+
+    <!-- activity_register_completed -->
+    <string name="text_register_completed_your_name">홍길동님,</string>
+    <string name="text_register_completed_message">회원가입이 완료되었습니다!</string>
+    <string name="text_register_completed_your_id">YourID</string>
+    <string name="text_register_completed_your_pw">YourPassword</string>
+    <string name="text_register_completed_your_school">YourSchool</string>
+    <string name="action_go_to_login_screen">로그인 화면으로 가기</string>
 </resources>
