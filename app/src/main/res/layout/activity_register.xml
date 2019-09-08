@@ -1,105 +1,112 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".RegisterActivity"
-    android:orientation="vertical">
+    tools:context=".RegisterActivity">
 
-    <LinearLayout
+    <ScrollView
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
-        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="30dp"
-            android:text="@string/action_sign_up"
-            android:textColor="@android:color/black"
-            android:textSize="50sp" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="30dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
             android:orientation="vertical">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/text_name"
+                android:layout_gravity="center"
+                android:layout_marginTop="30dp"
+                android:text="@string/action_sign_up"
                 android:textColor="@android:color/black"
-                android:textSize="16sp" />
+                android:textSize="50sp" />
 
-            <EditText
-                android:id="@+id/newName"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:background="@drawable/rounded_edittext"
-                android:hint="@string/text_name" />
-
-            <TextView
-                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/text_id"
-                android:textColor="@android:color/black"
-                android:textSize="16sp" />
+                android:layout_margin="30dp"
+                android:orientation="vertical">
 
-            <EditText
-                android:id="@+id/newID"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:background="@drawable/rounded_edittext"
-                android:hint="@string/text_id" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/text_name"
+                    android:textColor="@android:color/black"
+                    android:textSize="16sp" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/text_pw"
-                android:textColor="@android:color/black"
-                android:textSize="16sp" />
+                <EditText
+                    android:id="@+id/newName"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@drawable/rounded_edittext"
+                    android:hint="@string/text_name" />
 
-            <EditText
-                android:id="@+id/newPW"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:background="@drawable/rounded_edittext"
-                android:hint="@string/text_pw" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/text_id"
+                    android:textColor="@android:color/black"
+                    android:textSize="16sp" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/text_pw_check"
-                android:textColor="@android:color/black"
-                android:textSize="16sp" />
+                <EditText
+                    android:id="@+id/newID"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@drawable/rounded_edittext"
+                    android:hint="@string/text_id" />
 
-            <EditText
-                android:id="@+id/newPW_check"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:background="@drawable/rounded_edittext"
-                android:hint="@string/text_pw" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/text_pw"
+                    android:textColor="@android:color/black"
+                    android:textSize="16sp" />
 
-            <Button
-                android:id="@+id/next"
-                android:layout_width="130dp"
-                android:layout_height="wrap_content"
-                android:background="@android:color/holo_blue_dark"
-                android:textColor="#ffffff"
-                android:textSize="20sp"
-                android:layout_gravity="end"
-                android:layout_marginTop="20dp"
-                android:text="@string/action_next" />
+                <EditText
+                    android:id="@+id/newPW"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@drawable/rounded_edittext"
+                    android:hint="@string/text_pw" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/text_pw_check"
+                    android:textColor="@android:color/black"
+                    android:textSize="16sp" />
+
+                <EditText
+                    android:id="@+id/newPW_check"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@drawable/rounded_edittext"
+                    android:hint="@string/text_pw" />
+
+                <Button
+                    android:id="@+id/next"
+                    android:layout_width="130dp"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/holo_blue_dark"
+                    android:textColor="#ffffff"
+                    android:textSize="20sp"
+                    android:layout_gravity="end"
+                    android:layout_marginTop="20dp"
+                    android:text="@string/action_next" />
+
+            </LinearLayout>
 
         </LinearLayout>
 
-    </LinearLayout>
+    </ScrollView>
 
 </android.support.constraint.ConstraintLayout>
