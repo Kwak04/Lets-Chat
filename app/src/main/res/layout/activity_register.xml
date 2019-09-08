@@ -78,12 +78,34 @@
                     android:background="@drawable/rounded_edittext"
                     android:hint="@string/text_pw" />
 
-                <TextView
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/text_pw_check"
-                    android:textColor="@android:color/black"
-                    android:textSize="16sp" />
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/text_pw_check"
+                        android:textColor="@android:color/black"
+                        android:textSize="16sp"
+                        android:layout_gravity="center"/>
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="#FF0000"
+                        android:text="@string/error_incorrect_password"
+                        android:textSize="13sp"
+                        android:layout_gravity="center"
+                        android:id="@+id/password_error"/>
+
+                </LinearLayout>
 
                 <EditText
                     android:id="@+id/newPW_check"

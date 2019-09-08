@@ -28,7 +28,7 @@
     <string name="hint_school_search">학교명 입력</string>
     <string name="text_school_search">학교검색</string>
     <string name="error_invalid_password">비밀번호가 너무 짧습니다.</string>
-    <string name="error_incorrect_password">비밀번호가 올바르지 않습니다.</string>
+    <string name="error_incorrect_password">비밀번호가 일치하지 않습니다.</string>
     <string name="error_field_required">내용을 입력해 주세요.</string>
 
     <!-- Strings related to buttons -->
