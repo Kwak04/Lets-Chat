@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class RegisterActivity extends AppCompatActivity {
@@ -14,6 +15,7 @@ public class RegisterActivity extends AppCompatActivity {
     EditText makeID;
     EditText makePW;
     EditText makePW_check;
+    TextView pwIncorrectError;
     Button next;
 
     @Override
@@ -25,7 +27,10 @@ public class RegisterActivity extends AppCompatActivity {
         makeID = findViewById(R.id.newID);
         makePW = findViewById(R.id.newPW);
         makePW_check = findViewById(R.id.newPW_check);
+        pwIncorrectError = findViewById(R.id.password_error);
         next = findViewById(R.id.next);
+
+        pwIncorrectError.setText("");
 
         final Intent intent = new Intent(getApplicationContext(), RegisterSchoolActivity.class);
         next.setOnClickListener(new View.OnClickListener() {
@@ -38,6 +43,8 @@ public class RegisterActivity extends AppCompatActivity {
 
                 if (!(name.equals("")) || !(id.equals("")) || !(pw.equals("")) || !(pw_check.equals(""))) {
                     if (pw.equals(pw_check)) {
+                        pwIncorrectError.setText("");
+
                         intent.putExtra("name", name);
                         intent.putExtra("id", id);
                         intent.putExtra("pw", pw);
@@ -45,7 +52,7 @@ public class RegisterActivity extends AppCompatActivity {
                         startActivity(intent);
 
                     } else {
-                        Toast.makeText(getApplicationContext(), "비밀번호가 일치하지 않습니다.", Toast.LENGTH_SHORT).show();
+                        pwIncorrectError.setText(R.string.error_incorrect_password);
                     }
                 }
             }
