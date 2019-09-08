@@ -105,8 +105,6 @@ public class RegisterSchoolActivity extends AppCompatActivity {
         final String id = getIntent.getExtras().getString("id");
         final String pw = getIntent.getExtras().getString("pw");
 
-        Toast.makeText(getApplicationContext(), "이름: " + name + " 아이디: " + id + " 비번: " + pw, Toast.LENGTH_LONG).show();
-
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
