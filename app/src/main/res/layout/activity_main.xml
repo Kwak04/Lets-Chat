@@ -239,10 +239,17 @@
                     android:id="@+id/content2">
 
                     <TextView
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:text="요기는 즐겨찾기 화면입니다!"/>
+                        android:text="@string/text_main_friend"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="15sp"/>
+
+                    <android.support.v7.widget.RecyclerView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scrollbars="vertical"
+                        android:id="@+id/list_friends"/>
 
                 </LinearLayout>
 
