@@ -36,6 +36,7 @@
     <string name="action_next">다음</string>
     <string name="action_previous">이전</string>
     <string name="action_join">참가</string>
+    <string name="action_message">메시지</string>
 
     <!-- Sort by Activities -->
 

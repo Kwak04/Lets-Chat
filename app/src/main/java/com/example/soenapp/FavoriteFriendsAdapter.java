@@ -50,7 +50,7 @@ public class FavoriteFriendsAdapter extends RecyclerView.Adapter<FavoriteFriends
     public void onBindViewHolder(MyViewHolder holder, int position) {
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
-        holder.friendName.setText(friendsDataArrayList.get(position).name);
+        holder.friendName.setText(friendsDataArrayList.get(position).getName());
     }
 
     // Return the size of your dataset (invoked by the layout manager)

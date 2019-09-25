@@ -2,13 +2,18 @@ package com.example.soenapp;
 
 import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.shapes.OvalShape;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.GestureDetector;
+import android.view.MotionEvent;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TabHost;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -35,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
         tabHost = findViewById(R.id.tabHost);
         tabHost.setup();
 
+
         // First Tab
         TabHost.TabSpec ts1 = tabHost.newTabSpec("TabSpec1");
         ts1.setContent(R.id.content1);
@@ -47,7 +53,8 @@ public class MainActivity extends AppCompatActivity {
         ts2.setIndicator("즐겨찾기");
         tabHost.addTab(ts2);
 
-        // 즐겨찾기 탭 친구 목록
+
+        // Favorites tab friends list
         recyclerView = findViewById(R.id.list_friends);
 
         recyclerView.setHasFixedSize(true);
@@ -57,11 +64,59 @@ public class MainActivity extends AppCompatActivity {
 
             // temporary
             //TODO 서버 연결 - api 구현
-        ArrayList<FriendsData> friendsDataArrayList = new ArrayList<>();
+        final ArrayList<FriendsData> friendsDataArrayList = new ArrayList<>();
         friendsDataArrayList.add(new FriendsData("김준일", 0));
         friendsDataArrayList.add(new FriendsData("신일강", 0));
+        friendsDataArrayList.add(new FriendsData("최연욱", 0));
+        friendsDataArrayList.add(new FriendsData("한승윤", 0));
+        friendsDataArrayList.add(new FriendsData("박상범", 0));
 
         mAdapter = new FavoriteFriendsAdapter(friendsDataArrayList);
         recyclerView.setAdapter(mAdapter);
+
+
+        // Friends list click event
+        final GestureDetector gestureDetector = new GestureDetector(getApplicationContext(), new GestureDetector.SimpleOnGestureListener() {
+            @Override
+            public boolean onSingleTapUp(MotionEvent e) {
+                return true;
+            }
+        });
+
+        RecyclerView.OnItemTouchListener onItemTouchListener = new RecyclerView.OnItemTouchListener() {
+            @Override
+            public boolean onInterceptTouchEvent(@NonNull RecyclerView recyclerView, @NonNull MotionEvent motionEvent) {
+                //손으로 터치한 곳의 좌표를 토대로 해당 Item의 View를 가져옴
+                View childView = recyclerView.findChildViewUnder(motionEvent.getX(),motionEvent.getY());
+
+                //터치한 곳의 View가 RecyclerView 안의 아이템이고 그 아이템의 View가 null이 아니라
+                //정확한 Item의 View를 가져왔고, gestureDetector에서 한번만 누르면 true를 넘기게 구현했으니
+                //한번만 눌려서 그 값이 true가 넘어왔다면
+                if(childView != null && gestureDetector.onTouchEvent(motionEvent)){
+
+                    //현재 터치된 곳의 position을 가져오고
+                    int currentPosition = recyclerView.getChildAdapterPosition(childView);
+
+                    //해당 위치의 Data를 가져옴
+                    FriendsData currentItemFriend = friendsDataArrayList.get(currentPosition);
+                    Toast.makeText(MainActivity.this, currentItemFriend.getName(), Toast.LENGTH_SHORT).show();
+                    return true;
+                }
+
+                return false;
+            }
+
+            @Override
+            public void onTouchEvent(@NonNull RecyclerView recyclerView, @NonNull MotionEvent motionEvent) {
+
+            }
+
+            @Override
+            public void onRequestDisallowInterceptTouchEvent(boolean b) {
+
+            }
+        };
+
+        recyclerView.addOnItemTouchListener(onItemTouchListener);
     }
 }
