@@ -7,6 +7,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 public class FavoriteFriendsAdapter extends RecyclerView.Adapter<FavoriteFriendsAdapter.MyViewHolder> {
     private FriendsData mDataset;
 
@@ -15,18 +17,22 @@ public class FavoriteFriendsAdapter extends RecyclerView.Adapter<FavoriteFriends
     // you provide access to all the views for a data item in a view holder
     public static class MyViewHolder extends RecyclerView.ViewHolder {
         // each data item is just a string in this case
-        public ImageView friendPhoto;
+//        public ImageView friendPhoto;
         public TextView friendName;
         public MyViewHolder(View v) {
             super(v);
-            friendPhoto = v.findViewById(R.id.friend_photo);
+//            friendPhoto = v.findViewById(R.id.friend_photo);
             friendName = v.findViewById(R.id.friend_name);
         }
     }
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    public FavoriteFriendsAdapter(FriendsData myDataset) {
-        mDataset = myDataset;
+//    public FavoriteFriendsAdapter(FriendsData myDataset) {
+//        mDataset = myDataset;
+//    }
+    private ArrayList<FriendsData> friendsDataArrayList;
+    FavoriteFriendsAdapter(ArrayList<FriendsData> friendsDataArrayList) {
+        this.friendsDataArrayList = friendsDataArrayList;
     }
 
     // Create new views (invoked by the layout manager)
@@ -44,12 +50,12 @@ public class FavoriteFriendsAdapter extends RecyclerView.Adapter<FavoriteFriends
     public void onBindViewHolder(MyViewHolder holder, int position) {
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
-        holder.friendName.setText(mDataset.results[position].name);
+        holder.friendName.setText(friendsDataArrayList.get(position).name);
     }
 
     // Return the size of your dataset (invoked by the layout manager)
     @Override
     public int getItemCount() {
-        return mDataset.results.length;
+        return friendsDataArrayList.size();
     }
 }

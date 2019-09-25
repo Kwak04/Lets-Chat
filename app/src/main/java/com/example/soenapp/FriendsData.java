@@ -3,10 +3,11 @@ package com.example.soenapp;
 public class FriendsData {
     //TODO 서버 연결 - api 구현
 
-    Result[] results;
+    String name = "홍길동";
+    int photo = 0;
 
-    public class Result {
-        String name = "홍길동";
-        String photo = " ";
+    public FriendsData(String name, int photo) {
+        this.name = name;
+        this.photo = photo;
     }
 }

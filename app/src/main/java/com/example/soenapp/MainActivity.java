@@ -10,10 +10,13 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TabHost;
 
+import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity {
 
     ImageView userImage;
     TabHost tabHost;
+    FriendsData friendsData;
 
     RecyclerView recyclerView;
     RecyclerView.Adapter mAdapter;
@@ -54,9 +57,11 @@ public class MainActivity extends AppCompatActivity {
 
             // temporary
             //TODO 서버 연결 - api 구현
-        FriendsData friendsData = new FriendsData();
+        ArrayList<FriendsData> friendsDataArrayList = new ArrayList<>();
+        friendsDataArrayList.add(new FriendsData("김준일", 0));
+        friendsDataArrayList.add(new FriendsData("신일강", 0));
 
-        mAdapter = new FavoriteFriendsAdapter(friendsData);
+        mAdapter = new FavoriteFriendsAdapter(friendsDataArrayList);
         recyclerView.setAdapter(mAdapter);
     }
 }
