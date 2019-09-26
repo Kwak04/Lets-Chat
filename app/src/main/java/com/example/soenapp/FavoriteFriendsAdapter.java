@@ -19,10 +19,12 @@ public class FavoriteFriendsAdapter extends RecyclerView.Adapter<FavoriteFriends
         // each data item is just a string in this case
 //        public ImageView friendPhoto;
         public TextView friendName;
+        public ImageView friendPhoto;
         public MyViewHolder(View v) {
             super(v);
 //            friendPhoto = v.findViewById(R.id.friend_photo);
             friendName = v.findViewById(R.id.friend_name);
+            friendPhoto = v.findViewById(R.id.friend_photo);
         }
     }
 
