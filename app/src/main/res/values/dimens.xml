@@ -7,6 +7,7 @@
     <!-- margin -->
     <dimen name="marginTop_title">20dp</dimen>
     <dimen name="marginStart_title">30dp</dimen>
+    <dimen name="marginBottom_title">30dp</dimen>
     <dimen name="marginStart_text_above_rounded_edittext">10.5dp</dimen>
     <dimen name="marginBottom_text_above_rounded_edittext">5dp</dimen>
 
