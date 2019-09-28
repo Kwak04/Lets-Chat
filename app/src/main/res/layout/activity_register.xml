@@ -24,21 +24,25 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="30dp"
-                android:text="@string/action_sign_up"
+                android:layout_marginStart="@dimen/marginStart_title"
+                android:layout_marginBottom="30dp"
+                android:text="@string/text_info"
                 android:textColor="@android:color/black"
-                android:textSize="50sp" />
+                android:textSize="@dimen/textSize_title"
+                android:textStyle="bold"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="30dp"
+                android:layout_marginStart="25dp"
+                android:layout_marginEnd="25dp"
                 android:orientation="vertical">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/marginStart_text_above_rounded_edittext"
+                    android:layout_marginBottom="@dimen/marginBottom_text_above_rounded_edittext"
                     android:text="@string/text_name"
                     android:textColor="@android:color/black"
                     android:textSize="@dimen/textSize_small" />
@@ -48,11 +52,16 @@
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:background="@drawable/rounded_edittext"
-                    android:hint="@string/text_name" />
+                    android:hint="@string/text_name"
+                    android:layout_marginBottom="10dp"
+                    android:paddingStart="@dimen/paddingStart_rounded_edittext"
+                    android:paddingEnd="0dp"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/marginStart_text_above_rounded_edittext"
+                    android:layout_marginBottom="@dimen/marginBottom_text_above_rounded_edittext"
                     android:text="@string/text_id"
                     android:textColor="@android:color/black"
                     android:textSize="@dimen/textSize_small" />
@@ -62,11 +71,16 @@
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:background="@drawable/rounded_edittext"
-                    android:hint="@string/text_id" />
+                    android:hint="@string/text_id"
+                    android:layout_marginBottom="10dp"
+                    android:paddingStart="@dimen/paddingStart_rounded_edittext"
+                    android:paddingEnd="0dp"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/marginStart_text_above_rounded_edittext"
+                    android:layout_marginBottom="@dimen/marginBottom_text_above_rounded_edittext"
                     android:text="@string/text_pw"
                     android:textColor="@android:color/black"
                     android:textSize="@dimen/textSize_small" />
@@ -76,17 +90,23 @@
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:background="@drawable/rounded_edittext"
-                    android:hint="@string/text_pw" />
+                    android:hint="@string/text_pw"
+                    android:inputType="textPassword"
+                    android:layout_marginBottom="10dp"
+                    android:paddingStart="@dimen/paddingStart_rounded_edittext"
+                    android:paddingEnd="0dp"/>
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="@dimen/marginBottom_text_above_rounded_edittext">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/text_pw_check"
+                        android:layout_marginStart="@dimen/marginStart_text_above_rounded_edittext"
                         android:textColor="@android:color/black"
                         android:textSize="@dimen/textSize_small"
                         android:layout_gravity="center"/>
@@ -112,17 +132,20 @@
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:background="@drawable/rounded_edittext"
-                    android:hint="@string/text_pw" />
+                    android:hint="@string/text_pw_check"
+                    android:inputType="textPassword"
+                    android:layout_marginBottom="30dp"
+                    android:paddingStart="@dimen/paddingStart_rounded_edittext"
+                    android:paddingEnd="0dp"/>
 
                 <Button
                     android:id="@+id/next"
                     android:layout_width="130dp"
                     android:layout_height="wrap_content"
-                    android:background="@android:color/holo_blue_dark"
+                    android:background="@drawable/shape_button_accent"
                     android:textColor="#ffffff"
                     android:textSize="20sp"
                     android:layout_gravity="end"
-                    android:layout_marginTop="20dp"
                     android:text="@string/action_next" />
 
             </LinearLayout>

@@ -19,6 +19,7 @@
     <!-- Strings related to login -->
     <string name="action_sign_in">로그인</string>
     <string name="action_sign_up">회원가입</string>
+    <string name="action_enter_info">정보 입력</string>
     <string name="text_id">아이디</string>
     <string name="text_id_en">ID</string>
     <string name="text_pw">비밀번호</string>
@@ -41,6 +42,9 @@
     <string name="action_message">메시지</string>
 
     <!-- Sort by Activities -->
+
+    <!-- activity_register -->
+    <string name="text_info">정보</string>
 
     <!-- activity_register_completed -->
     <string name="text_register_completed_your_name">홍길동님,</string>
