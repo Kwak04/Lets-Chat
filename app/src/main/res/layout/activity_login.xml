@@ -63,27 +63,28 @@
                     android:layout_marginTop="20dp">
 
                     <Button
-                        android:id="@+id/login_bt"
-                        android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:layout_gravity="center"
-                        android:layout_weight="1"
-                        android:layout_marginHorizontal="10dp"
-                        android:background="@drawable/shape_button_accent"
-                        android:text="@string/action_sign_in"
-                        android:textSize="20sp"
-                        android:textColor="@color/colorWhite" />
-
-                    <Button
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
                         android:id="@+id/register_bt"
                         android:layout_weight="1"
-                        android:layout_marginHorizontal="10dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp"
                         android:background="@drawable/shape_button"
                         android:text="@string/action_sign_up"
                         android:textSize="20sp"
                         android:textColor="@color/colorWhite"/>
+
+                    <Button
+                        android:id="@+id/login_bt"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_weight="1"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:background="@drawable/shape_button_accent"
+                        android:text="@string/action_sign_in"
+                        android:textSize="20sp"
+                        android:textColor="@color/colorWhite" />
 
                 </LinearLayout>
 
