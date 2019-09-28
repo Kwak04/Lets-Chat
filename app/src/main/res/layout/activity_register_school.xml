@@ -10,77 +10,54 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
         android:orientation="vertical"
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="100dp"
-            android:text="@string/action_sign_up"
-            android:textColor="@android:color/black"
-            android:textSize="50sp" />
+            android:text="@string/text_school_search"
+            android:textColor="@color/colorBlack"
+            android:textSize="@dimen/textSize_title"
+            android:textStyle="bold"
+            android:layout_marginStart="@dimen/marginStart_title"
+            android:layout_marginTop="@dimen/marginTop_title"
+            android:layout_marginBottom="@dimen/marginBottom_title" />
 
-        <LinearLayout
+        <EditText
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="30dp"
-            android:orientation="vertical">
+            android:layout_height="50dp"
+            android:id="@+id/input"
+            android:hint="@string/hint_school_search"
+            android:background="@drawable/rounded_edittext"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            android:paddingStart="@dimen/paddingStart_rounded_edittext"
+            android:paddingEnd="0dp"/>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/text_school_search"
-                android:textColor="#000000"
-                android:textSize="16sp"/>
-
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:id="@+id/input"
-                android:hint="@string/hint_school_search"
-                android:background="@drawable/rounded_edittext"/>
-
-        </LinearLayout>
-
-        <LinearLayout
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/school_list"
+            android:scrollbars="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp">
-
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/school_list"
-                android:scrollbars="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp">
-
-            <Button
-                android:id="@+id/next"
-                android:layout_width="130dp"
-                android:layout_height="wrap_content"
-                android:background="@android:color/holo_blue_dark"
-                android:textColor="#ffffff"
-                android:textSize="20sp"
-                android:layout_gravity="end"
-                android:layout_marginTop="20dp"
-                android:text="@string/action_next" />
-
-        </LinearLayout>
+            android:layout_height="match_parent"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"/>
 
     </LinearLayout>
+
+        <Button
+            android:id="@+id/next"
+            android:layout_width="130dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/shape_button_accent"
+            android:textColor="#ffffff"
+            android:textSize="20sp"
+            android:layout_gravity="end"
+            android:text="@string/action_next"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:layout_marginEnd="30dp"
+            android:layout_marginBottom="30dp"/>
 
 </android.support.constraint.ConstraintLayout>
