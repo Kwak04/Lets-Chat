@@ -41,7 +41,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/text_name"
                     android:textColor="@android:color/black"
-                    android:textSize="16sp" />
+                    android:textSize="@dimen/textSize_small" />
 
                 <EditText
                     android:id="@+id/newName"
@@ -55,7 +55,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/text_id"
                     android:textColor="@android:color/black"
-                    android:textSize="16sp" />
+                    android:textSize="@dimen/textSize_small" />
 
                 <EditText
                     android:id="@+id/newID"
@@ -69,7 +69,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/text_pw"
                     android:textColor="@android:color/black"
-                    android:textSize="16sp" />
+                    android:textSize="@dimen/textSize_small" />
 
                 <EditText
                     android:id="@+id/newPW"
@@ -88,7 +88,7 @@
                         android:layout_height="wrap_content"
                         android:text="@string/text_pw_check"
                         android:textColor="@android:color/black"
-                        android:textSize="16sp"
+                        android:textSize="@dimen/textSize_small"
                         android:layout_gravity="center"/>
 
                     <View

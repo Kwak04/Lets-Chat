@@ -12,7 +12,7 @@ import retrofit2.http.Query;
 
 public interface RetrofitService {
 
-    String ip = "13.209.35.108";  // aws EC2 ip 입력
+    String ip = "54.180.155.213";  // aws EC2 ip 입력
     String URL = "http://" + ip + ":3000/";
 
     @FormUrlEncoded

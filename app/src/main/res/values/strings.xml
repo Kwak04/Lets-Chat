@@ -20,7 +20,9 @@
     <string name="action_sign_in">로그인</string>
     <string name="action_sign_up">회원가입</string>
     <string name="text_id">아이디</string>
+    <string name="text_id_en">ID</string>
     <string name="text_pw">비밀번호</string>
+    <string name="text_pw_en">PW</string>
     <string name="text_pw_check">비밀번호 확인</string>
     <string name="text_name">이름</string>
     <string name="text_school">학교</string>
