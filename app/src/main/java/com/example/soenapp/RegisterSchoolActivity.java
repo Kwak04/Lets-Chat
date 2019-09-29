@@ -11,10 +11,8 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -92,7 +90,7 @@ public class RegisterSchoolActivity extends AppCompatActivity {
                                             if (body.message.equals("success")) {
 
                                                 // specify an adapter (see also next example)
-                                                mAdapter = new MyAdapter(body);
+                                                mAdapter = new RegisterSchoolAdapter(body);
                                                 schoolList.setAdapter(mAdapter);
 
                                                 System.out.println(body.toString());
@@ -115,14 +113,14 @@ public class RegisterSchoolActivity extends AppCompatActivity {
         final Intent getIntent = getIntent();
         final Intent newIntent = new Intent(getApplicationContext(), RegisterCompletedActivity.class);  // TODO register complete class
 
-        final String name = getIntent.getExtras().getString("name");
+        final String name = getIntent.getExtras().getString("SCHUL_NM");
         final String id = getIntent.getExtras().getString("id");
         final String pw = getIntent.getExtras().getString("pw");
 
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                newIntent.putExtra("name", name);
+                newIntent.putExtra("SCHUL_NM", name);
                 newIntent.putExtra("id", id);
                 newIntent.putExtra("pw", pw);
 

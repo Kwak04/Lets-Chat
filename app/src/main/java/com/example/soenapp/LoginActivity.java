@@ -77,9 +77,11 @@ public class LoginActivity extends AppCompatActivity {
                         if (response.isSuccessful()) {
                             body = response.body();
                             if (body.message.equals("success")) {
-                                Toast.makeText(getApplicationContext(), "성공!" + " userKey : " + body.results[0].user_key, Toast.LENGTH_SHORT).show();
+                                String toastMessage = "userKey: " + body.results[0].user_key + "\n환영합니다 " + body.results[0].name + "님!";
+                                Toast.makeText(getApplicationContext(), toastMessage, Toast.LENGTH_SHORT).show();
                                 editor = sharedPreferences.edit();
                                 editor.putString("user_key", body.results[0].user_key);
+                                editor.putString("name", body.results[0].name);
                                 editor.apply();
                             } else if (body.message.equals("fail")) {
                                 Toast.makeText(getApplicationContext(), "실패", Toast.LENGTH_SHORT).show();

@@ -6,7 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
+public class RegisterSchoolAdapter extends RecyclerView.Adapter<RegisterSchoolAdapter.MyViewHolder> {
     private SchoolData mDataset;
 
     // Provide a reference to the views for each data item
@@ -24,13 +24,13 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     }
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    public MyAdapter(SchoolData myDataset) {
+    public RegisterSchoolAdapter(SchoolData myDataset) {
         mDataset = myDataset;
     }
 
     // Create new views (invoked by the layout manager)
     @Override
-    public MyAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public RegisterSchoolAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.school_list_object, parent,false);
         return new MyViewHolder(v);
     }
@@ -40,8 +40,8 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     public void onBindViewHolder(MyViewHolder holder, int position) {
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
-        holder.name.setText(mDataset.results[position].name);
-        holder.address.setText(mDataset.results[position].address);
+        holder.name.setText(mDataset.results[position].SCHUL_NM);
+        holder.address.setText(mDataset.results[position].SCHUL_RDNMA);
     }
 
     // Return the size of your dataset (invoked by the layout manager)

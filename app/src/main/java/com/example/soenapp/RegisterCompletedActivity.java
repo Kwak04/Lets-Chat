@@ -19,7 +19,7 @@ public class RegisterCompletedActivity extends AppCompatActivity {
 
         final Intent intent = getIntent();
 
-        final String nameValue = intent.getExtras().getString("name") + "님,";
+        final String nameValue = intent.getExtras().getString("SCHUL_NM") + "님,";
         final String idValue = intent.getExtras().getString("id");
         final String pwValue = intent.getExtras().getString("pw");
 

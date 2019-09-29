@@ -5,10 +5,12 @@ public class SchoolData {
     Result[] results;
 
     public class Result {
-        String code;
-        String address;
-        String name;
-        String type;
+        String SCHUL_CODE;
+        String SCHUL_RDNMA;
+        String SCHUL_NM;
+        String SCHUL_KND_SC_CODE;
+        String HMPG_ADRES;
+        String USER_TELNO;
     }
 
     @Override
@@ -18,7 +20,13 @@ public class SchoolData {
 
         if (message.equals("success")) {
             for (int i = 0 ; i<results.length; i++){
-                info_string += ("code : " + results[i].code + " address : " + results[i].address + " name : " + results[i].name + " type : " + results[i].type + "\n-------------");
+                info_string += ("SCHUL_CODE : " + results[i].SCHUL_CODE +
+                        " SCHUL_RDNMA : " + results[i].SCHUL_RDNMA +
+                        " SCHUL_NM : " + results[i].SCHUL_NM +
+                        " SCHUL_KND_SC_CODE : " + results[i].SCHUL_KND_SC_CODE +
+                        " HMPG_ADRES : " + results[i].HMPG_ADRES +
+                        "USER_TELNO : " + results[i].USER_TELNO +
+                        "\n-------------");
             }
         }
         return info_string;

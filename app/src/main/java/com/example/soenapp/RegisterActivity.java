@@ -45,7 +45,7 @@ public class RegisterActivity extends AppCompatActivity {
                     if (pw.equals(pw_check)) {
                         pwIncorrectError.setText("");
 
-                        intent.putExtra("name", name);
+                        intent.putExtra("SCHUL_NM", name);
                         intent.putExtra("id", id);
                         intent.putExtra("pw", pw);
 
