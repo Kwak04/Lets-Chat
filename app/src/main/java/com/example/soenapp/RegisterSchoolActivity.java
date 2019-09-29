@@ -194,7 +194,8 @@ public class RegisterSchoolActivity extends AppCompatActivity {
                 input.put("name", name);
                 input.put("id", id);
                 input.put("pw", pw);
-                input.put("school", currentSchoolCode);
+                input.put("school_code", currentSchoolCode);
+                input.put("school_name", currentSchoolName);
 
                 retrofitService.register(input).enqueue(new Callback<RegisterData>() {
                     @Override
