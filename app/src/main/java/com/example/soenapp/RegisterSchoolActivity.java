@@ -15,6 +15,8 @@ import android.widget.Toast;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -59,7 +61,6 @@ public class RegisterSchoolActivity extends AppCompatActivity {
         layoutManager = new LinearLayoutManager(this);
         schoolList.setLayoutManager(layoutManager);
 
-
         editText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -68,33 +69,46 @@ public class RegisterSchoolActivity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                retrofitService.getSchool(s.toString()).enqueue(new Callback<SchoolData>() {
-                    @Override
-                    public void onResponse(@NonNull Call<SchoolData> call, @NonNull Response<SchoolData> response) {
-                        if (response.isSuccessful()) {
-                            body = response.body();
-                            if (body.message.equals("success")) {
-
-                                // specify an adapter (see also next example)
-                                mAdapter = new MyAdapter(body);
-                                schoolList.setAdapter(mAdapter);
-
-                                System.out.println(body.toString());
-                            }
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(@NonNull Call<SchoolData> call, @NonNull Throwable t) {
-
-                    }
-                });
 
             }
 
-            @Override
-            public void afterTextChanged(Editable s) {
+            Timer timer = new Timer();
+            final int DELAY = 200;
 
+            @Override
+            public void afterTextChanged(final Editable s) {
+
+                timer.cancel();
+                timer = new Timer();
+                timer.schedule(
+                        new TimerTask() {
+                            @Override
+                            public void run() {
+                                retrofitService.getSchool(s.toString()).enqueue(new Callback<SchoolData>() {
+                                    @Override
+                                    public void onResponse(@NonNull Call<SchoolData> call, @NonNull Response<SchoolData> response) {
+                                        if (response.isSuccessful()) {
+                                            body = response.body();
+                                            if (body.message.equals("success")) {
+
+                                                // specify an adapter (see also next example)
+                                                mAdapter = new MyAdapter(body);
+                                                schoolList.setAdapter(mAdapter);
+
+                                                System.out.println(body.toString());
+                                            }
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onFailure(@NonNull Call<SchoolData> call, @NonNull Throwable t) {
+
+                                    }
+                                });
+                            }
+                        },
+                        DELAY
+                );
             }
         });
 
