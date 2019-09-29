@@ -33,7 +33,9 @@ public class RegisterSchoolActivity extends AppCompatActivity {
             .build();
     RetrofitService retrofitService = retrofit.create(RetrofitService.class);
     HashMap<String, Object> input = new HashMap<>();
-    SchoolData body;
+    SchoolData schoolBody;
+    RegisterData registerBody;
+
 
     private RecyclerView schoolList;
     private RecyclerView.Adapter mAdapter;
@@ -92,14 +94,14 @@ public class RegisterSchoolActivity extends AppCompatActivity {
                                     @Override
                                     public void onResponse(@NonNull Call<SchoolData> call, @NonNull Response<SchoolData> response) {
                                         if (response.isSuccessful()) {
-                                            body = response.body();
-                                            if (body.message.equals("success")) {
+                                            schoolBody = response.body();
+                                            if (schoolBody.message.equals("success")) {
 
                                                 // specify an adapter (see also next example)
-                                                mAdapter = new RegisterSchoolAdapter(body);
+                                                mAdapter = new RegisterSchoolAdapter(schoolBody);
                                                 schoolList.setAdapter(mAdapter);
 
-                                                System.out.println(body.toString());
+                                                System.out.println(schoolBody.toString());
                                             }
                                         }
                                     }
@@ -141,7 +143,7 @@ public class RegisterSchoolActivity extends AppCompatActivity {
                     int currentPosition = rv.getChildAdapterPosition(childView);
 
                     //해당 위치의 Data를 가져옴
-                    SchoolData.Result currentItemSchool = body.results[currentPosition];
+                    SchoolData.Result currentItemSchool = schoolBody.results[currentPosition];
                     currentSchoolCode = currentItemSchool.SCHUL_CODE;
                     currentSchoolName = currentItemSchool.SCHUL_NM;
                     Toast.makeText(getApplicationContext(), currentItemSchool.SCHUL_NM, Toast.LENGTH_SHORT).show();
@@ -179,7 +181,39 @@ public class RegisterSchoolActivity extends AppCompatActivity {
                 newIntent.putExtra("school_code", currentSchoolCode);
                 newIntent.putExtra("school_name", currentSchoolName);
 
-                startActivity(newIntent);
+
+                // 회원가입
+                Retrofit retrofit = new Retrofit.Builder()
+                        .baseUrl(RetrofitService.URL)
+                        .addConverterFactory(GsonConverterFactory.create())
+                        .build();
+                RetrofitService retrofitService = retrofit.create(RetrofitService.class);
+                HashMap<String, Object> input = new HashMap<>();
+                RegisterData body;
+
+                input.put("name", name);
+                input.put("id", id);
+                input.put("pw", pw);
+                input.put("school", currentSchoolCode);
+
+                retrofitService.register(input).enqueue(new Callback<RegisterData>() {
+                    @Override
+                    public void onResponse(@NonNull Call<RegisterData> call, @NonNull Response<RegisterData> response) {
+                        if (response.isSuccessful()) {
+                            registerBody = response.body();
+                            if (registerBody.message.equals("success")) {
+                                startActivity(newIntent);
+                            } else if (registerBody.message.equals("fail")) {
+                                Toast.makeText(getApplicationContext(), "실패", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(@NonNull Call<RegisterData> call, @NonNull Throwable t) {
+                        Toast.makeText(getApplicationContext(), "서버를 찾을 수 없음", Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
         });
     }
