@@ -15,12 +15,17 @@ public interface RetrofitService {
     String ip = "10.0.2.2";  // aws EC2 ip 입력
     String URL = "http://" + ip + ":3000/";
 
+    // 로그인
     @FormUrlEncoded
     @POST("/user/privacy")
     Call<LoginData> postData(@FieldMap HashMap<String, Object> param);
 
-
+    // 회원가입 - 학교 정보
     @GET("/user/privacy/register/school")
     Call<SchoolData> getSchool(@Query("schoolname") String schoolname);
 
+    // 회원가입
+    @FormUrlEncoded
+    @POST("/user/privacy/register/next")
+    Call<RegisterData> register(@FieldMap HashMap<String, Object> param);
 }
