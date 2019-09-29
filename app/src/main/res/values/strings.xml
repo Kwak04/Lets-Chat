@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Let\'s Chat!</string>
 
+
     <!-- Sort by Uses -->
 
     <!-- Strings for test -->
@@ -27,10 +28,6 @@
     <string name="text_pw_check">비밀번호 확인</string>
     <string name="text_name">이름</string>
     <string name="text_school">학교</string>
-    <string name="text_school_name">학교이름</string>
-    <string name="text_school_address">학교주소</string>
-    <string name="hint_school_search">학교명 입력</string>
-    <string name="text_school_search">학교검색</string>
     <string name="error_invalid_password">비밀번호가 너무 짧습니다.</string>
     <string name="error_incorrect_password">비밀번호가 일치하지 않습니다.</string>
     <string name="error_field_required">내용을 입력해 주세요.</string>
@@ -41,10 +38,18 @@
     <string name="action_join">참가</string>
     <string name="action_message">메시지</string>
 
+
     <!-- Sort by Activities -->
 
     <!-- activity_register -->
     <string name="text_info">정보</string>
+
+    <!-- activity_register_school -->
+    <string name="text_register_school_name">학교이름</string>
+    <string name="text_register_school_address">학교주소</string>
+    <string name="hint_register_school_search">학교명 입력</string>
+    <string name="text_register_school_search">학교검색</string>
+    <string name="text_register_school_help">아래 목록 중 재학 중인 학교를 누르고\n다음 버튼을 누르세요.</string>
 
     <!-- activity_register_completed -->
     <string name="text_register_completed_your_name">홍길동님,</string>
