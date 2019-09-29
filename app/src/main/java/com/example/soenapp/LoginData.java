@@ -6,5 +6,6 @@ public class LoginData {
 
     public class Result {
         public String user_key;
+        public String name;
     }
 }

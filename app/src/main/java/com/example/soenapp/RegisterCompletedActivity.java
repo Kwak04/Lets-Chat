@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 public class RegisterCompletedActivity extends AppCompatActivity {
 
-    TextView name, id, pw;
+    TextView name, id, pw, school;
     Button button;
 
     @Override
@@ -22,14 +22,18 @@ public class RegisterCompletedActivity extends AppCompatActivity {
         final String nameValue = intent.getExtras().getString("name") + "님,";
         final String idValue = intent.getExtras().getString("id");
         final String pwValue = intent.getExtras().getString("pw");
+        final String schoolCodeValue = intent.getExtras().getString("school_code");
+        final String schoolNameValue = intent.getExtras().getString("school_name");
 
         name = findViewById(R.id.name);
         id = findViewById(R.id.id);
         pw = findViewById(R.id.pw);
+        school = findViewById(R.id.school);
 
         name.setText(nameValue);
         id.setText(idValue);
         pw.setText(pwValue);
+        school.setText(schoolNameValue);
 
         //TODO mySQL에 회원가입하는 코드 추가
 
