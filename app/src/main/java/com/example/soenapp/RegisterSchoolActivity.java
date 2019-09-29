@@ -43,6 +43,9 @@ public class RegisterSchoolActivity extends AppCompatActivity {
     EditText editText;
     Button next;
 
+    String currentSchoolCode;
+    String currentSchoolName;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -122,7 +125,6 @@ public class RegisterSchoolActivity extends AppCompatActivity {
             }
         });
 
-
         RecyclerView.OnItemTouchListener onItemTouchListener = new RecyclerView.OnItemTouchListener() {
 
             @Override
@@ -140,6 +142,8 @@ public class RegisterSchoolActivity extends AppCompatActivity {
 
                     //해당 위치의 Data를 가져옴
                     SchoolData.Result currentItemSchool = body.results[currentPosition];
+                    currentSchoolCode = currentItemSchool.SCHUL_CODE;
+                    currentSchoolName = currentItemSchool.SCHUL_NM;
                     Toast.makeText(getApplicationContext(), currentItemSchool.SCHUL_NM, Toast.LENGTH_SHORT).show();
                     return true;
                 }
@@ -162,16 +166,18 @@ public class RegisterSchoolActivity extends AppCompatActivity {
         final Intent getIntent = getIntent();
         final Intent newIntent = new Intent(getApplicationContext(), RegisterCompletedActivity.class);  // TODO register complete class
 
-        final String name = getIntent.getExtras().getString("SCHUL_NM");
+        final String name = getIntent.getExtras().getString("name");
         final String id = getIntent.getExtras().getString("id");
         final String pw = getIntent.getExtras().getString("pw");
 
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                newIntent.putExtra("SCHUL_NM", name);
+                newIntent.putExtra("name", name);
                 newIntent.putExtra("id", id);
                 newIntent.putExtra("pw", pw);
+                newIntent.putExtra("school_code", currentSchoolCode);
+                newIntent.putExtra("school_name", currentSchoolName);
 
                 startActivity(newIntent);
             }
