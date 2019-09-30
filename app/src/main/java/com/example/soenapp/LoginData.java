@@ -5,7 +5,6 @@ public class LoginData {
     public Result[] results;
 
     public class Result {
-        public String user_token;
         public String user_key;
         public String name;
     }

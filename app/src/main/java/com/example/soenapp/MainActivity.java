@@ -1,6 +1,5 @@
 package com.example.soenapp;
 
-import android.content.SharedPreferences;
 import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.shapes.OvalShape;
 import android.support.annotation.NonNull;
@@ -14,14 +13,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TabHost;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-    TextView userName;
     ImageView userImage;
     TabHost tabHost;
     FriendsData friendsData;
@@ -30,31 +27,17 @@ public class MainActivity extends AppCompatActivity {
     RecyclerView.Adapter mAdapter;
     RecyclerView.LayoutManager layoutManager;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
-        userName = findViewById(R.id.user_name);
-        userImage = findViewById(R.id.user_photo);
-
-        tabHost = findViewById(R.id.tabHost);
-
-        recyclerView = findViewById(R.id.list_friends);
-
-
-        SharedPreferences pref = getSharedPreferences("userData", MODE_PRIVATE);
-
-        // 사용자 이름 표시
-        String userNameValue = pref.getString("name", "user");
-        userName.setText(userNameValue);
-
         // 사용자 사진 원형 테두리로 표시
+        userImage = findViewById(R.id.user_photo);
         userImage.setBackground(new ShapeDrawable(new OvalShape()));
         userImage.setClipToOutline(true);
 
+        tabHost = findViewById(R.id.tabHost);
         tabHost.setup();
 
 
@@ -72,6 +55,8 @@ public class MainActivity extends AppCompatActivity {
 
 
         // Favorites tab friends list
+        recyclerView = findViewById(R.id.list_friends);
+
         recyclerView.setHasFixedSize(true);
 
         layoutManager = new LinearLayoutManager(this);
