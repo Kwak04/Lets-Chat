@@ -65,8 +65,6 @@ public class LoginActivity extends AppCompatActivity {
                         if (response.isSuccessful()) {
                             body = response.body();
                             if (body.message.equals("success")) {
-                                String toastMessage = "userKey: " + body.results[0].user_key + "\n환영합니다 " + body.results[0].name + "님!";
-                                Toast.makeText(getApplicationContext(), toastMessage, Toast.LENGTH_SHORT).show();
 
                                 // 서버에서 받은 값들
                                 String userTokenValue = body.results[0].user_token;
@@ -81,6 +79,7 @@ public class LoginActivity extends AppCompatActivity {
 
                                 final Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                                 startActivity(intent);
+
                             } else if (body.message.equals("fail")) {
                                 String toastMessage = "아이디 혹은 비밀번호가 잘못되었습니다.";
                                 Toast.makeText(getApplicationContext(),toastMessage, Toast.LENGTH_SHORT).show();
