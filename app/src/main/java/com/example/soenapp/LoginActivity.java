@@ -36,6 +36,10 @@ public class LoginActivity extends AppCompatActivity {
     HashMap<String, Object> input = new HashMap<>();
     LoginData body;
 
+    // temporary
+    // TODO remove this after the test
+    TextView myUserKey;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,7 +52,15 @@ public class LoginActivity extends AppCompatActivity {
 
         test = findViewById(R.id.btn_test_screen);
 
-        sharedPreferences = getSharedPreferences("userData", MODE_PRIVATE);
+        sharedPreferences = getSharedPreferences("appData", MODE_PRIVATE);
+
+        // temporary
+//        editor = sharedPreferences.edit();
+//        editor.putString("text", "");
+//        editor.apply();
+
+//        myUserKey = findViewById(R.id.my_user_key);
+//        myUserKey.setText(sharedPreferences.getString("text", ""));
 
         login.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,23 +79,12 @@ public class LoginActivity extends AppCompatActivity {
                             if (body.message.equals("success")) {
                                 String toastMessage = "userKey: " + body.results[0].user_key + "\n환영합니다 " + body.results[0].name + "님!";
                                 Toast.makeText(getApplicationContext(), toastMessage, Toast.LENGTH_SHORT).show();
-
-                                // 서버에서 받은 값들
-                                String userTokenValue = body.results[0].user_token;
-                                String userKeyValue = body.results[0].user_key;
-                                String nameValue = body.results[0].name;
-
                                 editor = sharedPreferences.edit();
-                                editor.putString("user_token", userTokenValue);
-                                editor.putString("user_key", userKeyValue);
-                                editor.putString("name", nameValue);
+                                editor.putString("user_key", body.results[0].user_key);
+                                editor.putString("name", body.results[0].name);
                                 editor.apply();
-
-                                final Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                                startActivity(intent);
                             } else if (body.message.equals("fail")) {
-                                String toastMessage = "아이디 혹은 비밀번호가 잘못되었습니다.";
-                                Toast.makeText(getApplicationContext(),toastMessage, Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getApplicationContext(), "실패", Toast.LENGTH_SHORT).show();
                             }
                         }
                     }
