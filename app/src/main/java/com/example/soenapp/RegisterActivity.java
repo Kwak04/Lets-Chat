@@ -9,6 +9,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.regex.Pattern;
+
 public class RegisterActivity extends AppCompatActivity {
 
     EditText makeName, makeID, makePW, makePW_check;
@@ -49,28 +51,36 @@ public class RegisterActivity extends AppCompatActivity {
 
                 // 조건 체크
 
-                if (name.equals("") || id.equals("") || pw.equals("") || pw_check.equals("")) {  // 공백이 있는 칸이 있을 경우
+                // 공백이 있는 칸이 있을 경우
+                if (name.equals("") || id.equals("") || pw.equals("") || pw_check.equals("")) {
                     String toastMessage = "모든 칸에 내용을 입력해 주세요.";
                     Toast.makeText(getApplicationContext(), toastMessage, Toast.LENGTH_SHORT).show();
-
-                    // 공백이 있는 칸이 있으면서 '비밀번호'가 '비밀번호 확인'과 다를 경우
-                    if (!pw.equals(pw_check)) {  // '비밀번호'가 '비밀번호 확인'과 다를 경우
-                        pwIncorrectError.setText(R.string.error_incorrect_password);
-                    }
                 }
-                // 모든 칸이 공백이 아니면서 '비밀번호'가 '비밀번호 확인'과 다를 경우
-                else if (!pw.equals(pw_check)) {  // '비밀번호'가 '비밀번호 확인'과 다를 경우
+                // '비밀번호'가 '비밀번호 확인'과 다를 경우
+                if (!pw.equals(pw_check)) {
                     pwIncorrectError.setText(R.string.error_incorrect_password);
+                } else {  // 같을 경우
+                    pwIncorrectError.setText("");
                 }
-
+                // '이름'이 한글이 아니거나 글자 수가 10을 넘어갈 경우
+                final int MAX_NAME_LENGTH = 10;
+                if (!Pattern.matches("^[가-힣]*$", name) || name.length() > MAX_NAME_LENGTH) {
+                    nameInvalidError.setText(R.string.error_invalid_name);
+                } else {  // 맞을 경우
+                    nameInvalidError.setText("");
+                }
                 // 모든 조건에 만족하는 경우
-                else {  // 나머지
+                if (
+                        !(name.equals("") || id.equals("") || pw.equals("") || pw_check.equals(""))
+                        && (pw.equals(pw_check))
+                        && (Pattern.matches("^[가-힣]*$", name))
+                        && (name.length() <= MAX_NAME_LENGTH)
+                ){
                     intent.putExtra("name", name);
                     intent.putExtra("id", id);
                     intent.putExtra("pw", pw);
 
-                    // 액티비티 시작
-                    startActivity(intent);
+                    startActivity(intent);  // 액티비티 시작
                 }
             }
         });
