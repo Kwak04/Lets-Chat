@@ -11,11 +11,8 @@ import android.widget.Toast;
 
 public class RegisterActivity extends AppCompatActivity {
 
-    EditText makeName;
-    EditText makeID;
-    EditText makePW;
-    EditText makePW_check;
-    TextView pwIncorrectError;
+    EditText makeName, makeID, makePW, makePW_check;
+    TextView nameInvalidError, idInvalidError, pwInvalidError, pwIncorrectError;
     Button next;
 
     @Override
@@ -27,9 +24,17 @@ public class RegisterActivity extends AppCompatActivity {
         makeID = findViewById(R.id.newID);
         makePW = findViewById(R.id.newPW);
         makePW_check = findViewById(R.id.newPW_check);
-        pwIncorrectError = findViewById(R.id.password_error);
+
+        nameInvalidError = findViewById(R.id.invalid_name);
+        idInvalidError = findViewById(R.id.invalid_id);
+        pwInvalidError = findViewById(R.id.invalid_password);
+        pwIncorrectError = findViewById(R.id.incorrect_password);
+
         next = findViewById(R.id.next);
 
+        nameInvalidError.setText("");
+        idInvalidError.setText("");
+        pwInvalidError.setText("");
         pwIncorrectError.setText("");
 
         final Intent intent = new Intent(getApplicationContext(), RegisterSchoolActivity.class);
