@@ -8,7 +8,7 @@ import android.widget.TextView;
 
 import java.util.List;
 
-public class ChatMyAdapter extends RecyclerView.Adapter<ChatMyAdapter.MyViewHolder> {
+public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.MyViewHolder> {
     private List<Chat> mDataset;
     private String myUserKey;
 
@@ -25,13 +25,13 @@ public class ChatMyAdapter extends RecyclerView.Adapter<ChatMyAdapter.MyViewHold
         }
     }
 
-    public ChatMyAdapter(List<Chat> myDataset, String my_user_key) {
+    public ChatAdapter(List<Chat> myDataset, String my_user_key) {
         mDataset = myDataset;
         myUserKey = my_user_key;
     }
 
     @Override
-    public ChatMyAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ChatAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.chat_object, parent, false);
         return new MyViewHolder(v);

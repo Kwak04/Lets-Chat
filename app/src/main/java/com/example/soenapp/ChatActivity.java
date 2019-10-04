@@ -6,7 +6,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -14,13 +13,14 @@ import java.util.List;
 import java.util.Random;
 
 public class ChatActivity extends AppCompatActivity {
+
     RecyclerView recyclerView;
     RecyclerView.Adapter mAdapter;
     RecyclerView.LayoutManager layoutManager;
     List<Chat> chats;
     EditText input;
     TextView who;
-    String my_user_key = "1";
+    String myUserKey = "1";
 
     Chat chat;
     Random random = new Random();
@@ -60,7 +60,7 @@ public class ChatActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
 
         // specify an adapter (see also next example)
-        mAdapter = new ChatMyAdapter(chats, my_user_key);
+        mAdapter = new ChatAdapter(chats, myUserKey);
         recyclerView.setAdapter(mAdapter);
 
         findViewById(R.id.chat_send).setOnClickListener(new View.OnClickListener() {
@@ -78,7 +78,7 @@ public class ChatActivity extends AppCompatActivity {
                 for (int i = 0 ; i < chats.size(); i++) {
                     System.out.println(chats.get(i).toString());
                 }
-                mAdapter = new ChatMyAdapter(chats, my_user_key);
+                mAdapter = new ChatAdapter(chats, myUserKey);
                 recyclerView.setAdapter(mAdapter);
             }
         });
