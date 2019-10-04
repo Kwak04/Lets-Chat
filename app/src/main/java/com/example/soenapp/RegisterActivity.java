@@ -69,8 +69,8 @@ public class RegisterActivity extends AppCompatActivity {
                 } else {  // 맞을 경우
                     nameInvalidError.setText("");
                 }
-                // '아이디'가 영문과 숫자로 이루어지지 않거라 글자 수가 4자리~20자리 범위에 없을 경우
-                if (!Pattern.matches("^[a-z0-9]{4,20}$", id)) {
+                // '아이디'가 영문과 숫자로 이루어지지 않거나 글자 수가 4자리~20자리 범위에 없을 경우
+                if (!Pattern.matches("^[a-z0-9]{4,20}$", id) && (!id.equals(""))) {
                     idInvalidError.setText(R.string.error_invalid_id);
                 } else {  // 맞을 경우
                     idInvalidError.setText("");
