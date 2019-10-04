@@ -41,15 +41,11 @@ public class ChatActivity extends AppCompatActivity {
 
         chats = new ArrayList<>();
 
-        // use this setting to improve performance if you know that changes
-        // in content do not change the layout size of the RecyclerView
-        recyclerView.setHasFixedSize(true);
 
-        // use a linear layout manager
+        // RecyclerView
+        recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
-
-        // specify an adapter (see also next example)
         mAdapter = new ChatAdapter(chats, myUserKey);
         recyclerView.setAdapter(mAdapter);
 
