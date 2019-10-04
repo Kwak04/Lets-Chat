@@ -25,9 +25,7 @@ public class ChatActivity extends AppCompatActivity {
     Chat chat;
     List<Chat> chats;
 
-    SharedPreferences pref = getSharedPreferences("userData", MODE_PRIVATE);
-
-    String myUserKey = pref.getString("user_key", "");
+    SharedPreferences pref;
 
 
     @Override
@@ -37,6 +35,9 @@ public class ChatActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.chat_recycler_view);
         input = findViewById(R.id.chat_input);
         who = findViewById(R.id.chat_who);
+
+        pref = getSharedPreferences("userData", MODE_PRIVATE);
+        final String myUserKey = pref.getString("user_key", "");
 
         chats = new ArrayList<>();
 
