@@ -42,9 +42,9 @@
     <!-- activity_register -->
     <string name="text_info">정보</string>
     <string name="error_invalid_name">한글, 10자리까지 허용</string>
-    <string name="error_invalid_id">영문(숫자 포함 가능), 20자리까지 허용</string>
+    <string name="error_invalid_id">영문, 숫자 포함, 4자리~20자리</string>
     <string name="error_overlapping_id">이미 있는 아이디입니다.</string>
-    <string name="error_invalid_password">영문(숫자 포함 가능), 6~20자리까지 허용</string>
+    <string name="error_invalid_password">영문, 숫자 포함, 6자리~20자리</string>
     <string name="error_incorrect_password">비밀번호가 일치하지 않습니다.</string>
 
     <!-- activity_register_school -->

@@ -69,12 +69,19 @@ public class RegisterActivity extends AppCompatActivity {
                 } else {  // 맞을 경우
                     nameInvalidError.setText("");
                 }
+                // '아이디'가 영문과 숫자로 이루어지지 않거라 글자 수가 4자리~20자리 범위에 없을 경우
+                if (!Pattern.matches("^[a-z0-9]{4,20}$", id)) {
+                    idInvalidError.setText(R.string.error_invalid_id);
+                } else {  // 맞을 경우
+                    idInvalidError.setText("");
+                }
                 // 모든 조건에 만족하는 경우
                 if (
                         !(name.equals("") || id.equals("") || pw.equals("") || pw_check.equals(""))
                         && (pw.equals(pw_check))
                         && (Pattern.matches("^[가-힣]*$", name))
                         && (name.length() <= MAX_NAME_LENGTH)
+                        && (Pattern.matches("^[a-z0-9]{4,20}$", id))
                 ){
                     intent.putExtra("name", name);
                     intent.putExtra("id", id);
