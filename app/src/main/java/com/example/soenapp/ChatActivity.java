@@ -1,5 +1,6 @@
 package com.example.soenapp;
 
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -14,16 +15,20 @@ import java.util.Random;
 
 public class ChatActivity extends AppCompatActivity {
 
+    EditText input;
+    TextView who;
+
     RecyclerView recyclerView;
     RecyclerView.Adapter mAdapter;
     RecyclerView.LayoutManager layoutManager;
-    List<Chat> chats;
-    EditText input;
-    TextView who;
-    String myUserKey = "1";
 
     Chat chat;
-    Random random = new Random();
+    List<Chat> chats;
+
+    SharedPreferences pref = getSharedPreferences("userData", MODE_PRIVATE);
+
+    String myUserKey = pref.getString("user_key", "");
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,22 +40,6 @@ public class ChatActivity extends AppCompatActivity {
 
         chats = new ArrayList<>();
 
-        int a;
-
-        for (int i = 0; i < 10 ; i++){
-
-            chat = new Chat();
-            chat.person = String.valueOf(i);
-            chat.text = String.valueOf(i);
-            chat.time = String.valueOf(i);
-
-            a = random.nextInt(3);
-            chat.user_key = String.valueOf(a);
-
-            System.out.println(a);
-
-            chats.add(chat);
-        }
         // use this setting to improve performance if you know that changes
         // in content do not change the layout size of the RecyclerView
         recyclerView.setHasFixedSize(true);
@@ -68,16 +57,13 @@ public class ChatActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 Chat chat = new Chat();
-                chat.person = "test";
-                chat.time = "test";
-                chat.user_key = "1";
+                chat.person = "none";
+                chat.time = "none";
+                chat.user_key = "none";
 
                 chat.text = input.getText().toString();
                 chats.add(chat);
 
-                for (int i = 0 ; i < chats.size(); i++) {
-                    System.out.println(chats.get(i).toString());
-                }
                 mAdapter = new ChatAdapter(chats, myUserKey);
                 recyclerView.setAdapter(mAdapter);
             }

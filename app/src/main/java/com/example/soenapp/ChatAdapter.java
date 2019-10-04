@@ -46,6 +46,7 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.MyViewHolder> 
         holder.chat_person.setText(mDataset.get(position).person);
         holder.chat_time.setText(mDataset.get(position).time);
 
+        // myUserKey 가 메시지의 user_key 와 일치할 때
         if (myUserKey.equals(mDataset.get(position).user_key)) {
             holder.who.setText("나");
         } else {
