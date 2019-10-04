@@ -69,11 +69,17 @@ public class RegisterActivity extends AppCompatActivity {
                 } else {  // 맞을 경우
                     nameInvalidError.setText("");
                 }
-                // '아이디'가 영문과 숫자로 이루어지지 않거나 글자 수가 4자리~20자리 범위에 없을 경우
+                // '아이디'가 영문과 숫자로 이루어지지 않았거나 글자 수가 3자리~20자리 범위에 없을 경우
                 if (!Pattern.matches("^[a-z0-9]{4,20}$", id) && (!id.equals(""))) {
                     idInvalidError.setText(R.string.error_invalid_id);
                 } else {  // 맞을 경우
                     idInvalidError.setText("");
+                }
+                // '비밀번호'가 영문과 숫자로 이루어지지 않았거나 글자 수가 6자리~20자리 범위에 없을 경우
+                if (!Pattern.matches("^[a-z0-9]{6,20}$", pw) && (!pw.equals(""))) {
+                    pwInvalidError.setText(R.string.error_invalid_password);
+                } else {
+                    pwInvalidError.setText("");
                 }
                 // 모든 조건에 만족하는 경우
                 if (
@@ -82,6 +88,7 @@ public class RegisterActivity extends AppCompatActivity {
                         && (Pattern.matches("^[가-힣]*$", name))
                         && (name.length() <= MAX_NAME_LENGTH)
                         && (Pattern.matches("^[a-z0-9]{4,20}$", id))
+                        && (Pattern.matches("^[a-z0-9]{6,20}$", pw))
                 ){
                     intent.putExtra("name", name);
                     intent.putExtra("id", id);
