@@ -29,4 +29,9 @@ public interface RetrofitService {
     @FormUrlEncoded
     @POST("/user/privacy/register/next")
     Call<RegisterData> register(@FieldMap HashMap<String, Object> param);
+
+    // 채팅 데이터 데이터베이스로 전송
+    @FormUrlEncoded
+    @POST("/user/chat/personal")
+    Call<ChatData> postChatData(@FieldMap HashMap<String, Object> param);
 }
