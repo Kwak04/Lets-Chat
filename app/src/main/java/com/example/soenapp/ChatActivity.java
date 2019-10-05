@@ -11,15 +11,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.google.gson.JsonObject;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.net.URISyntaxException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
-import java.util.Random;
 
 import io.socket.client.IO;
 import io.socket.client.Socket;
@@ -35,8 +34,8 @@ public class ChatActivity extends AppCompatActivity {
     RecyclerView.Adapter mAdapter;
     RecyclerView.LayoutManager layoutManager;
 
-    Chat chat;
-    List<Chat> chats;
+    ChatData chat;
+    List<ChatData> chats;
 
     SharedPreferences pref;
 
@@ -92,6 +91,7 @@ public class ChatActivity extends AppCompatActivity {
         // SharedPreferences
         pref = getSharedPreferences("userData", MODE_PRIVATE);
         final String myUserKey = pref.getString("user_key", "");
+        final String myName = pref.getString("name", "");
 
         chats = new ArrayList<>();
 
@@ -99,6 +99,7 @@ public class ChatActivity extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
+
         mAdapter = new ChatAdapter(chats, myUserKey);
         recyclerView.setAdapter(mAdapter);
 
@@ -107,10 +108,16 @@ public class ChatActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 String text = input.getText().toString();
+                Date time = new Date();
+                SimpleDateFormat formatActual = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                SimpleDateFormat formatDisplay = new SimpleDateFormat("HH:mm");
 
-                Chat chat = new Chat();
-                chat.person = "none";
-                chat.time = "none";
+                String timeActual = formatActual.format(time.getTime());
+                String timeDisplay = formatDisplay.format(time.getTime());
+
+                ChatData chat = new ChatData();
+                chat.person = myName;
+                chat.time = timeDisplay;
                 chat.user_key = "none";
 
                 chat.text = text;

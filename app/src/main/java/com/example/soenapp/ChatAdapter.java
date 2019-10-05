@@ -9,7 +9,7 @@ import android.widget.TextView;
 import java.util.List;
 
 public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.MyViewHolder> {
-    private List<Chat> mDataset;
+    private List<ChatData> mDataset;
     private String myUserKey;
 
     public static class MyViewHolder extends RecyclerView.ViewHolder{
@@ -25,7 +25,7 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.MyViewHolder> 
         }
     }
 
-    public ChatAdapter(List<Chat> myDataset, String my_user_key) {
+    public ChatAdapter(List<ChatData> myDataset, String my_user_key) {
         mDataset = myDataset;
         myUserKey = my_user_key;
     }
