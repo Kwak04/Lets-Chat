@@ -12,7 +12,7 @@ import retrofit2.http.Query;
 
 public interface RetrofitService {
 
-    String ip = "119.196.210.238";
+    String ip = "10.0.2.2";
     // 집 포트 포워딩 IP = 119.196.210.238  로컬 서버 (에뮬레이터 구동 시) IP = 10.0.2.2
     String URL = "http://" + ip + ":3000/";
 
@@ -29,4 +29,9 @@ public interface RetrofitService {
     @FormUrlEncoded
     @POST("/user/privacy/register/next")
     Call<RegisterData> register(@FieldMap HashMap<String, Object> param);
+
+    // 채팅 데이터 데이터베이스로 전송
+    @FormUrlEncoded
+    @POST("/user/chat/personal")
+    Call<ChatData> postChatData(@FieldMap HashMap<String, Object> param);
 }
