@@ -60,7 +60,7 @@ public class ChatActivity extends AppCompatActivity {
         Emitter.Listener onConnect = new Emitter.Listener() {
             @Override
             public void call(Object... args) {
-                socket.emit("clientMessage", "hi");
+                socket.emit("clientMessage", "Connected!");
             }
         };
 
@@ -106,13 +106,17 @@ public class ChatActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+                String text = input.getText().toString();
+
                 Chat chat = new Chat();
                 chat.person = "none";
                 chat.time = "none";
                 chat.user_key = "none";
 
-                chat.text = input.getText().toString();
+                chat.text = text;
                 chats.add(chat);
+
+                socket.emit("clientMessage", text);
 
                 mAdapter = new ChatAdapter(chats, myUserKey);
                 recyclerView.setAdapter(mAdapter);
