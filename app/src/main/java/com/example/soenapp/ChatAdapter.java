@@ -47,6 +47,8 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.MyViewHolder> 
         holder.chat_time.setText(mDataset.get(position).time);
 
         // myUserKey 가 메시지의 user_key 와 일치할 때
+        // mDataset.user_key 는 서버에서 받아 오는 값임
+        // myUserKey 는 로그인했을 때 SharedPreferences 에 저장되어 있는 값임
         if (myUserKey.equals(mDataset.get(position).user_key)) {
             holder.who.setText("나");
         } else {
