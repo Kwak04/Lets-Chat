@@ -66,7 +66,7 @@ public class RegisterActivity extends AppCompatActivity {
 
 
                 // 조건 체크
-                System.out.println("hello");
+
                 // 아이디 중복 확인
                 retrofitService.checkID(id).enqueue(new Callback<SimpleMessageData>() {
                     @Override
@@ -80,13 +80,11 @@ public class RegisterActivity extends AppCompatActivity {
                             }
                         }
                     }
-
                     @Override
                     public void onFailure(@NonNull Call<SimpleMessageData> call, @NonNull Throwable t) {
                         Toast.makeText(RegisterActivity.this, "데이터 전송에 실패하였습니다.", Toast.LENGTH_SHORT).show();
                     }
                 });
-
                 // 공백이 있는 칸이 있을 경우
                 if (name.equals("") || id.equals("") || pw.equals("") || pw_check.equals("")) {
                     String toastMessage = "모든 칸에 내용을 입력해 주세요.";
