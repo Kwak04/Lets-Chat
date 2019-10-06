@@ -38,14 +38,35 @@
                 android:layout_marginEnd="25dp"
                 android:orientation="vertical">
 
-                <TextView
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/marginStart_text_above_rounded_edittext"
-                    android:layout_marginBottom="@dimen/marginBottom_text_above_rounded_edittext"
-                    android:text="@string/text_name"
-                    android:textColor="@android:color/black"
-                    android:textSize="@dimen/textSize_small" />
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="@dimen/marginBottom_text_above_rounded_edittext">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/marginStart_text_above_rounded_edittext"
+                        android:text="@string/text_name"
+                        android:textColor="@android:color/black"
+                        android:textSize="@dimen/textSize_small" />
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/colorRed"
+                        android:text="@string/error_invalid_name"
+                        android:textSize="13sp"
+                        android:layout_gravity="center"
+                        android:id="@+id/invalid_name"/>
+
+                </LinearLayout>
 
                 <EditText
                     android:id="@+id/newName"
@@ -57,14 +78,35 @@
                     android:paddingStart="@dimen/paddingStart_rounded_edittext"
                     android:paddingEnd="0dp"/>
 
-                <TextView
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/marginStart_text_above_rounded_edittext"
-                    android:layout_marginBottom="@dimen/marginBottom_text_above_rounded_edittext"
-                    android:text="@string/text_id"
-                    android:textColor="@android:color/black"
-                    android:textSize="@dimen/textSize_small" />
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="@dimen/marginBottom_text_above_rounded_edittext">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/marginStart_text_above_rounded_edittext"
+                        android:text="@string/text_id"
+                        android:textColor="@android:color/black"
+                        android:textSize="@dimen/textSize_small" />
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="13sp"
+                        android:textColor="@color/colorRed"
+                        android:text="@string/error_overlapping_id"
+                        android:layout_gravity="center"
+                        android:id="@+id/invalid_id"/>
+
+                </LinearLayout>
 
                 <EditText
                     android:id="@+id/newID"
@@ -76,14 +118,35 @@
                     android:paddingStart="@dimen/paddingStart_rounded_edittext"
                     android:paddingEnd="0dp"/>
 
-                <TextView
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/marginStart_text_above_rounded_edittext"
-                    android:layout_marginBottom="@dimen/marginBottom_text_above_rounded_edittext"
-                    android:text="@string/text_pw"
-                    android:textColor="@android:color/black"
-                    android:textSize="@dimen/textSize_small" />
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="@dimen/marginBottom_text_above_rounded_edittext">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/marginStart_text_above_rounded_edittext"
+                        android:text="@string/text_pw"
+                        android:textColor="@android:color/black"
+                        android:textSize="@dimen/textSize_small" />
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/error_invalid_password"
+                        android:textColor="@color/colorRed"
+                        android:textSize="13sp"
+                        android:layout_gravity="center"
+                        android:id="@+id/invalid_password"/>
+
+                </LinearLayout>
 
                 <EditText
                     android:id="@+id/newPW"
@@ -119,11 +182,11 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="#FF0000"
+                        android:textColor="@color/colorRed"
                         android:text="@string/error_incorrect_password"
                         android:textSize="13sp"
                         android:layout_gravity="center"
-                        android:id="@+id/password_error"/>
+                        android:id="@+id/incorrect_password"/>
 
                 </LinearLayout>
 

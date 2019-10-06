@@ -30,6 +30,10 @@ public interface RetrofitService {
     @POST("/user/privacy/register/next")
     Call<RegisterData> register(@FieldMap HashMap<String, Object> param);
 
+    // 회원가입 - 아이디 중복 확인
+    @GET("/user/privacy/register/idcheck")
+    Call<SimpleMessageData> checkID(@Query("id") String id);
+
     // 채팅 데이터 데이터베이스로 전송
     @FormUrlEncoded
     @POST("/user/chat/personal")
