@@ -1,6 +1,7 @@
 package com.example.soenapp;
 
 import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -9,13 +10,28 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.HashMap;
 import java.util.regex.Pattern;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RegisterActivity extends AppCompatActivity {
 
     EditText makeName, makeID, makePW, makePW_check;
     TextView nameInvalidError, idInvalidError, pwInvalidError, pwIncorrectError;
     Button next;
+
+    Retrofit retrofit = new Retrofit.Builder()
+            .baseUrl(RetrofitService.URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build();
+    RetrofitService retrofitService = retrofit.create(RetrofitService.class);
+    SimpleMessageData resultBody;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,13 +59,33 @@ public class RegisterActivity extends AppCompatActivity {
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String name = makeName.getText().toString();
-                String id = makeID.getText().toString();
-                String pw = makePW.getText().toString();
-                String pw_check = makePW_check.getText().toString();
+                final String name = makeName.getText().toString();
+                final String id = makeID.getText().toString();
+                final String pw = makePW.getText().toString();
+                final String pw_check = makePW_check.getText().toString();
 
 
                 // 조건 체크
+                System.out.println("hello");
+                // 아이디 중복 확인
+                retrofitService.checkID(id).enqueue(new Callback<SimpleMessageData>() {
+                    @Override
+                    public void onResponse(@NonNull Call<SimpleMessageData> call, @NonNull Response<SimpleMessageData> response) {
+                        if (response.isSuccessful()) {
+                            resultBody = response.body();
+                            if (resultBody.message.equals("overlapping")) {  // 이미 데이터베이스에 같은 아이디가 있을 경우
+                                idInvalidError.setText(R.string.error_overlapping_id);
+                            } else {  // 없을 경우
+                                idInvalidError.setText("");
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(@NonNull Call<SimpleMessageData> call, @NonNull Throwable t) {
+                        Toast.makeText(RegisterActivity.this, "데이터 전송에 실패하였습니다.", Toast.LENGTH_SHORT).show();
+                    }
+                });
 
                 // 공백이 있는 칸이 있을 경우
                 if (name.equals("") || id.equals("") || pw.equals("") || pw_check.equals("")) {
@@ -70,7 +106,7 @@ public class RegisterActivity extends AppCompatActivity {
                     nameInvalidError.setText("");
                 }
                 // '아이디'가 영문과 숫자로 이루어지지 않았거나 글자 수가 3자리~20자리 범위에 없을 경우
-                if (!Pattern.matches("^[a-z0-9]{4,20}$", id) && (!id.equals(""))) {
+                if (!Pattern.matches("^[a-z0-9]{3,20}$", id) && (!id.equals(""))) {
                     idInvalidError.setText(R.string.error_invalid_id);
                 } else {  // 맞을 경우
                     idInvalidError.setText("");

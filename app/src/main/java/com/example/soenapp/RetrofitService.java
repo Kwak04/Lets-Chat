@@ -29,4 +29,8 @@ public interface RetrofitService {
     @FormUrlEncoded
     @POST("/user/privacy/register/next")
     Call<RegisterData> register(@FieldMap HashMap<String, Object> param);
+
+    // 회원가입 - 아이디 중복 확인
+    @GET("/user/privacy/register/idcheck")
+    Call<SimpleMessageData> checkID(@Query("id") String id);
 }
