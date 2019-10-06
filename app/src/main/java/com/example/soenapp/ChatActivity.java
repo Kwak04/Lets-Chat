@@ -71,12 +71,19 @@ public class ChatActivity extends AppCompatActivity {
         who = findViewById(R.id.chat_who);
         send = findViewById(R.id.chat_send);
 
+        // SharedPreferences
+        pref = getSharedPreferences("userData", MODE_PRIVATE);
+        final String myUserKey = pref.getString("user_key", "");
+        final String myName = pref.getString("name", "");
+
+        chats = new ArrayList<>();
+
 
         // Socket Communication
         Emitter.Listener onConnect = new Emitter.Listener() {
             @Override
             public void call(Object... args) {
-                socket.emit("clientMessage", "Connected!");
+                socket.emit("chat", myUserKey);
             }
         };
 
@@ -85,8 +92,9 @@ public class ChatActivity extends AppCompatActivity {
             public void call(Object... args) {
                 try {
                     JSONObject receivedData = (JSONObject) args[0];
-                    Log.d(TAG, receivedData.getString("msg"));
-                    Log.d(TAG, receivedData.getString("data"));
+                    Log.d(TAG, receivedData.getString("user_name"));
+                    Log.d(TAG, receivedData.getString("time"));
+                    Log.d(TAG, receivedData.getString("text"));
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -103,14 +111,6 @@ public class ChatActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-
-
-        // SharedPreferences
-        pref = getSharedPreferences("userData", MODE_PRIVATE);
-        final String myUserKey = pref.getString("user_key", "");
-        final String myName = pref.getString("name", "");
-
-        chats = new ArrayList<>();
 
         // RecyclerView
         recyclerView.setHasFixedSize(true);
@@ -146,6 +146,7 @@ public class ChatActivity extends AppCompatActivity {
                 chatInfo.put("user_name", myName);
                 chatInfo.put("time", timeDisplay);
                 chatInfo.put("time_detail", timeActual);
+                chatInfo.put("text", text);
 
                 retrofitService.postChatData(chatInfo).enqueue(new Callback<ChatData>() {
                     @Override
