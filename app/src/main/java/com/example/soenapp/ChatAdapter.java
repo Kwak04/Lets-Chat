@@ -8,8 +8,8 @@ import android.widget.TextView;
 
 import java.util.List;
 
-public class ChatMyAdapter extends RecyclerView.Adapter<ChatMyAdapter.MyViewHolder> {
-    private List<Chat> mDataset;
+public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.MyViewHolder> {
+    private List<ChatData> mDataset;
     private String myUserKey;
 
     public static class MyViewHolder extends RecyclerView.ViewHolder{
@@ -25,13 +25,13 @@ public class ChatMyAdapter extends RecyclerView.Adapter<ChatMyAdapter.MyViewHold
         }
     }
 
-    public ChatMyAdapter(List<Chat> myDataset, String my_user_key) {
+    public ChatAdapter(List<ChatData> myDataset, String my_user_key) {
         mDataset = myDataset;
         myUserKey = my_user_key;
     }
 
     @Override
-    public ChatMyAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ChatAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.chat_object, parent, false);
         return new MyViewHolder(v);
@@ -46,6 +46,9 @@ public class ChatMyAdapter extends RecyclerView.Adapter<ChatMyAdapter.MyViewHold
         holder.chat_person.setText(mDataset.get(position).person);
         holder.chat_time.setText(mDataset.get(position).time);
 
+        // myUserKey 가 메시지의 user_key 와 일치할 때
+        // mDataset.user_key 는 서버에서 받아 오는 값임
+        // myUserKey 는 로그인했을 때 SharedPreferences 에 저장되어 있는 값임
         if (myUserKey.equals(mDataset.get(position).user_key)) {
             holder.who.setText("나");
         } else {

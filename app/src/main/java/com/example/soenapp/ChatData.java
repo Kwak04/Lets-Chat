@@ -1,6 +1,8 @@
 package com.example.soenapp;
 
-public class Chat {
+public class ChatData {
+    String message;
+
     String text;
     String person;
     String time;
@@ -8,7 +10,7 @@ public class Chat {
 
     @Override
     public String toString() {
-        return "Chat{" +
+        return "ChatData {" +
                 "text='" + text + '\'' +
                 ", person='" + person + '\'' +
                 ", time='" + time + '\'' +
