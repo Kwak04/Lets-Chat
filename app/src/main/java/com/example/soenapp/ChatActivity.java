@@ -57,7 +57,7 @@ public class ChatActivity extends AppCompatActivity {
             .addConverterFactory(GsonConverterFactory.create())
             .build();
     RetrofitService retrofitService = retrofit.create(RetrofitService.class);
-    HashMap<String, Object> chatInfo = new HashMap<>();
+    HashMap<String, Object> chatInfo_ = new HashMap<>();
     ChatData body;
 
 
@@ -80,6 +80,8 @@ public class ChatActivity extends AppCompatActivity {
 
 
         // Socket Communication
+
+        // 연결되었을 때
         Emitter.Listener onConnect = new Emitter.Listener() {
             @Override
             public void call(Object... args) {
@@ -87,7 +89,8 @@ public class ChatActivity extends AppCompatActivity {
             }
         };
 
-        Emitter.Listener onMessageReceived = new Emitter.Listener() {
+        // 'chatMessage'를 받았을 때
+        Emitter.Listener onChatMessageReceived = new Emitter.Listener() {
             @Override
             public void call(Object... args) {
                 try {
@@ -101,12 +104,26 @@ public class ChatActivity extends AppCompatActivity {
             }
         };
 
+        // 'checkSaveChat'을 받았을 때
+        Emitter.Listener onCheckSaveChat = new Emitter.Listener() {
+            @Override
+            public void call(Object... args) {
+                try {
+                    JSONObject receivedData = (JSONObject) args[0];
+                    Log.d("onCheckSaveChat", receivedData.getString("message"));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+
         try {
             String url = RetrofitService.URL;
             socket = IO.socket(url);
             socket.connect();
             socket.on(Socket.EVENT_CONNECT, onConnect);
-            socket.on("serverMessage", onMessageReceived);
+            socket.on("chatMessage", onChatMessageReceived);
+            socket.on("checkSaveChat", onCheckSaveChat);
         } catch (URISyntaxException e) {
             e.printStackTrace();
         }
@@ -142,30 +159,17 @@ public class ChatActivity extends AppCompatActivity {
 
                 // Put chat data to the database
 
-                chatInfo.put("user_key", myUserKey);
-                chatInfo.put("user_name", myName);
-                chatInfo.put("time", timeDisplay);
-                chatInfo.put("time_detail", timeActual);
-                chatInfo.put("text", text);
-
-                retrofitService.postChatData(chatInfo).enqueue(new Callback<ChatData>() {
-                    @Override
-                    public void onResponse(@NonNull Call<ChatData> call, @NonNull Response<ChatData> response) {
-                        if (response.isSuccessful()) {
-                            body = response.body();
-                            if (body.message.equals("success")) {
-                                Log.d(TAG, body.toString());
-                            }
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(@NonNull Call<ChatData> call, @NonNull Throwable t) {
-                        Toast.makeText(ChatActivity.this, "데이터 전송 실패", Toast.LENGTH_SHORT).show();
-                    }
-                });
-
-                socket.emit("clientMessage", text);
+                JSONObject chatInfo = new JSONObject();
+                try {
+                    chatInfo.put("user_key", myUserKey);
+                    chatInfo.put("user_name", myName);
+                    chatInfo.put("time", timeDisplay);
+                    chatInfo.put("time_detail", timeActual);
+                    chatInfo.put("text", text);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                socket.emit("saveChat", chatInfo);
 
                 mAdapter = new ChatAdapter(chats, myUserKey);
                 recyclerView.setAdapter(mAdapter);
