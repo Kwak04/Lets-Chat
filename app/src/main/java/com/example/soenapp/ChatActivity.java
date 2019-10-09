@@ -42,23 +42,11 @@ public class ChatActivity extends AppCompatActivity {
     RecyclerView.Adapter mAdapter;
     RecyclerView.LayoutManager layoutManager;
 
-    ChatData chat;
     List<ChatData> chats;
 
     SharedPreferences pref;
 
     Socket socket;
-
-    final String TAG = "ChatActivity";
-
-    // Retrofit
-    Retrofit retrofit = new Retrofit.Builder()
-            .baseUrl(RetrofitService.URL)
-            .addConverterFactory(GsonConverterFactory.create())
-            .build();
-    RetrofitService retrofitService = retrofit.create(RetrofitService.class);
-    HashMap<String, Object> chatInfo_ = new HashMap<>();
-    ChatData body;
 
 
     @Override
@@ -91,6 +79,7 @@ public class ChatActivity extends AppCompatActivity {
 
         // 'chatMessage'를 받았을 때
         Emitter.Listener onChatMessageReceived = new Emitter.Listener() {
+            final String TAG = "onChatMessageReceived";
             @Override
             public void call(Object... args) {
                 try {
@@ -105,12 +94,13 @@ public class ChatActivity extends AppCompatActivity {
         };
 
         // 'checkSaveChat'을 받았을 때
-        Emitter.Listener onCheckSaveChat = new Emitter.Listener() {
+        Emitter.Listener onCheckSaveChatReceived = new Emitter.Listener() {
+            final String TAG = "onCheckSaveChatReceived";
             @Override
             public void call(Object... args) {
                 try {
                     JSONObject receivedData = (JSONObject) args[0];
-                    Log.d("onCheckSaveChat", receivedData.getString("message"));
+                    Log.d(TAG, receivedData.getString("message"));
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -123,7 +113,7 @@ public class ChatActivity extends AppCompatActivity {
             socket.connect();
             socket.on(Socket.EVENT_CONNECT, onConnect);
             socket.on("chatMessage", onChatMessageReceived);
-            socket.on("checkSaveChat", onCheckSaveChat);
+            socket.on("checkSaveChat", onCheckSaveChatReceived);
         } catch (URISyntaxException e) {
             e.printStackTrace();
         }
