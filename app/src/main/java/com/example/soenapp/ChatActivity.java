@@ -1,7 +1,6 @@
 package com.example.soenapp;
 
 import android.content.SharedPreferences;
-import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -11,7 +10,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -19,18 +17,14 @@ import org.json.JSONObject;
 import java.net.URISyntaxException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 
 import io.socket.client.IO;
 import io.socket.client.Socket;
 import io.socket.emitter.Emitter;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ChatActivity extends AppCompatActivity {
 
@@ -42,23 +36,13 @@ public class ChatActivity extends AppCompatActivity {
     RecyclerView.Adapter mAdapter;
     RecyclerView.LayoutManager layoutManager;
 
-    ChatData chat;
     List<ChatData> chats;
 
     SharedPreferences pref;
 
     Socket socket;
 
-    final String TAG = "ChatActivity";
-
-    // Retrofit
-    Retrofit retrofit = new Retrofit.Builder()
-            .baseUrl(RetrofitService.URL)
-            .addConverterFactory(GsonConverterFactory.create())
-            .build();
-    RetrofitService retrofitService = retrofit.create(RetrofitService.class);
-    HashMap<String, Object> chatInfo = new HashMap<>();
-    ChatData body;
+    String roomKey;
 
 
     @Override
@@ -71,22 +55,90 @@ public class ChatActivity extends AppCompatActivity {
         who = findViewById(R.id.chat_who);
         send = findViewById(R.id.chat_send);
 
+        // SharedPreferences
+        pref = getSharedPreferences("userData", MODE_PRIVATE);
+        final String myUserKey = pref.getString("user_key", "");
+        final String myName = pref.getString("name", "");
+
+        chats = new ArrayList<>();
+
 
         // Socket Communication
+
+        // 연결되었을 때
         Emitter.Listener onConnect = new Emitter.Listener() {
             @Override
             public void call(Object... args) {
-                socket.emit("clientMessage", "Connected!");
+                socket.emit("requestChat", myUserKey);
             }
         };
 
-        Emitter.Listener onMessageReceived = new Emitter.Listener() {
+        // 'room_key'를 받았을 때
+        Emitter.Listener onRoomKeyReceived = new Emitter.Listener() {
+            @Override
+            public void call(Object... args) {
+                final String TAG = "onRoomKeyReceived";
+                try {
+                    JSONObject receivedData = (JSONObject) args[0];
+                    roomKey = receivedData.getString("room_key");
+                    Log.d(TAG, "room_key: " + roomKey);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+
+        // 'chatMessage'를 받았을 때
+        Emitter.Listener onChatMessageReceived = new Emitter.Listener() {
+            final String TAG = "onChatMessageReceived";
             @Override
             public void call(Object... args) {
                 try {
                     JSONObject receivedData = (JSONObject) args[0];
-                    Log.d(TAG, receivedData.getString("msg"));
-                    Log.d(TAG, receivedData.getString("data"));
+                    Log.d(TAG, receivedData.getString("user_name"));
+                    Log.d(TAG, receivedData.getString("time"));
+                    Log.d(TAG, receivedData.getString("text"));
+
+                    if(receivedData.getString("room_key").equals(roomKey)){
+                        ChatData chat = new ChatData();
+                        chat.person = receivedData.getString("user_name");
+                        chat.time = receivedData.getString("time");
+                        chat.user_key = receivedData.getString("user_key");
+                        chat.text = receivedData.getString("text");
+                        chats.add(chat);
+
+                        Collections.sort(chats, new Comparator<ChatData>() {
+                            @Override
+                            public int compare(ChatData lhs, ChatData rhs) {
+                                // -1 - less than, 1 - greater than, 0 - equal, all inversed for descending
+                                return lhs.time.compareTo(rhs.time) > 0 ? -1 : (lhs.time.compareTo(rhs.time) < 0 ) ? 1 : 0;
+                            }
+                        });
+
+                        mAdapter = new ChatAdapter(chats, myUserKey);
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                recyclerView.setAdapter(mAdapter);
+                            }
+                        });
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+
+        // 'checkSaveChat'을 받았을 때
+        Emitter.Listener onCheckSaveChatReceived = new Emitter.Listener() {
+            final String TAG = "onCheckSaveChatReceived";
+            @Override
+            public void call(Object... args) {
+                try {
+                    JSONObject receivedData = (JSONObject) args[0];
+                    Log.d(TAG, receivedData.getString("message"));
+
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -98,19 +150,13 @@ public class ChatActivity extends AppCompatActivity {
             socket = IO.socket(url);
             socket.connect();
             socket.on(Socket.EVENT_CONNECT, onConnect);
-            socket.on("serverMessage", onMessageReceived);
+            socket.on("roomKey", onRoomKeyReceived);
+            socket.on("chatMessage", onChatMessageReceived);
+            socket.on("checkSaveChat", onCheckSaveChatReceived);
         } catch (URISyntaxException e) {
             e.printStackTrace();
         }
 
-
-
-        // SharedPreferences
-        pref = getSharedPreferences("userData", MODE_PRIVATE);
-        final String myUserKey = pref.getString("user_key", "");
-        final String myName = pref.getString("name", "");
-
-        chats = new ArrayList<>();
 
         // RecyclerView
         recyclerView.setHasFixedSize(true);
@@ -123,6 +169,10 @@ public class ChatActivity extends AppCompatActivity {
         send.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                if(roomKey == null){
+                    return;
+                }
 
                 String text = input.getText().toString();
                 Date time = new Date();
@@ -142,30 +192,19 @@ public class ChatActivity extends AppCompatActivity {
 
                 // Put chat data to the database
 
-                chatInfo.put("user_key", myUserKey);
-                chatInfo.put("user_name", myName);
-                chatInfo.put("time", timeDisplay);
-                chatInfo.put("time_detail", timeActual);
-
-                retrofitService.postChatData(chatInfo).enqueue(new Callback<ChatData>() {
-                    @Override
-                    public void onResponse(@NonNull Call<ChatData> call, @NonNull Response<ChatData> response) {
-                        if (response.isSuccessful()) {
-                            body = response.body();
-                            if (body.message.equals("success")) {
-                                Log.d(TAG, body.toString());
-                            }
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(@NonNull Call<ChatData> call, @NonNull Throwable t) {
-                        Toast.makeText(ChatActivity.this, "데이터 전송 실패", Toast.LENGTH_SHORT).show();
-                    }
-                });
-
-                socket.emit("clientMessage", text);
-
+                JSONObject chatInfo = new JSONObject();
+                try {
+                    chatInfo.put("user_key", myUserKey);
+                    chatInfo.put("user_name", myName);
+                    chatInfo.put("time", timeDisplay);
+                    chatInfo.put("time_detail", timeActual);
+                    chatInfo.put("text", text);
+                    chatInfo.put("room_key", roomKey);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                socket.emit("saveChat", chatInfo);
+//
                 mAdapter = new ChatAdapter(chats, myUserKey);
                 recyclerView.setAdapter(mAdapter);
             }
