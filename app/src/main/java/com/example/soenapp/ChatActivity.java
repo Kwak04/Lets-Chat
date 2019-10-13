@@ -82,9 +82,32 @@ public class ChatActivity extends AppCompatActivity {
                 try {
                     JSONObject receivedData = (JSONObject) args[0];
                     Log.d(TAG, "receivedData: " + receivedData);
+                    String userKey = receivedData.getString("user_key");
                     String name = receivedData.getString("user_name");
                     String time = receivedData.getString("time");
                     String text = receivedData.getString("text");
+
+                    ChatData chat = new ChatData();
+                    chat.person = name;
+                    chat.time = time;
+                    chat.user_key = userKey;
+                    chat.text = text;
+                    chats.add(chat);
+
+                    Collections.sort(chats, new Comparator<ChatData>() {
+                        @Override
+                        public int compare(ChatData lhs, ChatData rhs) {
+                            return lhs.time.compareTo(rhs.time) < 0 ? -1 : (lhs.time.compareTo(rhs.time) > 0 ) ? 1 : 0;
+                        }
+                    });
+
+                    mAdapter = new ChatAdapter(chats, myUserKey);
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            recyclerView.setAdapter(mAdapter);
+                        }
+                    });
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -98,16 +121,21 @@ public class ChatActivity extends AppCompatActivity {
             public void call(Object... args) {
                 try {
                     JSONObject receivedData = (JSONObject) args[0];
-                    Log.d(TAG, receivedData.getString("user_name"));
-                    Log.d(TAG, receivedData.getString("time"));
-                    Log.d(TAG, receivedData.getString("text"));
+                    String name = receivedData.getString("user_name");
+                    String time = receivedData.getString("time");
+                    String userKey = receivedData.getString("user_key");
+                    String text = receivedData.getString("text");
+
+                    Log.d(TAG, "name: " + name);
+                    Log.d(TAG, "time: " + time);
+                    Log.d(TAG, "text: " + text);
 
                     if(receivedData.getString("room_key").equals(roomKey)){
                         ChatData chat = new ChatData();
-                        chat.person = receivedData.getString("user_name");
-                        chat.time = receivedData.getString("time");
-                        chat.user_key = receivedData.getString("user_key");
-                        chat.text = receivedData.getString("text");
+                        chat.person = name;
+                        chat.time = time;
+                        chat.user_key = userKey;
+                        chat.text = text;
                         chats.add(chat);
 
                         Collections.sort(chats, new Comparator<ChatData>() {
