@@ -69,19 +69,22 @@ public class ChatActivity extends AppCompatActivity {
         Emitter.Listener onConnect = new Emitter.Listener() {
             @Override
             public void call(Object... args) {
-                socket.emit("requestChat", myUserKey);
+                roomKey = "test";
+                socket.emit("requestChat", roomKey);
             }
         };
 
-        // 'room_key'를 받았을 때
-        Emitter.Listener onRoomKeyReceived = new Emitter.Listener() {
+        // 데이터베이스에 저장된 메시지들을 받았을 때
+        Emitter.Listener onSavedMessagesReceived = new Emitter.Listener() {
             @Override
             public void call(Object... args) {
-                final String TAG = "onRoomKeyReceived";
+                final String TAG = "onSavedMessagesReceived";
                 try {
                     JSONObject receivedData = (JSONObject) args[0];
-                    roomKey = receivedData.getString("room_key");
-                    Log.d(TAG, "room_key: " + roomKey);
+                    Log.d(TAG, "receivedData: " + receivedData);
+                    String name = receivedData.getString("user_name");
+                    String time = receivedData.getString("time");
+                    String text = receivedData.getString("text");
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -150,7 +153,7 @@ public class ChatActivity extends AppCompatActivity {
             socket = IO.socket(url);
             socket.connect();
             socket.on(Socket.EVENT_CONNECT, onConnect);
-            socket.on("roomKey", onRoomKeyReceived);
+            socket.on("savedMessages", onSavedMessagesReceived);
             socket.on("chatMessage", onChatMessageReceived);
             socket.on("checkSaveChat", onCheckSaveChatReceived);
         } catch (URISyntaxException e) {
