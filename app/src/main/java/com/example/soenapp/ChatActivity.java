@@ -113,8 +113,7 @@ public class ChatActivity extends AppCompatActivity {
                         Collections.sort(chats, new Comparator<ChatData>() {
                             @Override
                             public int compare(ChatData lhs, ChatData rhs) {
-                                // -1 - less than, 1 - greater than, 0 - equal, all inversed for descending
-                                return lhs.time.compareTo(rhs.time) > 0 ? -1 : (lhs.time.compareTo(rhs.time) < 0 ) ? 1 : 0;
+                                return lhs.time.compareTo(rhs.time) < 0 ? -1 : (lhs.time.compareTo(rhs.time) > 0 ) ? 1 : 0;
                             }
                         });
 
