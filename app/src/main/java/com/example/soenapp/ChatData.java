@@ -7,6 +7,7 @@ public class ChatData {
     String person;
     String time;
     String user_key;
+    String seq;
 
     @Override
     public String toString() {
@@ -15,6 +16,7 @@ public class ChatData {
                 ", person='" + person + '\'' +
                 ", time='" + time + '\'' +
                 ", user_key='" + user_key + '\'' +
+                ", seq='" + seq + '\'' +
                 '}';
     }
 }

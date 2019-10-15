@@ -69,19 +69,50 @@ public class ChatActivity extends AppCompatActivity {
         Emitter.Listener onConnect = new Emitter.Listener() {
             @Override
             public void call(Object... args) {
-                socket.emit("requestChat", myUserKey);
+                roomKey = "test";
+                socket.emit("requestChat", roomKey);
             }
         };
 
-        // 'room_key'를 받았을 때
-        Emitter.Listener onRoomKeyReceived = new Emitter.Listener() {
+        // 데이터베이스에 저장된 메시지들을 받았을 때
+        Emitter.Listener onSavedMessagesReceived = new Emitter.Listener() {
             @Override
             public void call(Object... args) {
-                final String TAG = "onRoomKeyReceived";
+                final String TAG = "onSavedMessagesReceived";
                 try {
                     JSONObject receivedData = (JSONObject) args[0];
-                    roomKey = receivedData.getString("room_key");
-                    Log.d(TAG, "room_key: " + roomKey);
+                    Log.d(TAG, "receivedData: " + receivedData);
+                    String seq = receivedData.getString("seq");
+                    String userKey = receivedData.getString("user_key");
+                    String name = receivedData.getString("user_name");
+                    String time = receivedData.getString("time");
+                    String text = receivedData.getString("text");
+
+                    Log.d(TAG, "userKey: " + userKey);
+                    Log.d(TAG, "seq: " + seq);
+
+                    ChatData chat = new ChatData();
+                    chat.person = name;
+                    chat.time = time;
+                    chat.user_key = userKey;
+                    chat.text = text;
+                    chat.seq = seq;
+                    chats.add(chat);
+
+                    Collections.sort(chats, new Comparator<ChatData>() {
+                        @Override
+                        public int compare(ChatData lhs, ChatData rhs) {
+                            return Integer.compare(lhs.seq.compareTo(rhs.seq), 0);
+                        }
+                    });
+
+                    mAdapter = new ChatAdapter(chats, myUserKey);
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            recyclerView.setAdapter(mAdapter);
+                        }
+                    });
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -94,24 +125,32 @@ public class ChatActivity extends AppCompatActivity {
             @Override
             public void call(Object... args) {
                 try {
+                    Log.d(TAG, "call: CHAT MESSAGE RECEIVED!!!!!!!!");
                     JSONObject receivedData = (JSONObject) args[0];
-                    Log.d(TAG, receivedData.getString("user_name"));
-                    Log.d(TAG, receivedData.getString("time"));
-                    Log.d(TAG, receivedData.getString("text"));
+                    String seq = receivedData.getString("seq");
+                    String name = receivedData.getString("user_name");
+                    String time = receivedData.getString("time");
+                    String userKey = receivedData.getString("user_key");
+                    String text = receivedData.getString("text");
 
-                    if(receivedData.getString("room_key").equals(roomKey)){
+                    Log.d(TAG, "seq: " + seq);
+                    Log.d(TAG, "name: " + name);
+                    Log.d(TAG, "time: " + time);
+                    Log.d(TAG, "text: " + text);
+
+                    if (receivedData.getString("room_key").equals(roomKey)) {
                         ChatData chat = new ChatData();
-                        chat.person = receivedData.getString("user_name");
-                        chat.time = receivedData.getString("time");
-                        chat.user_key = receivedData.getString("user_key");
-                        chat.text = receivedData.getString("text");
+                        chat.person = name;
+                        chat.time = time;
+                        chat.user_key = userKey;
+                        chat.text = text;
+                        chat.seq = seq;
                         chats.add(chat);
 
                         Collections.sort(chats, new Comparator<ChatData>() {
                             @Override
                             public int compare(ChatData lhs, ChatData rhs) {
-                                // -1 - less than, 1 - greater than, 0 - equal, all inversed for descending
-                                return lhs.time.compareTo(rhs.time) > 0 ? -1 : (lhs.time.compareTo(rhs.time) < 0 ) ? 1 : 0;
+                                return Integer.compare(lhs.seq.compareTo(rhs.seq), 0);
                             }
                         });
 
@@ -150,7 +189,7 @@ public class ChatActivity extends AppCompatActivity {
             socket = IO.socket(url);
             socket.connect();
             socket.on(Socket.EVENT_CONNECT, onConnect);
-            socket.on("roomKey", onRoomKeyReceived);
+            socket.on("savedMessages", onSavedMessagesReceived);
             socket.on("chatMessage", onChatMessageReceived);
             socket.on("checkSaveChat", onCheckSaveChatReceived);
         } catch (URISyntaxException e) {
@@ -204,7 +243,7 @@ public class ChatActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
                 socket.emit("saveChat", chatInfo);
-//
+
                 mAdapter = new ChatAdapter(chats, myUserKey);
                 recyclerView.setAdapter(mAdapter);
             }
