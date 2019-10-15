@@ -82,22 +82,27 @@ public class ChatActivity extends AppCompatActivity {
                 try {
                     JSONObject receivedData = (JSONObject) args[0];
                     Log.d(TAG, "receivedData: " + receivedData);
+                    String seq = receivedData.getString("seq");
                     String userKey = receivedData.getString("user_key");
                     String name = receivedData.getString("user_name");
                     String time = receivedData.getString("time");
                     String text = receivedData.getString("text");
+
+                    Log.d(TAG, "userKey: " + userKey);
+                    Log.d(TAG, "seq: " + seq);
 
                     ChatData chat = new ChatData();
                     chat.person = name;
                     chat.time = time;
                     chat.user_key = userKey;
                     chat.text = text;
+                    chat.seq = seq;
                     chats.add(chat);
 
                     Collections.sort(chats, new Comparator<ChatData>() {
                         @Override
                         public int compare(ChatData lhs, ChatData rhs) {
-                            return lhs.time.compareTo(rhs.time) < 0 ? -1 : (lhs.time.compareTo(rhs.time) > 0 ) ? 1 : 0;
+                            return Integer.compare(lhs.seq.compareTo(rhs.seq), 0);
                         }
                     });
 
@@ -120,28 +125,32 @@ public class ChatActivity extends AppCompatActivity {
             @Override
             public void call(Object... args) {
                 try {
+                    Log.d(TAG, "call: CHAT MESSAGE RECEIVED!!!!!!!!");
                     JSONObject receivedData = (JSONObject) args[0];
+                    String seq = receivedData.getString("seq");
                     String name = receivedData.getString("user_name");
                     String time = receivedData.getString("time");
                     String userKey = receivedData.getString("user_key");
                     String text = receivedData.getString("text");
 
+                    Log.d(TAG, "seq: " + seq);
                     Log.d(TAG, "name: " + name);
                     Log.d(TAG, "time: " + time);
                     Log.d(TAG, "text: " + text);
 
-                    if(receivedData.getString("room_key").equals(roomKey)){
+                    if (receivedData.getString("room_key").equals(roomKey)) {
                         ChatData chat = new ChatData();
                         chat.person = name;
                         chat.time = time;
                         chat.user_key = userKey;
                         chat.text = text;
+                        chat.seq = seq;
                         chats.add(chat);
 
                         Collections.sort(chats, new Comparator<ChatData>() {
                             @Override
                             public int compare(ChatData lhs, ChatData rhs) {
-                                return lhs.time.compareTo(rhs.time) < 0 ? -1 : (lhs.time.compareTo(rhs.time) > 0 ) ? 1 : 0;
+                                return Integer.compare(lhs.seq.compareTo(rhs.seq), 0);
                             }
                         });
 
@@ -234,7 +243,7 @@ public class ChatActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
                 socket.emit("saveChat", chatInfo);
-//
+
                 mAdapter = new ChatAdapter(chats, myUserKey);
                 recyclerView.setAdapter(mAdapter);
             }
