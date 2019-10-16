@@ -147,7 +147,6 @@ public class ChatActivity extends AppCompatActivity {
                         chat.seq = seq;
                         chats.add(chat);
 
-                        // java.lang.NullPointerException: rhs == null
                         Collections.sort(chats, new Comparator<ChatData>() {
                             @Override
                             public int compare(ChatData lhs, ChatData rhs) {
