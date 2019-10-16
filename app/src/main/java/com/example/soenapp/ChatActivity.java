@@ -221,13 +221,6 @@ public class ChatActivity extends AppCompatActivity {
                 String timeActual = formatActual.format(time.getTime());
                 String timeDisplay = formatDisplay.format(time.getTime());
 
-                ChatData chat = new ChatData();
-                chat.person = myName;
-                chat.time = timeDisplay;
-                chat.user_key = myUserKey;
-                chat.text = text;
-                chats.add(chat);
-
 
                 // Put chat data to the database
 
