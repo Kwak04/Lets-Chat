@@ -22,7 +22,7 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-    TextView userName;
+    TextView userName, schoolName;
     ImageView userImage;
     TabHost tabHost;
     FriendsData friendsData;
@@ -45,12 +45,16 @@ public class MainActivity extends AppCompatActivity {
 
         tabHost = findViewById(R.id.tabHost);
 
+        schoolName = findViewById(R.id.my_school);
+
         goSchool = findViewById(R.id.btn_go_school);
 
         recyclerView = findViewById(R.id.list_friends);
 
-
         getPreferences = getSharedPreferences("userData", MODE_PRIVATE);
+
+
+        // Title bar
 
         // 사용자 이름 표시
         String userNameValue = getPreferences.getString("name", "user");
@@ -60,8 +64,9 @@ public class MainActivity extends AppCompatActivity {
         userImage.setBackground(new ShapeDrawable(new OvalShape()));
         userImage.setClipToOutline(true);
 
-        tabHost.setup();
 
+        // Tabs
+        tabHost.setup();
 
         // First Tab
         TabHost.TabSpec ts1 = tabHost.newTabSpec("TabSpec1");
@@ -76,12 +81,18 @@ public class MainActivity extends AppCompatActivity {
         tabHost.addTab(ts2);
 
 
+        // Setup
+
+        // user's school name
+        final String roomNameValue = getPreferences.getString("school", "");
+        schoolName.setText(roomNameValue);
+
+
         // School chat button
         goSchool.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 final Intent intent = new Intent(getApplicationContext(), ChatActivity.class);
-                String roomNameValue = getPreferences.getString("school", "");
                 String roomKeyValue = getPreferences.getString("school_code", "");
                 intent.putExtra("roomName", roomNameValue);
                 intent.putExtra("roomKey", roomKeyValue);
