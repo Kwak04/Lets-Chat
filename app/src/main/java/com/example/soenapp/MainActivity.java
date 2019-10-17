@@ -1,5 +1,6 @@
 package com.example.soenapp;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.shapes.OvalShape;
@@ -25,11 +26,13 @@ public class MainActivity extends AppCompatActivity {
     ImageView userImage;
     TabHost tabHost;
     FriendsData friendsData;
+    Button goSchool;
 
     RecyclerView recyclerView;
     RecyclerView.Adapter mAdapter;
     RecyclerView.LayoutManager layoutManager;
 
+    SharedPreferences getPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,13 +45,15 @@ public class MainActivity extends AppCompatActivity {
 
         tabHost = findViewById(R.id.tabHost);
 
+        goSchool = findViewById(R.id.btn_go_school);
+
         recyclerView = findViewById(R.id.list_friends);
 
 
-        SharedPreferences pref = getSharedPreferences("userData", MODE_PRIVATE);
+        getPreferences = getSharedPreferences("userData", MODE_PRIVATE);
 
         // 사용자 이름 표시
-        String userNameValue = pref.getString("name", "user");
+        String userNameValue = getPreferences.getString("name", "user");
         userName.setText(userNameValue);
 
         // 사용자 사진 원형 테두리로 표시
@@ -69,6 +74,20 @@ public class MainActivity extends AppCompatActivity {
         ts2.setContent(R.id.content2);
         ts2.setIndicator("즐겨찾기");
         tabHost.addTab(ts2);
+
+
+        // School chat button
+        goSchool.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final Intent intent = new Intent(getApplicationContext(), ChatActivity.class);
+                String roomNameValue = getPreferences.getString("school", "");
+                String roomKeyValue = getPreferences.getString("school_code", "");
+                intent.putExtra("roomName", roomNameValue);
+                intent.putExtra("roomKey", roomKeyValue);
+                startActivity(intent);
+            }
+        });
 
 
         // Favorites tab friends list

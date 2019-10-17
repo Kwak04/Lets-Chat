@@ -1,5 +1,6 @@
 package com.example.soenapp;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -42,8 +43,6 @@ public class ChatActivity extends AppCompatActivity {
 
     Socket socket;
 
-    String roomKey;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +53,11 @@ public class ChatActivity extends AppCompatActivity {
         input = findViewById(R.id.chat_input);
         who = findViewById(R.id.chat_who);
         send = findViewById(R.id.chat_send);
+
+        // Room information
+        final Intent intent = getIntent();
+        final String roomName = intent.getExtras().getString("roomName");
+        final String roomKey = intent.getExtras().getString("roomKey");
 
         // SharedPreferences
         pref = getSharedPreferences("userData", MODE_PRIVATE);
@@ -69,7 +73,6 @@ public class ChatActivity extends AppCompatActivity {
         Emitter.Listener onConnect = new Emitter.Listener() {
             @Override
             public void call(Object... args) {
-                roomKey = "test";
                 socket.emit("requestChat", roomKey);
             }
         };
