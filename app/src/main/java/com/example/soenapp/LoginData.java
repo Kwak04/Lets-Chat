@@ -8,5 +8,7 @@ public class LoginData {
         public String user_token;
         public String user_key;
         public String name;
+        public String school;
+        public String school_code;
     }
 }

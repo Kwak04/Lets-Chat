@@ -70,11 +70,15 @@ public class LoginActivity extends AppCompatActivity {
                                 String userTokenValue = body.results[0].user_token;
                                 String userKeyValue = body.results[0].user_key;
                                 String nameValue = body.results[0].name;
+                                String schoolValue = body.results[0].school;
+                                String schoolCodeValue = body.results[0].school_code;
 
                                 editor = sharedPreferences.edit();
                                 editor.putString("user_token", userTokenValue);
                                 editor.putString("user_key", userKeyValue);
                                 editor.putString("name", nameValue);
+                                editor.putString("school", schoolValue);
+                                editor.putString("school_code", schoolCodeValue);
                                 editor.apply();
 
                                 final Intent intent = new Intent(getApplicationContext(), MainActivity.class);

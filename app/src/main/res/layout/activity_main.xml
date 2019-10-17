@@ -121,7 +121,8 @@
                                 android:text="@string/action_join"
                                 android:background="@android:color/holo_blue_dark"
                                 android:textSize="15sp"
-                                android:textColor="#FFFFFF" />
+                                android:textColor="#FFFFFF"
+                                android:id="@+id/btn_go_school"/>
 
                         </LinearLayout>
 

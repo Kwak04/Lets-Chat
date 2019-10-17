@@ -22,7 +22,7 @@ public class TestActivity extends AppCompatActivity {
         goToChat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final Intent intent = new Intent(getApplicationContext(), ChatActivity.class);
+                final Intent intent = new Intent(getApplicationContext(), ChatTestActivity.class);
                 startActivity(intent);
             }
         });

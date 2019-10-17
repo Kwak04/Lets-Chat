@@ -1,5 +1,6 @@
 package com.example.soenapp;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.shapes.OvalShape;
@@ -21,15 +22,17 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-    TextView userName;
+    TextView userName, schoolName;
     ImageView userImage;
     TabHost tabHost;
     FriendsData friendsData;
+    Button goSchool;
 
     RecyclerView recyclerView;
     RecyclerView.Adapter mAdapter;
     RecyclerView.LayoutManager layoutManager;
 
+    SharedPreferences getPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,21 +45,28 @@ public class MainActivity extends AppCompatActivity {
 
         tabHost = findViewById(R.id.tabHost);
 
+        schoolName = findViewById(R.id.my_school);
+
+        goSchool = findViewById(R.id.btn_go_school);
+
         recyclerView = findViewById(R.id.list_friends);
 
+        getPreferences = getSharedPreferences("userData", MODE_PRIVATE);
 
-        SharedPreferences pref = getSharedPreferences("userData", MODE_PRIVATE);
+
+        // Title bar
 
         // 사용자 이름 표시
-        String userNameValue = pref.getString("name", "user");
+        String userNameValue = getPreferences.getString("name", "user");
         userName.setText(userNameValue);
 
         // 사용자 사진 원형 테두리로 표시
         userImage.setBackground(new ShapeDrawable(new OvalShape()));
         userImage.setClipToOutline(true);
 
-        tabHost.setup();
 
+        // Tabs
+        tabHost.setup();
 
         // First Tab
         TabHost.TabSpec ts1 = tabHost.newTabSpec("TabSpec1");
@@ -69,6 +79,26 @@ public class MainActivity extends AppCompatActivity {
         ts2.setContent(R.id.content2);
         ts2.setIndicator("즐겨찾기");
         tabHost.addTab(ts2);
+
+
+        // Setup
+
+        // user's school name
+        final String roomNameValue = getPreferences.getString("school", "");
+        schoolName.setText(roomNameValue);
+
+
+        // School chat button
+        goSchool.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final Intent intent = new Intent(getApplicationContext(), ChatActivity.class);
+                String roomKeyValue = getPreferences.getString("school_code", "");
+                intent.putExtra("roomName", roomNameValue);
+                intent.putExtra("roomKey", roomKeyValue);
+                startActivity(intent);
+            }
+        });
 
 
         // Favorites tab friends list
