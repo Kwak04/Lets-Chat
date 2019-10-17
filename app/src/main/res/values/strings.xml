@@ -68,4 +68,7 @@
     <string name="text_main_my_class">나의 반</string>
     <string name="text_main_my_gender">나의 성별</string>
     <string name="text_main_friend">친구</string>
+
+    <!-- activity_chat -->
+    <string name="hint_type_message">메시지를 입력하세요...</string>
 </resources>
