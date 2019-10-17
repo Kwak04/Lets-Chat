@@ -23,7 +23,7 @@ public class LoginActivity extends AppCompatActivity {
 
     EditText editID, editPW;
     String id, pw;
-    Button login, register, test;
+    Button login, register;
 
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
@@ -45,8 +45,6 @@ public class LoginActivity extends AppCompatActivity {
         editPW = findViewById(R.id.PW);
         login = findViewById(R.id.login_bt);
         register = findViewById(R.id.register_bt);
-
-        test = findViewById(R.id.btn_test_screen);
 
         sharedPreferences = getSharedPreferences("userData", MODE_PRIVATE);
 
@@ -98,16 +96,6 @@ public class LoginActivity extends AppCompatActivity {
                 });
             }
         });
-
-        // 테스트 화면 버튼
-        test.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                final Intent intent = new Intent(getApplicationContext(), TestActivity.class);
-                startActivity(intent);
-            }
-        });
-
         final Intent intent = new Intent(getApplicationContext(), RegisterActivity.class);
         register.setOnClickListener(new View.OnClickListener() {
             @Override
