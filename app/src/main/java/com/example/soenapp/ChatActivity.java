@@ -47,7 +47,7 @@ public class ChatActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_chat_old);
+        setContentView(R.layout.activity_chat);
 
         recyclerView = findViewById(R.id.chat_recycler_view);
         input = findViewById(R.id.chat_input);
