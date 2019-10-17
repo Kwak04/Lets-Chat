@@ -7,5 +7,40 @@
     tools:context=".ChatActivity"
     android:orientation="vertical">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:background="@drawable/message_input_background">
+
+        <EditText
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:hint="@string/hint_type_message"
+            android:textColorHint="@color/colorWhite"
+            android:textColor="@color/colorWhite"
+            android:inputType="textMultiLine"
+            android:id="@+id/chat_input"
+            android:maxLines="4"
+            android:importantForAutofill="no"
+            android:layout_weight="1"
+            android:background="@drawable/chat_rounded_rectangle"
+            android:padding="3dp"
+            android:paddingStart="@dimen/paddingStart_rounded_rectangle"
+            android:paddingEnd="@dimen/paddingEnd_rounded_rectangle"
+            android:layout_gravity="center"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="10dp" />
+
+        <Button
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:layout_marginEnd="15dp"
+            android:background="@drawable/circle_send_button"
+            android:id="@+id/chat_send"/>
+
+    </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>

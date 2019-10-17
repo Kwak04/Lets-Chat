@@ -38,26 +38,26 @@
                     android:id="@+id/ID"
                     android:layout_gravity="center"
                     android:layout_marginBottom="10dp"
-                    android:paddingStart="@dimen/paddingStart_rounded_edittext"
+                    android:paddingStart="@dimen/paddingStart_rounded_rectangle"
                     android:paddingEnd="0dp"
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
                     android:maxLines="1"
                     android:hint="@string/text_id"
                     android:inputType="text"
-                    android:background="@drawable/rounded_edittext" />
+                    android:background="@drawable/white_rounded_rectangle" />
 
                 <EditText
                     android:id="@+id/PW"
                     android:layout_gravity="center"
-                    android:paddingStart="@dimen/paddingStart_rounded_edittext"
+                    android:paddingStart="@dimen/paddingStart_rounded_rectangle"
                     android:paddingEnd="0dp"
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
                     android:maxLines="1"
                     android:hint="@string/text_pw"
                     android:inputType="textPassword"
-                    android:background="@drawable/rounded_edittext"/>
+                    android:background="@drawable/white_rounded_rectangle"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"

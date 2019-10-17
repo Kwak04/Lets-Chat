@@ -14,7 +14,7 @@
         <ImageView
             android:layout_width="15dp"
             android:layout_height="15dp"
-            android:src="@drawable/circle"
+            android:src="@drawable/circle_black"
             android:layout_gravity="center"/>
 
         <TextView
