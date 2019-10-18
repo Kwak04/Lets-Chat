@@ -40,7 +40,6 @@ public class RegisterCompletedActivity extends AppCompatActivity {
         pw.setText(pwValue);
         school.setText(schoolNameValue);
 
-        //TODO mySQL에 회원가입하는 코드 추가
 
         final Intent newIntent = new Intent(getApplicationContext(), LoginActivity.class);
 

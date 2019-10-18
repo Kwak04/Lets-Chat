@@ -30,8 +30,8 @@
             android:layout_height="50dp"
             android:id="@+id/input"
             android:hint="@string/hint_register_school_search"
-            android:background="@drawable/rounded_edittext"
-            android:paddingStart="@dimen/paddingStart_rounded_edittext"
+            android:background="@drawable/white_rounded_rectangle"
+            android:paddingStart="@dimen/paddingStart_rounded_rectangle"
             android:paddingEnd="0dp"/>
 
         <TextView

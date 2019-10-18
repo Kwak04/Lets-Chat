@@ -166,7 +166,7 @@ public class RegisterSchoolActivity extends AppCompatActivity {
         schoolList.addOnItemTouchListener(onItemTouchListener);
 
         final Intent getIntent = getIntent();
-        final Intent newIntent = new Intent(getApplicationContext(), RegisterCompletedActivity.class);  // TODO register complete class
+        final Intent newIntent = new Intent(getApplicationContext(), RegisterCompletedActivity.class);
 
         final String name = getIntent.getExtras().getString("name");
         final String id = getIntent.getExtras().getString("id");

@@ -1,55 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/layout_chat_object"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/border"
-
+    android:gravity="start"
+    android:layout_marginTop="10dp"
     android:orientation="vertical">
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <TextView
-            android:id="@+id/chat_person"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="보낸 사람"
-            android:textSize="15sp"
-            android:textColor="#000000"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="나/너"
-            android:layout_marginStart="5dp"
-            android:textSize="12sp"
-            android:id="@+id/chat_who"/>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
+        android:id="@+id/layout_chat_container"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="vertical"
+        android:gravity="start">
 
-        <TextView
-            android:id="@+id/chat_text"
+        <LinearLayout
+            android:id="@+id/layout_chat_floor1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="메시지 내용"
-            android:textColor="#000000"
-            android:textSize="20sp" />
+            android:orientation="horizontal"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp">
 
-        <TextView
-            android:id="@+id/chat_time"
+            <TextView
+                android:id="@+id/chat_person"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/text_chat_person_send"
+                android:textColor="@color/colorWhite"
+                android:textSize="15sp"/>
+
+            <TextView
+                android:id="@+id/chat_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:text="@string/text_chat_time"
+                android:textSize="12sp"
+                android:textColor="@color/colorWhite"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layout_chat_floor2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:text="보낸 시간"
-            android:textSize="12sp" />
+            android:layout_marginTop="1dp"
+            android:orientation="horizontal"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp">
+
+            <TextView
+                android:id="@+id/chat_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/text_chat_message"
+                android:textColor="@color/colorWhite"
+                android:textSize="20sp" />
+
+        </LinearLayout>
 
     </LinearLayout>
-
 
 </LinearLayout>

@@ -30,7 +30,7 @@ import io.socket.emitter.Emitter;
 public class ChatActivity extends AppCompatActivity {
 
     EditText input;
-    TextView who;
+    TextView roomName;
     Button send;
 
     RecyclerView recyclerView;
@@ -49,14 +49,18 @@ public class ChatActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
 
+        // findViewById
+
+        roomName = findViewById(R.id.room_name);
+
         recyclerView = findViewById(R.id.chat_recycler_view);
         input = findViewById(R.id.chat_input);
-        who = findViewById(R.id.chat_who);
         send = findViewById(R.id.chat_send);
+
 
         // Room information
         final Intent intent = getIntent();
-        final String roomName = intent.getExtras().getString("roomName");
+        final String roomNameValue = intent.getExtras().getString("roomName");
         final String roomKey = intent.getExtras().getString("roomKey");
 
         // SharedPreferences
@@ -66,6 +70,12 @@ public class ChatActivity extends AppCompatActivity {
 
         chats = new ArrayList<>();
 
+
+        // Change status bar's color
+        getWindow().setStatusBarColor(getResources().getColor(R.color.colorGrey));
+
+        // View room's name
+        roomName.setText(roomNameValue);
 
         // Socket Communication
 
