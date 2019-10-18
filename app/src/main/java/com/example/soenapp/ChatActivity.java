@@ -30,7 +30,7 @@ import io.socket.emitter.Emitter;
 public class ChatActivity extends AppCompatActivity {
 
     EditText input;
-    TextView who, roomName;
+    TextView roomName;
     Button send;
 
     RecyclerView recyclerView;
@@ -55,7 +55,6 @@ public class ChatActivity extends AppCompatActivity {
 
         recyclerView = findViewById(R.id.chat_recycler_view);
         input = findViewById(R.id.chat_input);
-        who = findViewById(R.id.chat_who);
         send = findViewById(R.id.chat_send);
 
 
