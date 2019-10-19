@@ -1,8 +1,10 @@
 package com.example.soenapp;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.TextView;
@@ -18,6 +20,7 @@ public class RegisterBirthActivity extends AppCompatActivity {
     Button next;
 
     int year, month, day;
+    String date;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +45,7 @@ public class RegisterBirthActivity extends AppCompatActivity {
             @Override
             public void onDateChanged(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                 // 생년월일 표시
-                String date = year + "/" + monthOfYear + "/" + dayOfMonth;
+                date = year + "/" + monthOfYear + "/" + dayOfMonth;
                 showDate.setText(date);
 
                 // 생년월일 유효성 검사
@@ -61,6 +64,15 @@ public class RegisterBirthActivity extends AppCompatActivity {
                     invalidBirthError.setText(R.string.error_register_birth_invalid_birth);  // 에러 메시지 표시
                     next.setEnabled(false);  // 다음 버튼 비활성화
                 }
+            }
+        });
+
+        next.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final Intent intent = new Intent(getApplicationContext(), RegisterGenderActivity.class);
+                intent.putExtra("birth", date);
+                startActivity(intent);
             }
         });
     }
