@@ -15,11 +15,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ChatActivity"></activity>
-        <activity android:name=".TestActivity" />
+        <activity android:name=".RegisterMoreActivity"></activity>
+        <activity android:name=".ChatActivity" />
         <activity android:name=".RegisterCompletedActivity" />
         <activity android:name=".MainActivity" />
-        <activity android:name=".ChatTestActivity" />
         <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
