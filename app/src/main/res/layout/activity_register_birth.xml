@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".RegisterMoreActivity">
+    tools:context=".RegisterBirthActivity">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -26,7 +26,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/marginStart_title"
                 android:layout_marginBottom="15dp"
-                android:text="@string/text_register_more_birth"
+                android:text="@string/text_register_birth_birth"
                 android:textColor="@android:color/black"
                 android:textSize="@dimen/textSize_title"
                 android:textStyle="bold"/>
@@ -49,7 +49,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/marginStart_text_above_rounded_rectangle"
-                        android:text="@string/text_register_more_birth"
+                        android:text="@string/text_register_birth_birth"
                         android:textColor="@android:color/black"
                         android:textSize="25sp" />
 
@@ -64,7 +64,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:textColor="@color/colorRed"
-                        android:text="@string/error_invalid_birth"
+                        android:text="@string/error_register_birth_invalid_birth"
                         android:textSize="13sp"/>
 
                 </LinearLayout>

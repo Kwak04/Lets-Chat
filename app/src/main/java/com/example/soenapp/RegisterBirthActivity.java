@@ -1,20 +1,17 @@
 package com.example.soenapp;
 
-import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.Locale;
 
-public class RegisterMoreActivity extends AppCompatActivity {
+public class RegisterBirthActivity extends AppCompatActivity {
 
     DatePicker datePicker;
     TextView showDate, invalidBirthError;
@@ -25,9 +22,9 @@ public class RegisterMoreActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register_more);
+        setContentView(R.layout.activity_register_birth);
 
-        final String TAG = "RegisterMoreActivity";
+        final String TAG = "RegisterBirthActivity";
 
         datePicker = findViewById(R.id.date_picker);
         showDate = findViewById(R.id.show_date);
@@ -61,7 +58,7 @@ public class RegisterMoreActivity extends AppCompatActivity {
                     invalidBirthError.setText("");  // 에러 메시지 숨기기
                     next.setEnabled(true);  // 다음 버튼 활성화
                 } else {
-                    invalidBirthError.setText(R.string.error_invalid_birth);  // 에러 메시지 표시
+                    invalidBirthError.setText(R.string.error_register_birth_invalid_birth);  // 에러 메시지 표시
                     next.setEnabled(false);  // 다음 버튼 비활성화
                 }
             }
