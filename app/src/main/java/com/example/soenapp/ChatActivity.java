@@ -252,6 +252,9 @@ public class ChatActivity extends AppCompatActivity {
 
                 mAdapter = new ChatAdapter(chats, myUserKey);
                 recyclerView.setAdapter(mAdapter);
+
+                // 입력된 내용 지우기
+                input.setText(null);
             }
         });
     }
