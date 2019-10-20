@@ -102,14 +102,6 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
-        findViewById(R.id.test_register2).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                final Intent intent = new Intent(getApplicationContext(), RegisterBirthActivity.class);
-                startActivity(intent);
-            }
-        });
     }
 
 }

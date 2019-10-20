@@ -19,7 +19,7 @@ public class RegisterBirthActivity extends AppCompatActivity {
     TextView showDate, invalidBirthError;
     Button next;
 
-    int year, month, day;
+    int year, month, day, age, grade;
     String date;
 
     @Override
@@ -52,7 +52,7 @@ public class RegisterBirthActivity extends AppCompatActivity {
                 Calendar calendar = new GregorianCalendar(Locale.KOREA);
                 int nowYear = calendar.get(Calendar.YEAR);
                 Log.d(TAG, "nowYear: " + nowYear);
-                final int age = nowYear - year + 1;
+                age = nowYear - year + 1;
                 Log.d(TAG, "onDateChanged: age = " + age);
                 final int MIN_AGE = 8;
                 final int MAX_AGE = 19;
@@ -64,15 +64,27 @@ public class RegisterBirthActivity extends AppCompatActivity {
                     invalidBirthError.setText(R.string.error_register_birth_invalid_birth);  // 에러 메시지 표시
                     next.setEnabled(false);  // 다음 버튼 비활성화
                 }
+
+                // grade
+                grade = age - 8 + 1;  // 초1: 1학년  고3: 12학년
             }
         });
 
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final Intent intent = new Intent(getApplicationContext(), RegisterGenderActivity.class);
-                intent.putExtra("birth", date);
-                startActivity(intent);
+                final Intent getIntent = getIntent();
+                final String name = getIntent.getExtras().getString("name");
+                final String id = getIntent.getExtras().getString("id");
+                final String pw = getIntent.getExtras().getString("pw");
+
+                final Intent newIntent = new Intent(getApplicationContext(), RegisterGenderActivity.class);
+                newIntent.putExtra("name", name);
+                newIntent.putExtra("id", id);
+                newIntent.putExtra("pw", pw);
+                newIntent.putExtra("birth", date);
+                newIntent.putExtra("grade", grade);
+                startActivity(newIntent);
             }
         });
     }

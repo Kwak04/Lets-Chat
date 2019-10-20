@@ -171,6 +171,9 @@ public class RegisterSchoolActivity extends AppCompatActivity {
         final String name = getIntent.getExtras().getString("name");
         final String id = getIntent.getExtras().getString("id");
         final String pw = getIntent.getExtras().getString("pw");
+        final String birth = getIntent.getExtras().getString("birth");
+        final String grade = getIntent.getExtras().getString("grade");
+        final String gender = getIntent.getExtras().getString("gender");
 
         next.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -178,6 +181,9 @@ public class RegisterSchoolActivity extends AppCompatActivity {
                 newIntent.putExtra("name", name);
                 newIntent.putExtra("id", id);
                 newIntent.putExtra("pw", pw);
+                newIntent.putExtra("birth", birth);
+                newIntent.putExtra("grade", grade);
+                newIntent.putExtra("gender", gender);
                 newIntent.putExtra("school_code", currentSchoolCode);
                 newIntent.putExtra("school_name", currentSchoolName);
 

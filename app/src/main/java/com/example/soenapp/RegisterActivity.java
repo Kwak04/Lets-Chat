@@ -55,7 +55,7 @@ public class RegisterActivity extends AppCompatActivity {
         pwInvalidError.setText("");
         pwIncorrectError.setText("");
 
-        final Intent intent = new Intent(getApplicationContext(), RegisterSchoolActivity.class);
+        final Intent intent = new Intent(getApplicationContext(), RegisterBirthActivity.class);
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
