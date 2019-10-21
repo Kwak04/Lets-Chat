@@ -38,6 +38,7 @@ public class RegisterGenderActivity extends AppCompatActivity {
         RadioGroup.OnCheckedChangeListener radioGroupButtonChangeListener = new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
+                next.setEnabled(true);
                 switch (checkedId) {
                     case R.id.radiobutton1:
                         gender = "male";

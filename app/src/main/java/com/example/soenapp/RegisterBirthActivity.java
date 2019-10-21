@@ -38,14 +38,14 @@ public class RegisterBirthActivity extends AppCompatActivity {
         // 초기화
         invalidBirthError.setText("");
         year = 2001;
-        month = 1;
+        month = 0;
         day = 1;
 
         datePicker.init(year, month, day, new DatePicker.OnDateChangedListener() {
             @Override
             public void onDateChanged(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                 // 생년월일 표시
-                date = year + "/" + monthOfYear + "/" + dayOfMonth;
+                date = year + "/" + (monthOfYear + 1) + "/" + dayOfMonth;
                 showDate.setText(date);
 
                 // 생년월일 유효성 검사
