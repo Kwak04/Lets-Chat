@@ -50,6 +50,7 @@
     <!-- activity_register_birth -->
     <string name="text_register_birth_birth">생년월일</string>
     <string name="error_register_birth_invalid_birth">11세~19세만 회원가입이 가능합니다.</string>
+    <string name="text_register_birth_default_birth">2001/1/1</string>
 
     <!-- activity_register_gender -->
     <string name="text_register_gender_gender">성별</string>

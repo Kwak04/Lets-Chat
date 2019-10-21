@@ -49,7 +49,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/marginStart_text_above_rounded_rectangle"
-                        android:text="@string/text_register_birth_birth"
+                        android:text="@string/text_register_birth_default_birth"
                         android:textColor="@android:color/black"
                         android:textSize="25sp" />
 
