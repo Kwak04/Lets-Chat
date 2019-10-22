@@ -47,6 +47,16 @@
     <string name="error_invalid_password">영문, 숫자 허용, 6자리~20자리</string>
     <string name="error_incorrect_password">비밀번호가 일치하지 않습니다.</string>
 
+    <!-- activity_register_birth -->
+    <string name="text_register_birth_birth">생년월일</string>
+    <string name="error_register_birth_invalid_birth">11세~19세만 회원가입이 가능합니다.</string>
+    <string name="text_register_birth_default_birth">2001/1/1</string>
+
+    <!-- activity_register_gender -->
+    <string name="text_register_gender_gender">성별</string>
+    <string name="text_register_gender_male">남성</string>
+    <string name="text_register_gender_female">여성</string>
+
     <!-- activity_register_school -->
     <string name="text_register_school_name">학교이름</string>
     <string name="text_register_school_address">학교주소</string>
