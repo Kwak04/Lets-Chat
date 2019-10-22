@@ -30,6 +30,7 @@ public class RegisterActivity extends AppCompatActivity {
             .build();
     RetrofitService retrofitService = retrofit.create(RetrofitService.class);
     SimpleMessageData resultBody;
+    String message;
 
 
     @Override
@@ -72,7 +73,8 @@ public class RegisterActivity extends AppCompatActivity {
                     public void onResponse(@NonNull Call<SimpleMessageData> call, @NonNull Response<SimpleMessageData> response) {
                         if (response.isSuccessful()) {
                             resultBody = response.body();
-                            if (resultBody.message.equals("overlapping")) {  // 이미 데이터베이스에 같은 아이디가 있을 경우
+                            message = resultBody.message;
+                            if (message.equals("overlapping")) {  // 이미 데이터베이스에 같은 아이디가 있을 경우
                                 idInvalidError.setText(R.string.error_overlapping_id);
                             } else {  // 없을 경우
                                 idInvalidError.setText("");
@@ -85,12 +87,13 @@ public class RegisterActivity extends AppCompatActivity {
                     }
                 });
 
-                boolean check1, check2, check3, check4, check5;
+                boolean check1, check2, check3, check4, check5, check6;
                 check1 = !(name.equals("") || id.equals("") || pw.equals("") || pw_check.equals(""));
                 check2 = pw.equals(pw_check);
                 check3 = Pattern.matches("^[가-힣]{1,10}$", name);
                 check4 = Pattern.matches("^[a-z0-9]{3,20}$", id);
                 check5 = Pattern.matches("^[a-z0-9]{6,20}$", pw);
+                check6 = message.equals("ok");
 
                 // 공백이 있는 칸이 있을 경우
                 if (!check1) {
@@ -122,14 +125,13 @@ public class RegisterActivity extends AppCompatActivity {
                     pwInvalidError.setText("");
                 }
                 // 모든 조건에 만족하는 경우
-                if (check1 && check2 && check3 && check4 && check5) {
+                if (check1 && check2 && check3 && check4 && check5 && check6) {
                     intent.putExtra("name", name);
                     intent.putExtra("id", id);
                     intent.putExtra("pw", pw);
                     startActivity(intent);  // 액티비티 시작
                 } else {
                     Toast.makeText(getApplicationContext(), "?", Toast.LENGTH_SHORT).show();
-                    startActivity(intent);
                 }
             }
         });
