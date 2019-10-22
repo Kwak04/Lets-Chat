@@ -173,6 +173,7 @@ public class RegisterSchoolActivity extends AppCompatActivity {
         final String pw = getIntent.getExtras().getString("pw");
         final String birth = getIntent.getExtras().getString("birth");
         final String grade = getIntent.getExtras().getString("grade");
+        final int gradeInt = Integer.parseInt(grade);
         final String gender = getIntent.getExtras().getString("gender");
 
         next.setOnClickListener(new View.OnClickListener() {
@@ -202,6 +203,9 @@ public class RegisterSchoolActivity extends AppCompatActivity {
                 input.put("pw", pw);
                 input.put("school_code", currentSchoolCode);
                 input.put("school_name", currentSchoolName);
+                input.put("birth", birth);
+                input.put("grade", gradeInt);
+                input.put("gender", gender);
 
                 retrofitService.register(input).enqueue(new Callback<RegisterData>() {
                     @Override

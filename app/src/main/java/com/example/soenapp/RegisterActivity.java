@@ -30,8 +30,7 @@ public class RegisterActivity extends AppCompatActivity {
             .build();
     RetrofitService retrofitService = retrofit.create(RetrofitService.class);
     SimpleMessageData resultBody;
-    String message;
-
+    boolean isIdOverlapping = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,11 +72,67 @@ public class RegisterActivity extends AppCompatActivity {
                     public void onResponse(@NonNull Call<SimpleMessageData> call, @NonNull Response<SimpleMessageData> response) {
                         if (response.isSuccessful()) {
                             resultBody = response.body();
-                            message = resultBody.message;
+                            String message = resultBody.message;
                             if (message.equals("overlapping")) {  // 이미 데이터베이스에 같은 아이디가 있을 경우
                                 idInvalidError.setText(R.string.error_overlapping_id);
+                                isIdOverlapping = true;
                             } else {  // 없을 경우
                                 idInvalidError.setText("");
+                                isIdOverlapping = false;
+
+                                boolean check1, check2, check3, check4, check5, check6;
+                                check1 = !(name.equals("") || id.equals("") || pw.equals("") || pw_check.equals(""));
+                                check2 = pw.equals(pw_check);
+                                check3 = Pattern.matches("^[가-힣]{1,10}$", name);
+                                check4 = Pattern.matches("^[a-z0-9]{3,20}$", id);
+                                check5 = Pattern.matches("^[a-z0-9]{6,20}$", pw);
+//                check6 = !isIdOverlapping;
+
+                                // 공백이 있는 칸이 있을 경우
+                                if (!check1) {
+                                    String toastMessage = "모든 칸에 내용을 입력해 주세요.";
+                                    Toast.makeText(getApplicationContext(), toastMessage, Toast.LENGTH_SHORT).show();
+                                }
+                                // '비밀번호'가 '비밀번호 확인'과 다를 경우
+                                if (!check2) {
+                                    pwIncorrectError.setText(R.string.error_incorrect_password);
+                                } else {  // 같을 경우
+                                    pwIncorrectError.setText("");
+                                }
+                                // '이름'이 한글이 아니거나 글자 수가 10을 넘어갈 경우
+                                if (!check3) {
+                                    nameInvalidError.setText(R.string.error_invalid_name);
+                                } else {  // 맞을 경우
+                                    nameInvalidError.setText("");
+                                }
+                                // '아이디'가 영문과 숫자로 이루어지지 않았거나 글자 수가 3자리~20자리 범위에 없을 경우
+                                if (!check4) {
+                                    idInvalidError.setText(R.string.error_invalid_id);
+                                } else {  // 맞을 경우
+                                    idInvalidError.setText("");
+                                }
+                                // '비밀번호'가 영문과 숫자로 이루어지지 않았거나 글자 수가 6자리~20자리 범위에 없을 경우
+                                if (!check5) {
+                                    pwInvalidError.setText(R.string.error_invalid_password);
+                                } else {
+                                    pwInvalidError.setText("");
+                                }
+
+//                                try {
+//                                    Thread.sleep(500);
+//                                } catch (InterruptedException e) {
+//                                    e.printStackTrace();
+//                                }
+
+                                // 모든 조건에 만족하는 경우
+                                if (check1 && check2 && check3 && check4 && check5) {
+                                    intent.putExtra("name", name);
+                                    intent.putExtra("id", id);
+                                    intent.putExtra("pw", pw);
+                                    startActivity(intent);  // 액티비티 시작
+                                } else {
+                                    Toast.makeText(getApplicationContext(), "?", Toast.LENGTH_SHORT).show();
+                                }
                             }
                         }
                     }
@@ -87,52 +142,7 @@ public class RegisterActivity extends AppCompatActivity {
                     }
                 });
 
-                boolean check1, check2, check3, check4, check5, check6;
-                check1 = !(name.equals("") || id.equals("") || pw.equals("") || pw_check.equals(""));
-                check2 = pw.equals(pw_check);
-                check3 = Pattern.matches("^[가-힣]{1,10}$", name);
-                check4 = Pattern.matches("^[a-z0-9]{3,20}$", id);
-                check5 = Pattern.matches("^[a-z0-9]{6,20}$", pw);
-                check6 = message.equals("ok");
 
-                // 공백이 있는 칸이 있을 경우
-                if (!check1) {
-                    String toastMessage = "모든 칸에 내용을 입력해 주세요.";
-                    Toast.makeText(getApplicationContext(), toastMessage, Toast.LENGTH_SHORT).show();
-                }
-                // '비밀번호'가 '비밀번호 확인'과 다를 경우
-                if (!check2) {
-                    pwIncorrectError.setText(R.string.error_incorrect_password);
-                } else {  // 같을 경우
-                    pwIncorrectError.setText("");
-                }
-                // '이름'이 한글이 아니거나 글자 수가 10을 넘어갈 경우
-                if (!check3) {
-                    nameInvalidError.setText(R.string.error_invalid_name);
-                } else {  // 맞을 경우
-                    nameInvalidError.setText("");
-                }
-                // '아이디'가 영문과 숫자로 이루어지지 않았거나 글자 수가 3자리~20자리 범위에 없을 경우
-                if (!check4) {
-                    idInvalidError.setText(R.string.error_invalid_id);
-                } else {  // 맞을 경우
-                    idInvalidError.setText("");
-                }
-                // '비밀번호'가 영문과 숫자로 이루어지지 않았거나 글자 수가 6자리~20자리 범위에 없을 경우
-                if (!check5) {
-                    pwInvalidError.setText(R.string.error_invalid_password);
-                } else {
-                    pwInvalidError.setText("");
-                }
-                // 모든 조건에 만족하는 경우
-                if (check1 && check2 && check3 && check4 && check5 && check6) {
-                    intent.putExtra("name", name);
-                    intent.putExtra("id", id);
-                    intent.putExtra("pw", pw);
-                    startActivity(intent);  // 액티비티 시작
-                } else {
-                    Toast.makeText(getApplicationContext(), "?", Toast.LENGTH_SHORT).show();
-                }
             }
         });
     }
