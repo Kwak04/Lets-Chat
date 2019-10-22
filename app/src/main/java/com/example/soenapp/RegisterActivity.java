@@ -80,13 +80,12 @@ public class RegisterActivity extends AppCompatActivity {
                                 idInvalidError.setText("");
                                 isIdOverlapping = false;
 
-                                boolean check1, check2, check3, check4, check5, check6;
+                                boolean check1, check2, check3, check4, check5;
                                 check1 = !(name.equals("") || id.equals("") || pw.equals("") || pw_check.equals(""));
                                 check2 = pw.equals(pw_check);
                                 check3 = Pattern.matches("^[가-힣]{1,10}$", name);
                                 check4 = Pattern.matches("^[a-z0-9]{3,20}$", id);
                                 check5 = Pattern.matches("^[a-z0-9]{6,20}$", pw);
-//                check6 = !isIdOverlapping;
 
                                 // 공백이 있는 칸이 있을 경우
                                 if (!check1) {
@@ -117,13 +116,6 @@ public class RegisterActivity extends AppCompatActivity {
                                 } else {
                                     pwInvalidError.setText("");
                                 }
-
-//                                try {
-//                                    Thread.sleep(500);
-//                                } catch (InterruptedException e) {
-//                                    e.printStackTrace();
-//                                }
-
                                 // 모든 조건에 만족하는 경우
                                 if (check1 && check2 && check3 && check4 && check5) {
                                     intent.putExtra("name", name);
@@ -141,8 +133,6 @@ public class RegisterActivity extends AppCompatActivity {
                         Toast.makeText(RegisterActivity.this, "데이터 전송에 실패하였습니다.", Toast.LENGTH_SHORT).show();
                     }
                 });
-
-
             }
         });
     }
