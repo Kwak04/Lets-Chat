@@ -61,8 +61,9 @@ public class MainActivity extends AppCompatActivity {
         userName.setText(userNameValue);
 
         // 사용자 사진 원형 테두리로 표시
-        userImage.setBackground(new ShapeDrawable(new OvalShape()));
-        userImage.setClipToOutline(true);
+        // 기본값이 Vector 이미지이므로 일단 주석 처리
+//        userImage.setBackground(new ShapeDrawable(new OvalShape()));
+//        userImage.setClipToOutline(true);
 
 
         // Tabs
