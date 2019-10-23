@@ -26,7 +26,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/marginStart_title"
                 android:layout_marginBottom="15dp"
-                android:text="@string/text_register_gender_gender"
+                android:text="@string/text_gender"
                 android:textColor="@android:color/black"
                 android:textSize="@dimen/textSize_title"
                 android:textStyle="bold"/>
