@@ -8,13 +8,14 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import java.util.HashMap;
+import java.util.Objects;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RegisterCompletedActivity extends AppCompatActivity {
 
-    TextView name, id, pw, school;
+    TextView name, id, pw, school, birth, grade, gender;
     Button button;
 
     @Override
@@ -24,24 +25,70 @@ public class RegisterCompletedActivity extends AppCompatActivity {
 
         final Intent intent = getIntent();
 
-        final String nameValue = intent.getExtras().getString("name") + "님,";
-        final String idValue = intent.getExtras().getString("id");
-        final String pwValue = intent.getExtras().getString("pw");
-        final String birthValue = intent.getExtras().getString("birth");
-        final String gradeValue = intent.getExtras().getString("grade");
-        final String genderValue = intent.getExtras().getString("gender");
-        final String schoolCodeValue = intent.getExtras().getString("school_code");
-        final String schoolNameValue = intent.getExtras().getString("school_name");
+        String nameValue = Objects.requireNonNull(intent.getExtras()).getString("name") + "님,";
+        String idValue = intent.getExtras().getString("id");
+        String pwValue = intent.getExtras().getString("pw");
+        String birthValue = intent.getExtras().getString("birth");
+        String gradeValue = intent.getExtras().getString("grade");
+        String genderValue = intent.getExtras().getString("gender");
+        String schoolNameValue = intent.getExtras().getString("school_name");
 
+        // findViewById
         name = findViewById(R.id.name);
         id = findViewById(R.id.id);
         pw = findViewById(R.id.pw);
         school = findViewById(R.id.school);
+        birth = findViewById(R.id.birth);
+        grade = findViewById(R.id.grade);
+        gender = findViewById(R.id.gender);
 
+
+        // Modify data to view
+
+        // birth
+        String[] splitBirths = Objects.requireNonNull(birthValue).split("/");
+        String birthYear = splitBirths[0];
+        String birthMonth = splitBirths[1];
+        String birthDay = splitBirths[2];
+        birthValue = birthYear + "년 " + birthMonth + "월 " + birthDay + "일";
+
+        // grade
+        int intGradeValue = Integer.parseInt(Objects.requireNonNull(gradeValue));
+        int actualGradeValue;
+        String schoolType;
+        if (1 <= intGradeValue && intGradeValue <= 6) {
+            schoolType = "초등학교";
+            actualGradeValue = intGradeValue;
+        } else if (7 <= intGradeValue && intGradeValue <= 9) {
+            schoolType = "중학교";
+            actualGradeValue = intGradeValue - 6;
+        } else if (10 <= intGradeValue && intGradeValue <= 12) {
+            schoolType = "고등학교";
+            actualGradeValue = intGradeValue - 9;
+        } else {
+            schoolType = "?";
+            actualGradeValue = 0;
+        }
+        gradeValue = schoolType + " " + actualGradeValue + "학년";
+
+        // gender
+        if (Objects.requireNonNull(genderValue).equals("male")) {
+            genderValue = "남성";
+        } else if (Objects.requireNonNull(genderValue).equals("female")) {
+            genderValue = "여성";
+        } else {
+            genderValue = "?";
+        }
+
+
+        // setText
         name.setText(nameValue);
         id.setText(idValue);
         pw.setText(pwValue);
         school.setText(schoolNameValue);
+        birth.setText(birthValue);
+        grade.setText(gradeValue);
+        gender.setText(genderValue);
 
 
         final Intent newIntent = new Intent(getApplicationContext(), LoginActivity.class);
