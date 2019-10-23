@@ -122,8 +122,6 @@ public class RegisterActivity extends AppCompatActivity {
                                     intent.putExtra("id", id);
                                     intent.putExtra("pw", pw);
                                     startActivity(intent);  // 액티비티 시작
-                                } else {
-                                    Toast.makeText(getApplicationContext(), "?", Toast.LENGTH_SHORT).show();
                                 }
                             }
                         }
