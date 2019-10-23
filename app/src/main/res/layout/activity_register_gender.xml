@@ -9,10 +9,10 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="30dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginBottom="30dp">
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -30,29 +30,40 @@
                 android:textColor="@android:color/black"
                 android:textSize="@dimen/textSize_title"
                 android:textStyle="bold"/>
-            
-            <RadioGroup
-                android:layout_width="wrap_content"
+
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:id="@+id/radio_group"
-                android:layout_marginStart="30dp">
-
-                <RadioButton
+                android:layout_gravity="center"
+                android:orientation="vertical">
+            
+                <RadioGroup
+                    android:id="@+id/radio_group"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/text_register_gender_male"
-                    android:id="@+id/radiobutton1"
-                    android:textSize="20sp"/>
+                    android:layout_gravity="center"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginEnd="30dp"
+                    android:orientation="horizontal">
 
-                <RadioButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/text_register_gender_female"
-                    android:id="@+id/radiobutton2"
-                    android:textSize="20sp"/>
+                        <RadioButton
+                            android:id="@+id/radiobutton1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginEnd="30dp"
+                            android:button="@drawable/radio_button_male"/>
 
-            </RadioGroup>
+                        <RadioButton
+                            android:id="@+id/radiobutton2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:button="@drawable/radio_button_female"/>
+
+                </RadioGroup>
+
+            </LinearLayout>
 
         </LinearLayout>
 
