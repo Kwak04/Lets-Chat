@@ -42,7 +42,7 @@ public class RegisterClassActivity extends AppCompatActivity {
         // initialize
         String firstClass = actualGrade + "학년";
         showClass.setText(firstClass);
-
+        classValue = 1;
 
         // picker
         picker.setMinValue(1);

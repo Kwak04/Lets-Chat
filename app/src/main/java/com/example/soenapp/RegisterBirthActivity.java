@@ -36,11 +36,12 @@ public class RegisterBirthActivity extends AppCompatActivity {
         next = findViewById(R.id.next);
 
 
-        // 초기화
+        // initialize
         invalidBirthError.setText("");
         year = 2001;
         month = 0;
         day = 1;
+        actualGrade = 3;
 
         datePicker.init(year, month, day, new DatePicker.OnDateChangedListener() {
             @Override
