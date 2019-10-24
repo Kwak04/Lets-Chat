@@ -39,6 +39,10 @@ public class RegisterClassActivity extends AppCompatActivity {
         final int actualGrade = getIntent.getExtras().getInt("actual_grade");
         final String gender = getIntent.getExtras().getString("gender");
 
+        // initialize
+        String firstClass = actualGrade + "학년";
+        showClass.setText(firstClass);
+
 
         // picker
         picker.setMinValue(1);
