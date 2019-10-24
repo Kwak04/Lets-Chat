@@ -48,6 +48,8 @@ public class RegisterSchoolActivity extends AppCompatActivity {
     String currentSchoolCode;
     String currentSchoolName;
 
+    int gradeInt;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -173,8 +175,12 @@ public class RegisterSchoolActivity extends AppCompatActivity {
         final String pw = getIntent.getExtras().getString("pw");
         final String birth = getIntent.getExtras().getString("birth");
         final String grade = getIntent.getExtras().getString("grade");
-        final int gradeInt = Integer.parseInt(grade);
         final String gender = getIntent.getExtras().getString("gender");
+        try {
+            gradeInt = Integer.parseInt(grade);
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+        }
 
         next.setOnClickListener(new View.OnClickListener() {
             @Override

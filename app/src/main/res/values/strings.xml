@@ -18,6 +18,7 @@
     <string name="sample_friend">홍길동</string>
     <string name="sample_birth">2004년 8월 23일</string>
     <string name="sample_grade">중학교 3학년</string>
+    <string name="sample_grade_class">3학년 11반</string>
 
     <!-- Strings related to login -->
     <string name="action_sign_in">로그인</string>
@@ -33,6 +34,7 @@
     <string name="text_birth">생년월일</string>
     <string name="text_grade">학년</string>
     <string name="text_gender">성별</string>
+    <string name="text_class">반</string>
     <string name="error_field_required">내용을 입력해 주세요.</string>
 
     <!-- Strings related to buttons -->
