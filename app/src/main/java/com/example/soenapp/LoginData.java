@@ -1,14 +1,20 @@
 package com.example.soenapp;
 
-public class LoginData {
-    public String message;
-    public Result[] results;
+class LoginData {
+    String message;
+    Result[] results;
 
     public class Result {
-        public String user_token;
-        public String user_key;
-        public String name;
-        public String school;
-        public String school_code;
+        String user_token;
+        String user_key;
+        String name;
+        String school;
+        String school_code;
+        String birth;
+        String school_type;
+        String grade;
+        String actual_grade;
+        String gender;
+        String school_class;
     }
 }

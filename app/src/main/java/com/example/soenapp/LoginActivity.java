@@ -5,12 +5,14 @@ import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import java.util.HashMap;
+import java.util.Objects;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -45,6 +47,7 @@ public class LoginActivity extends AppCompatActivity {
         login = findViewById(R.id.login_bt);
         register = findViewById(R.id.register_bt);
 
+
         sharedPreferences = getSharedPreferences("userData", MODE_PRIVATE);
 
         login.setOnClickListener(new View.OnClickListener() {
@@ -61,7 +64,7 @@ public class LoginActivity extends AppCompatActivity {
                     public void onResponse(@NonNull Call<LoginData> call, @NonNull Response<LoginData> response) {
                         if (response.isSuccessful()) {
                             body = response.body();
-                            if (body.message.equals("success")) {
+                            if (Objects.requireNonNull(body).message.equals("success")) {
 
                                 // 서버에서 받은 값들
                                 String userTokenValue = body.results[0].user_token;
@@ -69,13 +72,26 @@ public class LoginActivity extends AppCompatActivity {
                                 String nameValue = body.results[0].name;
                                 String schoolValue = body.results[0].school;
                                 String schoolCodeValue = body.results[0].school_code;
+                                String birthValue = body.results[0].birth;
+                                String schoolTypeValue = body.results[0].school_type;
+                                String gradeValue = body.results[0].grade;
+                                String actualGradeValue = body.results[0].actual_grade;
+                                String genderValue = body.results[0].gender;
+                                String schoolClassValue = body.results[0].school_class;
 
+                                // SharedPreferences 저장
                                 editor = sharedPreferences.edit();
                                 editor.putString("user_token", userTokenValue);
                                 editor.putString("user_key", userKeyValue);
                                 editor.putString("name", nameValue);
                                 editor.putString("school", schoolValue);
                                 editor.putString("school_code", schoolCodeValue);
+                                editor.putString("birth", birthValue);
+                                editor.putString("school_type", schoolTypeValue);
+                                editor.putString("grade", gradeValue);
+                                editor.putString("actual_grade", actualGradeValue);
+                                editor.putString("gender", genderValue);
+                                editor.putString("school_class", schoolClassValue);
                                 editor.apply();
 
                                 final Intent intent = new Intent(getApplicationContext(), MainActivity.class);
