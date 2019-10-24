@@ -34,15 +34,16 @@ public class RegisterClassActivity extends AppCompatActivity {
         final String id = getIntent.getExtras().getString("id");
         final String pw = getIntent.getExtras().getString("pw");
         final String birth = getIntent.getExtras().getString("birth");
-        final String grade = getIntent.getExtras().getString("grade");
+        final int grade = getIntent.getExtras().getInt("grade");
         final String schoolType = getIntent.getExtras().getString("school_type");
         final int actualGrade = getIntent.getExtras().getInt("actual_grade");
         final String gender = getIntent.getExtras().getString("gender");
 
         // initialize
-        String firstClass = actualGrade + "학년";
-        showClass.setText(firstClass);
         classValue = 1;
+        String firstClass = actualGrade + "학년 " + classValue + "반";
+        showClass.setText(firstClass);
+
 
         // picker
         picker.setMinValue(1);

@@ -62,7 +62,7 @@ public class RegisterGenderActivity extends AppCompatActivity {
                 final String id = getIntent.getExtras().getString("id");
                 final String pw = getIntent.getExtras().getString("pw");
                 final String birth = getIntent.getExtras().getString("birth");
-                final String grade = getIntent.getExtras().getString("grade");
+                final int grade = getIntent.getExtras().getInt("grade");
                 final String schoolType = getIntent.getExtras().getString("school_type");
                 final int actualGrade = getIntent.getExtras().getInt("actual_grade");
 

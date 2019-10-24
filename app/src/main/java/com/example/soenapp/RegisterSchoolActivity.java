@@ -175,16 +175,12 @@ public class RegisterSchoolActivity extends AppCompatActivity {
         final String id = getIntent.getExtras().getString("id");
         final String pw = getIntent.getExtras().getString("pw");
         final String birth = getIntent.getExtras().getString("birth");
-        final String grade = getIntent.getExtras().getString("grade");
+        final int grade = getIntent.getExtras().getInt("grade");
         final String schoolType = getIntent.getExtras().getString("school_type");
         final int actualGrade = getIntent.getExtras().getInt("actual_grade");
         final String gender = getIntent.getExtras().getString("gender");
         final int classValue = getIntent.getExtras().getInt("class");
-        try {
-            gradeInt = Integer.parseInt(Objects.requireNonNull(grade));
-        } catch (NumberFormatException e) {
-            e.printStackTrace();
-        }
+
 
         next.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -216,7 +212,7 @@ public class RegisterSchoolActivity extends AppCompatActivity {
                 input.put("school_code", currentSchoolCode);
                 input.put("school_name", currentSchoolName);
                 input.put("birth", birth);
-                input.put("grade", gradeInt);
+                input.put("grade", grade);
                 input.put("gender", gender);
                 input.put("school_type", schoolType);
                 input.put("actual_grade", actualGrade);

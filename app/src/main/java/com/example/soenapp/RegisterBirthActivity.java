@@ -21,7 +21,7 @@ public class RegisterBirthActivity extends AppCompatActivity {
     Button next;
 
     int year, month, day, age, grade, actualGrade;
-    String date, stringGrade, schoolType;
+    String date, schoolType;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,7 +69,6 @@ public class RegisterBirthActivity extends AppCompatActivity {
 
                 // grade
                 grade = age - 8 + 1;  // 초1: 1학년  고3: 12학년
-                stringGrade = Integer.toString(grade);
 
                 // schoolType, actualGrade
                 if (1 <= grade && grade <= 6) {
@@ -101,7 +100,7 @@ public class RegisterBirthActivity extends AppCompatActivity {
                 newIntent.putExtra("id", id);
                 newIntent.putExtra("pw", pw);
                 newIntent.putExtra("birth", date);
-                newIntent.putExtra("grade", stringGrade);
+                newIntent.putExtra("grade", grade);
                 newIntent.putExtra("school_type", schoolType);
                 newIntent.putExtra("actual_grade", actualGrade);
 
