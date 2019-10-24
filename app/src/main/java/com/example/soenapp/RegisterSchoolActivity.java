@@ -16,6 +16,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import java.util.HashMap;
+import java.util.Objects;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -97,7 +98,7 @@ public class RegisterSchoolActivity extends AppCompatActivity {
                                     public void onResponse(@NonNull Call<SchoolData> call, @NonNull Response<SchoolData> response) {
                                         if (response.isSuccessful()) {
                                             schoolBody = response.body();
-                                            if (schoolBody.message.equals("success")) {
+                                            if (Objects.requireNonNull(schoolBody).message.equals("success")) {
 
                                                 // specify an adapter (see also next example)
                                                 mAdapter = new RegisterSchoolAdapter(schoolBody);
@@ -155,7 +156,7 @@ public class RegisterSchoolActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onTouchEvent(RecyclerView rv, MotionEvent e) {
+            public void onTouchEvent(@NonNull RecyclerView rv, @NonNull MotionEvent e) {
 
             }
 
@@ -170,14 +171,17 @@ public class RegisterSchoolActivity extends AppCompatActivity {
         final Intent getIntent = getIntent();
         final Intent newIntent = new Intent(getApplicationContext(), RegisterCompletedActivity.class);
 
-        final String name = getIntent.getExtras().getString("name");
+        final String name = Objects.requireNonNull(getIntent.getExtras()).getString("name");
         final String id = getIntent.getExtras().getString("id");
         final String pw = getIntent.getExtras().getString("pw");
         final String birth = getIntent.getExtras().getString("birth");
         final String grade = getIntent.getExtras().getString("grade");
+        final String schoolType = getIntent.getExtras().getString("school_type");
+        final int actualGrade = getIntent.getExtras().getInt("actual_grade");
         final String gender = getIntent.getExtras().getString("gender");
+        final int classValue = getIntent.getExtras().getInt("class");
         try {
-            gradeInt = Integer.parseInt(grade);
+            gradeInt = Integer.parseInt(Objects.requireNonNull(grade));
         } catch (NumberFormatException e) {
             e.printStackTrace();
         }
@@ -190,7 +194,10 @@ public class RegisterSchoolActivity extends AppCompatActivity {
                 newIntent.putExtra("pw", pw);
                 newIntent.putExtra("birth", birth);
                 newIntent.putExtra("grade", grade);
+                newIntent.putExtra("school_type", schoolType);
+                newIntent.putExtra("actual_grade", actualGrade);
                 newIntent.putExtra("gender", gender);
+                newIntent.putExtra("class", classValue);
                 newIntent.putExtra("school_code", currentSchoolCode);
                 newIntent.putExtra("school_name", currentSchoolName);
 
@@ -202,7 +209,6 @@ public class RegisterSchoolActivity extends AppCompatActivity {
                         .build();
                 RetrofitService retrofitService = retrofit.create(RetrofitService.class);
                 HashMap<String, Object> input = new HashMap<>();
-                RegisterData body;
 
                 input.put("name", name);
                 input.put("id", id);
@@ -212,13 +218,16 @@ public class RegisterSchoolActivity extends AppCompatActivity {
                 input.put("birth", birth);
                 input.put("grade", gradeInt);
                 input.put("gender", gender);
+                input.put("school_type", schoolType);
+                input.put("actual_grade", actualGrade);
+                input.put("class", classValue);
 
                 retrofitService.register(input).enqueue(new Callback<RegisterData>() {
                     @Override
                     public void onResponse(@NonNull Call<RegisterData> call, @NonNull Response<RegisterData> response) {
                         if (response.isSuccessful()) {
                             registerBody = response.body();
-                            if (registerBody.message.equals("success")) {
+                            if (Objects.requireNonNull(registerBody).message.equals("success")) {
                                 startActivity(newIntent);
                             } else if (registerBody.message.equals("fail")) {
                                 Toast.makeText(getApplicationContext(), "실패", Toast.LENGTH_SHORT).show();

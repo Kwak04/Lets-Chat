@@ -9,6 +9,8 @@ import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
+import java.util.Objects;
+
 public class RegisterGenderActivity extends AppCompatActivity {
 
     RadioGroup radioGroup;
@@ -56,11 +58,13 @@ public class RegisterGenderActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 final Intent getIntent = getIntent();
-                final String name = getIntent.getExtras().getString("name");
+                final String name = Objects.requireNonNull(getIntent.getExtras()).getString("name");
                 final String id = getIntent.getExtras().getString("id");
                 final String pw = getIntent.getExtras().getString("pw");
                 final String birth = getIntent.getExtras().getString("birth");
                 final String grade = getIntent.getExtras().getString("grade");
+                final String schoolType = getIntent.getExtras().getString("school_type");
+                final int actualGrade = getIntent.getExtras().getInt("actual_grade");
 
                 final Intent newIntent = new Intent(getApplicationContext(), RegisterClassActivity.class);
                 newIntent.putExtra("name", name);
@@ -68,6 +72,8 @@ public class RegisterGenderActivity extends AppCompatActivity {
                 newIntent.putExtra("pw", pw);
                 newIntent.putExtra("birth", birth);
                 newIntent.putExtra("grade", grade);
+                newIntent.putExtra("school_type", schoolType);
+                newIntent.putExtra("actual_grade", actualGrade);
                 newIntent.putExtra("gender", gender);
                 startActivity(newIntent);
             }

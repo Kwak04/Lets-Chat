@@ -12,6 +12,7 @@ import android.widget.TextView;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.Locale;
+import java.util.Objects;
 
 public class RegisterBirthActivity extends AppCompatActivity {
 
@@ -19,8 +20,8 @@ public class RegisterBirthActivity extends AppCompatActivity {
     TextView showDate, invalidBirthError;
     Button next;
 
-    int year, month, day, age, grade;
-    String date, stringGrade;
+    int year, month, day, age, grade, actualGrade;
+    String date, stringGrade, schoolType;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,6 +69,21 @@ public class RegisterBirthActivity extends AppCompatActivity {
                 // grade
                 grade = age - 8 + 1;  // 초1: 1학년  고3: 12학년
                 stringGrade = Integer.toString(grade);
+
+                // schoolType, actualGrade
+                if (1 <= grade && grade <= 6) {
+                    schoolType = "elementary";
+                    actualGrade = grade;
+                } else if (7 <= grade && grade <= 9) {
+                    schoolType = "middle";
+                    actualGrade = grade - 6;
+                } else if (10 <= grade && grade <= 12) {
+                    schoolType = "high";
+                    actualGrade = grade - 9;
+                } else {
+                    schoolType = "?";
+                    actualGrade = 0;
+                }
             }
         });
 
@@ -75,7 +91,7 @@ public class RegisterBirthActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 final Intent getIntent = getIntent();
-                final String name = getIntent.getExtras().getString("name");
+                final String name = Objects.requireNonNull(getIntent.getExtras()).getString("name");
                 final String id = getIntent.getExtras().getString("id");
                 final String pw = getIntent.getExtras().getString("pw");
 
@@ -85,6 +101,9 @@ public class RegisterBirthActivity extends AppCompatActivity {
                 newIntent.putExtra("pw", pw);
                 newIntent.putExtra("birth", date);
                 newIntent.putExtra("grade", stringGrade);
+                newIntent.putExtra("school_type", schoolType);
+                newIntent.putExtra("actual_grade", actualGrade);
+
                 startActivity(newIntent);
             }
         });
