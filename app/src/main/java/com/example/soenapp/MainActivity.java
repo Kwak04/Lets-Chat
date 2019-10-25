@@ -22,11 +22,10 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-    TextView userName, schoolName;
+    TextView userName, schoolName, className;
     ImageView userImage;
     TabHost tabHost;
-    FriendsData friendsData;
-    Button goSchool;
+    Button goSchool, goClass;
 
     RecyclerView recyclerView;
     RecyclerView.Adapter mAdapter;
@@ -46,8 +45,10 @@ public class MainActivity extends AppCompatActivity {
         tabHost = findViewById(R.id.tabHost);
 
         schoolName = findViewById(R.id.my_school);
+        className = findViewById(R.id.my_class);
 
         goSchool = findViewById(R.id.btn_go_school);
+        goClass = findViewById(R.id.btn_go_class);
 
         recyclerView = findViewById(R.id.list_friends);
 
@@ -85,9 +86,14 @@ public class MainActivity extends AppCompatActivity {
         // Setup
 
         // user's school name
-        final String roomNameValue = getPreferences.getString("school", "");
-        schoolName.setText(roomNameValue);
+        final String schoolRoomNameValue = getPreferences.getString("school", "");
+        schoolName.setText(schoolRoomNameValue);
 
+        // user's class name
+        final String classValue = getPreferences.getString("school_class", "");
+        final String actualGradeValue = getPreferences.getString("actual_grade", "");
+        final String classRoomNameValue = actualGradeValue + "학년 " + classValue + "반";
+        className.setText(classRoomNameValue);
 
         // School chat button
         goSchool.setOnClickListener(new View.OnClickListener() {
@@ -95,7 +101,20 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 final Intent intent = new Intent(getApplicationContext(), ChatActivity.class);
                 String roomKeyValue = getPreferences.getString("school_code", "");
-                intent.putExtra("roomName", roomNameValue);
+                intent.putExtra("roomName", schoolRoomNameValue);
+                intent.putExtra("roomKey", roomKeyValue);
+                startActivity(intent);
+            }
+        });
+
+        // Class chat button
+        goClass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final Intent intent = new Intent(getApplicationContext(), ChatActivity.class);
+                String schoolCodeValue = getPreferences.getString("school_code", "");
+                String roomKeyValue = schoolCodeValue + "-" + actualGradeValue + "-" + classValue;
+                intent.putExtra("roomName", classRoomNameValue);
                 intent.putExtra("roomKey", roomKeyValue);
                 startActivity(intent);
             }
