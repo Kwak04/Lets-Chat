@@ -45,7 +45,8 @@
             android:id="@+id/user_photo"
             app:srcCompat="@drawable/user_icon"
             android:layout_marginEnd="40dp"
-            android:layout_gravity="center"/>
+            android:layout_gravity="center"
+            android:contentDescription="@string/image_main_user"/>
 
     </LinearLayout>
 
@@ -174,7 +175,8 @@
                                 android:text="@string/action_join"
                                 android:background="@android:color/holo_blue_dark"
                                 android:textSize="15sp"
-                                android:textColor="#FFFFFF" />
+                                android:textColor="#FFFFFF"
+                                android:id="@+id/btn_go_class"/>
 
                         </LinearLayout>
 
