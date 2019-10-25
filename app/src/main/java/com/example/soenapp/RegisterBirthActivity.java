@@ -42,6 +42,9 @@ public class RegisterBirthActivity extends AppCompatActivity {
         month = 0;
         day = 1;
         actualGrade = 3;
+        grade = 12;
+        schoolType = "high";
+        date = "2001/1/1";
 
         datePicker.init(year, month, day, new DatePicker.OnDateChangedListener() {
             @Override
