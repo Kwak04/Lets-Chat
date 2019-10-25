@@ -19,19 +19,22 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
 
-    TextView userName, schoolName, className;
+    TextView userName, schoolName, className, genderName;
     ImageView userImage;
     TabHost tabHost;
-    Button goSchool, goClass;
+    Button goSchool, goClass, goGender;
 
     RecyclerView recyclerView;
     RecyclerView.Adapter mAdapter;
     RecyclerView.LayoutManager layoutManager;
 
     SharedPreferences getPreferences;
+
+    String genderNameValue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,9 +49,11 @@ public class MainActivity extends AppCompatActivity {
 
         schoolName = findViewById(R.id.my_school);
         className = findViewById(R.id.my_class);
+        genderName = findViewById(R.id.my_gender);
 
         goSchool = findViewById(R.id.btn_go_school);
         goClass = findViewById(R.id.btn_go_class);
+        goGender = findViewById(R.id.btn_go_gender);
 
         recyclerView = findViewById(R.id.list_friends);
 
@@ -95,6 +100,16 @@ public class MainActivity extends AppCompatActivity {
         final String classRoomNameValue = actualGradeValue + "학년 " + classValue + "반";
         className.setText(classRoomNameValue);
 
+        // user's gender
+        final String genderValue = getPreferences.getString("gender", "");
+        if (Objects.equals(genderValue, "male")) {
+            genderNameValue = "남자";
+        } else if (Objects.equals(genderValue, "female")) {
+            genderNameValue = "여자";
+        }
+        final String genderRoomNameValue = actualGradeValue + "학년 " + classValue + "반 " + genderNameValue;
+        genderName.setText(genderRoomNameValue);
+
         // School chat button
         goSchool.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -115,6 +130,19 @@ public class MainActivity extends AppCompatActivity {
                 String schoolCodeValue = getPreferences.getString("school_code", "");
                 String roomKeyValue = schoolCodeValue + "-" + actualGradeValue + "-" + classValue;
                 intent.putExtra("roomName", classRoomNameValue);
+                intent.putExtra("roomKey", roomKeyValue);
+                startActivity(intent);
+            }
+        });
+
+        // Gender chat button
+        goGender.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final Intent intent = new Intent(getApplicationContext(), ChatActivity.class);
+                String schoolCodeValue = getPreferences.getString("school_code", "");
+                String roomKeyValue = schoolCodeValue + "-" + actualGradeValue + "-" + classValue + "-" + genderValue;
+                intent.putExtra("roomName", genderRoomNameValue);
                 intent.putExtra("roomKey", roomKeyValue);
                 startActivity(intent);
             }
