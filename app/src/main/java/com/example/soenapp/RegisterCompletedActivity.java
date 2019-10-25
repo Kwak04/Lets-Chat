@@ -29,7 +29,7 @@ public class RegisterCompletedActivity extends AppCompatActivity {
         String idValue = intent.getExtras().getString("id");
         String pwValue = intent.getExtras().getString("pw");
         String birthValue = intent.getExtras().getString("birth");
-        String gradeValue = intent.getExtras().getString("grade");
+        int gradeValue = intent.getExtras().getInt("grade");
         String genderValue = intent.getExtras().getString("gender");
         String schoolNameValue = intent.getExtras().getString("school_name");
 
@@ -53,23 +53,22 @@ public class RegisterCompletedActivity extends AppCompatActivity {
         birthValue = birthYear + "년 " + birthMonth + "월 " + birthDay + "일";
 
         // grade
-        int intGradeValue = Integer.parseInt(Objects.requireNonNull(gradeValue));
         int actualGradeValue;
         String schoolType;
-        if (1 <= intGradeValue && intGradeValue <= 6) {
+        if (1 <= gradeValue && gradeValue <= 6) {
             schoolType = "초등학교";
-            actualGradeValue = intGradeValue;
-        } else if (7 <= intGradeValue && intGradeValue <= 9) {
+            actualGradeValue = gradeValue;
+        } else if (7 <= gradeValue && gradeValue <= 9) {
             schoolType = "중학교";
-            actualGradeValue = intGradeValue - 6;
-        } else if (10 <= intGradeValue && intGradeValue <= 12) {
+            actualGradeValue = gradeValue - 6;
+        } else if (10 <= gradeValue && gradeValue <= 12) {
             schoolType = "고등학교";
-            actualGradeValue = intGradeValue - 9;
+            actualGradeValue = gradeValue - 9;
         } else {
             schoolType = "?";
             actualGradeValue = 0;
         }
-        gradeValue = schoolType + " " + actualGradeValue + "학년";
+        String stringGradeValue = schoolType + " " + actualGradeValue + "학년";
 
         // gender
         if (Objects.requireNonNull(genderValue).equals("male")) {
@@ -87,7 +86,7 @@ public class RegisterCompletedActivity extends AppCompatActivity {
         pw.setText(pwValue);
         school.setText(schoolNameValue);
         birth.setText(birthValue);
-        grade.setText(gradeValue);
+        grade.setText(stringGradeValue);
         gender.setText(genderValue);
 
 
