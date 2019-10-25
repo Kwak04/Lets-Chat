@@ -45,6 +45,9 @@ public class RegisterClassActivity extends AppCompatActivity {
         showClass.setText(firstClass);
 
 
+        // picker: disable keyboard input
+        picker.setDescendantFocusability(NumberPicker.FOCUS_BLOCK_DESCENDANTS);
+
         // picker
         picker.setMinValue(1);
         picker.setMaxValue(15);

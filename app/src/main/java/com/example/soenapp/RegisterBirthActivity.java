@@ -46,6 +46,9 @@ public class RegisterBirthActivity extends AppCompatActivity {
         schoolType = "high";
         date = "2001/1/1";
 
+        // datePicker: disable keyboard input
+        datePicker.setDescendantFocusability(DatePicker.FOCUS_BLOCK_DESCENDANTS);
+
         datePicker.init(year, month, day, new DatePicker.OnDateChangedListener() {
             @Override
             public void onDateChanged(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
