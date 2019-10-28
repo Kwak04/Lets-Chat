@@ -1,5 +1,6 @@
 package com.example.soenapp;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
@@ -23,6 +24,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 import io.socket.client.IO;
 import io.socket.client.Socket;
@@ -63,7 +65,7 @@ public class ChatActivity extends AppCompatActivity {
 
         // Room information
         final Intent intent = getIntent();
-        final String roomNameValue = intent.getExtras().getString("roomName");
+        final String roomNameValue = Objects.requireNonNull(intent.getExtras()).getString("roomName");
         final String roomKey = intent.getExtras().getString("roomKey");
 
         // SharedPreferences
@@ -231,8 +233,8 @@ public class ChatActivity extends AppCompatActivity {
 
                 String text = input.getText().toString();
                 Date time = new Date();
-                SimpleDateFormat formatActual = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                SimpleDateFormat formatDisplay = new SimpleDateFormat("HH:mm");
+                @SuppressLint("SimpleDateFormat") SimpleDateFormat formatActual = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                @SuppressLint("SimpleDateFormat") SimpleDateFormat formatDisplay = new SimpleDateFormat("HH:mm");
 
                 String timeActual = formatActual.format(time.getTime());
                 String timeDisplay = formatDisplay.format(time.getTime());
@@ -268,6 +270,7 @@ public class ChatActivity extends AppCompatActivity {
             public void onClick(View v) {
                 final Intent intent = new Intent(ChatActivity.this, ChatPeopleActivity.class);
                 startActivity(intent);
+                overridePendingTransition(R.anim.riseup_anim, R.anim.riseup_disappear_anim);
             }
         });
     }

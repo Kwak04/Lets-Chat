@@ -30,4 +30,10 @@ public class ChatPeopleActivity extends AppCompatActivity {
         ChatPeopleAdapter chatPeopleAdapter = new ChatPeopleAdapter(items);
         peopleList.setAdapter(chatPeopleAdapter);
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(R.anim.dropdown_anim, R.anim.dropdown_disappear_anim);
+    }
 }
