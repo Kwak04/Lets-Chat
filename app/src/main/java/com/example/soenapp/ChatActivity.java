@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import org.json.JSONException;
@@ -32,6 +33,7 @@ public class ChatActivity extends AppCompatActivity {
     EditText input;
     TextView roomName;
     Button send;
+    ImageButton goPeople;
 
     RecyclerView recyclerView;
     RecyclerView.Adapter mAdapter;
@@ -52,6 +54,7 @@ public class ChatActivity extends AppCompatActivity {
         // findViewById
 
         roomName = findViewById(R.id.room_name);
+        goPeople = findViewById(R.id.btn_show_people);
 
         recyclerView = findViewById(R.id.chat_recycler_view);
         input = findViewById(R.id.chat_input);
@@ -255,6 +258,16 @@ public class ChatActivity extends AppCompatActivity {
 
                 // 입력된 내용 지우기
                 input.setText(null);
+            }
+        });
+
+
+        // 사람 목록 보기
+        goPeople.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final Intent intent = new Intent(ChatActivity.this, ChatPeopleActivity.class);
+                startActivity(intent);
             }
         });
     }

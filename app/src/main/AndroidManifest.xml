@@ -15,7 +15,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         android:usesCleartextTraffic="true">
-        <activity android:name=".RegisterClassActivity"></activity>
+        <activity android:name=".ChatPeopleActivity"></activity>
+        <activity android:name=".RegisterClassActivity" />
         <activity android:name=".RegisterGenderActivity" />
         <activity android:name=".RegisterBirthActivity" />
         <activity android:name=".ChatActivity" />
