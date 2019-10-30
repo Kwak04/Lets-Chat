@@ -91,4 +91,8 @@
     <string name="text_chat_person_send">발신자</string>
     <string name="text_chat_message">메시지</string>
     <string name="text_chat_time">시간</string>
+    <string name="cd_show_people">대화 상대를 표시하는 버튼</string>
+
+    <!-- activity_chat_people -->
+    <string name="text_chat_people">사람</string>
 </resources>

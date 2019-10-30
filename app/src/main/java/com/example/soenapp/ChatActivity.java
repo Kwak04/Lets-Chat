@@ -1,5 +1,6 @@
 package com.example.soenapp;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
@@ -10,6 +11,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import org.json.JSONException;
@@ -22,6 +24,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 import io.socket.client.IO;
 import io.socket.client.Socket;
@@ -32,6 +35,7 @@ public class ChatActivity extends AppCompatActivity {
     EditText input;
     TextView roomName;
     Button send;
+    ImageButton goPeople;
 
     RecyclerView recyclerView;
     RecyclerView.Adapter mAdapter;
@@ -52,6 +56,7 @@ public class ChatActivity extends AppCompatActivity {
         // findViewById
 
         roomName = findViewById(R.id.room_name);
+        goPeople = findViewById(R.id.btn_show_people);
 
         recyclerView = findViewById(R.id.chat_recycler_view);
         input = findViewById(R.id.chat_input);
@@ -60,7 +65,7 @@ public class ChatActivity extends AppCompatActivity {
 
         // Room information
         final Intent intent = getIntent();
-        final String roomNameValue = intent.getExtras().getString("roomName");
+        final String roomNameValue = Objects.requireNonNull(intent.getExtras()).getString("roomName");
         final String roomKey = intent.getExtras().getString("roomKey");
 
         // SharedPreferences
@@ -228,8 +233,8 @@ public class ChatActivity extends AppCompatActivity {
 
                 String text = input.getText().toString();
                 Date time = new Date();
-                SimpleDateFormat formatActual = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                SimpleDateFormat formatDisplay = new SimpleDateFormat("HH:mm");
+                @SuppressLint("SimpleDateFormat") SimpleDateFormat formatActual = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                @SuppressLint("SimpleDateFormat") SimpleDateFormat formatDisplay = new SimpleDateFormat("HH:mm");
 
                 String timeActual = formatActual.format(time.getTime());
                 String timeDisplay = formatDisplay.format(time.getTime());
@@ -255,6 +260,18 @@ public class ChatActivity extends AppCompatActivity {
 
                 // 입력된 내용 지우기
                 input.setText(null);
+            }
+        });
+
+
+        // 사람 목록 보기
+        goPeople.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final Intent intent = new Intent(ChatActivity.this, ChatPeopleActivity.class);
+                intent.putExtra("roomKey", roomKey);
+                startActivity(intent);
+                overridePendingTransition(R.anim.riseup_anim, R.anim.riseup_disappear_anim);
             }
         });
     }

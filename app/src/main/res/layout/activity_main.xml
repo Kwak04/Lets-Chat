@@ -46,7 +46,7 @@
             android:layout_gravity="center"
             android:layout_marginEnd="40dp"
             android:contentDescription="@string/image_main_user"
-            app:srcCompat="@drawable/user_icon"/>
+            app:srcCompat="@drawable/icon_user_black"/>
 
     </LinearLayout>
 

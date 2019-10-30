@@ -33,4 +33,8 @@ public interface RetrofitService {
     // 회원가입 - 아이디 중복 확인
     @GET("/user/privacy/register/idcheck")
     Call<SimpleMessageData> checkID(@Query("id") String id);
+
+    // 같은 채팅방에 속해 있는 사람 목록
+    @GET("/user/main/chatpeople")
+    Call<ChatPeopleData> showChatPeople(@Query("room_key") String room_key);
 }
