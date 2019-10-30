@@ -2,8 +2,6 @@ package com.example.soenapp;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.drawable.ShapeDrawable;
-import android.graphics.drawable.shapes.OvalShape;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -18,8 +16,13 @@ import android.widget.TabHost;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.ArrayList;
 import java.util.Objects;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -28,13 +31,20 @@ public class MainActivity extends AppCompatActivity {
     TabHost tabHost;
     Button goSchool, goClass, goGender;
 
-    RecyclerView recyclerView;
+    RecyclerView favoriteFriendsList;
     RecyclerView.Adapter mAdapter;
     RecyclerView.LayoutManager layoutManager;
 
     SharedPreferences getPreferences;
 
     String genderNameValue;
+
+    Retrofit retrofit = new Retrofit.Builder()
+            .baseUrl(RetrofitService.URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build();
+    RetrofitService retrofitService = retrofit.create(RetrofitService.class);
+    ChatPeopleData peopleBody;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
         goClass = findViewById(R.id.btn_go_class);
         goGender = findViewById(R.id.btn_go_gender);
 
-        recyclerView = findViewById(R.id.list_friends);
+        favoriteFriendsList = findViewById(R.id.list_friends);
 
         getPreferences = getSharedPreferences("userData", MODE_PRIVATE);
 
@@ -150,22 +160,42 @@ public class MainActivity extends AppCompatActivity {
 
 
         // Favorites tab friends list
-        recyclerView.setHasFixedSize(true);
+        favoriteFriendsList.setHasFixedSize(true);
 
         layoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(layoutManager);
+        favoriteFriendsList.setLayoutManager(layoutManager);
 
             // temporary
             //TODO 서버 연결 - api 구현
-        final ArrayList<FriendsData> friendsDataArrayList = new ArrayList<>();
-        friendsDataArrayList.add(new FriendsData("김준일", 0));
-        friendsDataArrayList.add(new FriendsData("신일강", 0));
-        friendsDataArrayList.add(new FriendsData("최연욱", 0));
-        friendsDataArrayList.add(new FriendsData("한승윤", 0));
-        friendsDataArrayList.add(new FriendsData("박상범", 0));
+//        final ArrayList<FriendsData> friendsDataArrayList = new ArrayList<>();
+//        friendsDataArrayList.add(new FriendsData("김준일", 0));
+//        friendsDataArrayList.add(new FriendsData("신일강", 0));
+//        friendsDataArrayList.add(new FriendsData("최연욱", 0));
+//        friendsDataArrayList.add(new FriendsData("한승윤", 0));
+//        friendsDataArrayList.add(new FriendsData("박상범", 0));
+//
+//        mAdapter = new FavoriteFriendsAdapter(friendsDataArrayList);
+//        favoriteFriendsList.setAdapter(mAdapter);
 
-        mAdapter = new FavoriteFriendsAdapter(friendsDataArrayList);
-        recyclerView.setAdapter(mAdapter);
+        final String userKey = getPreferences.getString("user_key", "");
+
+        retrofitService.checkFavorite(userKey).enqueue(new Callback<ChatPeopleData>() {
+            @Override
+            public void onResponse(@NonNull Call<ChatPeopleData> call, @NonNull Response<ChatPeopleData> response) {
+                if (response.isSuccessful()) {
+                    peopleBody = response.body();
+                    if (Objects.requireNonNull(peopleBody).message.equals("success")) {
+                        FavoriteFriendsAdapter chatPeopleAdapter = new FavoriteFriendsAdapter(peopleBody);
+                        favoriteFriendsList.setAdapter(chatPeopleAdapter);
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<ChatPeopleData> call, @NonNull Throwable t) {
+                Toast.makeText(getApplicationContext(), "서버에 접속할 수 없습니다.", Toast.LENGTH_SHORT).show();
+            }
+        });
 
 
         // Friends list click event
@@ -191,8 +221,18 @@ public class MainActivity extends AppCompatActivity {
                     int currentPosition = recyclerView.getChildAdapterPosition(childView);
 
                     //해당 위치의 Data를 가져옴
-                    FriendsData currentItemFriend = friendsDataArrayList.get(currentPosition);
-                    Toast.makeText(MainActivity.this, currentItemFriend.getName(), Toast.LENGTH_SHORT).show();
+                    ChatPeopleData.Result currentItemFriend = peopleBody.results[currentPosition];
+
+                    int intUserKey = Integer.parseInt(Objects.requireNonNull(userKey));
+                    int intFriendsUserKey = Integer.parseInt(currentItemFriend.user_key);
+
+                    final Intent intent = new Intent(getApplicationContext(), ChatActivity.class);
+                    String roomKeyValue = Math.min(intUserKey, intFriendsUserKey) + "-" + Math.max(intUserKey, intFriendsUserKey);
+                    intent.putExtra("roomName", currentItemFriend.name);
+                    intent.putExtra("roomKey", roomKeyValue);
+                    startActivity(intent);
+
+                    Toast.makeText(MainActivity.this, currentItemFriend.name, Toast.LENGTH_SHORT).show();
                     return true;
                 }
 
@@ -210,6 +250,31 @@ public class MainActivity extends AppCompatActivity {
             }
         };
 
-        recyclerView.addOnItemTouchListener(onItemTouchListener);
+        favoriteFriendsList.addOnItemTouchListener(onItemTouchListener);
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+
+        final String userKey = getPreferences.getString("user_key", "");
+
+        retrofitService.checkFavorite(userKey).enqueue(new Callback<ChatPeopleData>() {
+            @Override
+            public void onResponse(@NonNull Call<ChatPeopleData> call, @NonNull Response<ChatPeopleData> response) {
+                if (response.isSuccessful()) {
+                    peopleBody = response.body();
+                    if (Objects.requireNonNull(peopleBody).message.equals("success")) {
+                        FavoriteFriendsAdapter chatPeopleAdapter = new FavoriteFriendsAdapter(peopleBody);
+                        favoriteFriendsList.setAdapter(chatPeopleAdapter);
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<ChatPeopleData> call, @NonNull Throwable t) {
+                Toast.makeText(getApplicationContext(), "서버에 접속할 수 없습니다.", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }
