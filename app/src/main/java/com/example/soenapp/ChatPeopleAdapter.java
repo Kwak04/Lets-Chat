@@ -13,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.HashMap;
+import java.util.Objects;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -26,19 +27,19 @@ public class ChatPeopleAdapter extends RecyclerView.Adapter<ChatPeopleAdapter.Vi
     private String userKey;
     private Context context;
 
-    Retrofit retrofit = new Retrofit.Builder()
+    private Retrofit retrofit = new Retrofit.Builder()
             .baseUrl(RetrofitService.URL)
             .addConverterFactory(GsonConverterFactory.create())
             .build();
-    RetrofitService retrofitService = retrofit.create(RetrofitService.class);
+    private RetrofitService retrofitService = retrofit.create(RetrofitService.class);
 
-    SimpleMessageData messageBody;
+    private SimpleMessageData messageBody;
 
     SharedPreferences sharedPreferences;
 
 
 
-    class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    class ViewHolder extends RecyclerView.ViewHolder {
         TextView name;
         CheckBox favorite;
         boolean isLiked;
@@ -52,19 +53,20 @@ public class ChatPeopleAdapter extends RecyclerView.Adapter<ChatPeopleAdapter.Vi
                 @Override
                 public void onClick(View v) {
                     final int adapterPosition = getAdapterPosition();
+
+                    HashMap<String, Object> hashMap = new HashMap<>();
+                    hashMap.put("user_key", userKey);
+                    hashMap.put("liking_key", mDataset.results[adapterPosition].user_key);
+
                     if (!isLiked) {
                         isLiked = true;
-                        // 서버 통신
-                        HashMap<String, Object> hashMap = new HashMap<>();
-                        hashMap.put("user_key", userKey);
-                        hashMap.put("liking_key", mDataset.results[adapterPosition].user_key);
 
                         retrofitService.addFavorite(hashMap).enqueue(new Callback<SimpleMessageData>() {
                             @Override
-                            public void onResponse(Call<SimpleMessageData> call, Response<SimpleMessageData> response) {
+                            public void onResponse(@NonNull Call<SimpleMessageData> call, @NonNull Response<SimpleMessageData> response) {
                                 if (response.isSuccessful()) {
                                     messageBody = response.body();
-                                    if (messageBody.message.equals("success")) {
+                                    if (Objects.requireNonNull(messageBody).message.equals("success")) {
                                         favorite.setChecked(isLiked);
                                         mDataset.results[adapterPosition].setLiked(isLiked);
                                     }
@@ -72,24 +74,34 @@ public class ChatPeopleAdapter extends RecyclerView.Adapter<ChatPeopleAdapter.Vi
                             }
 
                             @Override
-                            public void onFailure(Call<SimpleMessageData> call, Throwable t) {
+                            public void onFailure(@NonNull Call<SimpleMessageData> call, @NonNull Throwable t) {
                                 Toast.makeText(context, "실패", Toast.LENGTH_SHORT).show();
                             }
                         });
                     }
                     else {
                         isLiked = false;
-                        // 서버 통신
+
+                        retrofitService.removeFavorite(hashMap).enqueue(new Callback<SimpleMessageData>() {
+                            @Override
+                            public void onResponse(@NonNull Call<SimpleMessageData> call, @NonNull Response<SimpleMessageData> response) {
+                                if (response.isSuccessful()) {
+                                    messageBody = response.body();
+                                    if (Objects.requireNonNull(messageBody).message.equals("success")) {
+                                        favorite.setChecked(isLiked);
+                                        mDataset.results[adapterPosition].setLiked(isLiked);
+                                    }
+                                }
+                            }
+
+                            @Override
+                            public void onFailure(@NonNull Call<SimpleMessageData> call, @NonNull Throwable t) {
+                                Toast.makeText(context, "실패", Toast.LENGTH_SHORT).show();
+                            }
+                        });
                     }
                 }
             });
-        }
-
-        @Override
-        public void onClick(View v) {
-            final int adapterPosition = getAdapterPosition();
-            Log.d("ChatPeopleAdapter", "onClick: hello");
-
         }
     }
 

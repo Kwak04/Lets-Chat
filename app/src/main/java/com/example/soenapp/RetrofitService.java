@@ -42,4 +42,11 @@ public interface RetrofitService {
     @FormUrlEncoded
     @POST("/user/main/marking")
     Call<SimpleMessageData> addFavorite(@FieldMap HashMap<String, Object> param);
+
+    // 즐겨찾기 취소
+    @FormUrlEncoded
+    @POST("/user/main/unbookmark")
+    Call<SimpleMessageData> removeFavorite(@FieldMap HashMap<String, Object> param);
+
+
 }
