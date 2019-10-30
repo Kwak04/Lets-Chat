@@ -44,7 +44,7 @@
                     android:background="@drawable/white_rounded_rectangle"
                     android:hint="@string/text_id"
                     android:importantForAutofill="no"
-                    android:inputType="text"
+                    android:inputType="textVisiblePassword"
                     android:maxLines="1"
                     android:paddingStart="@dimen/paddingStart_rounded_rectangle"
                     android:paddingEnd="0dp"/>

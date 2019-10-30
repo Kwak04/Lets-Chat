@@ -1,6 +1,7 @@
 package com.example.soenapp;
 
 import android.content.Intent;
+import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -35,6 +36,11 @@ public class RegisterBirthActivity extends AppCompatActivity {
         invalidBirthError = findViewById(R.id.invalid_birth);
         next = findViewById(R.id.next);
 
+
+        getWindow().setStatusBarColor(getResources().getColor(R.color.colorWhite));
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+        }
 
         // initialize
         invalidBirthError.setText("");
