@@ -201,18 +201,13 @@ public class MainActivity extends AppCompatActivity {
         RecyclerView.OnItemTouchListener onItemTouchListener = new RecyclerView.OnItemTouchListener() {
             @Override
             public boolean onInterceptTouchEvent(@NonNull RecyclerView recyclerView, @NonNull MotionEvent motionEvent) {
-                //손으로 터치한 곳의 좌표를 토대로 해당 Item의 View를 가져옴
+
                 View childView = recyclerView.findChildViewUnder(motionEvent.getX(),motionEvent.getY());
 
-                //터치한 곳의 View가 RecyclerView 안의 아이템이고 그 아이템의 View가 null이 아니라
-                //정확한 Item의 View를 가져왔고, gestureDetector에서 한번만 누르면 true를 넘기게 구현했으니
-                //한번만 눌려서 그 값이 true가 넘어왔다면
                 if(childView != null && gestureDetector.onTouchEvent(motionEvent)){
 
-                    //현재 터치된 곳의 position을 가져오고
                     int currentPosition = recyclerView.getChildAdapterPosition(childView);
 
-                    //해당 위치의 Data를 가져옴
                     ChatPeopleData.Result currentItemFriend = peopleBody.results[currentPosition];
 
                     int intUserKey = Integer.parseInt(Objects.requireNonNull(userKey));
@@ -225,7 +220,6 @@ public class MainActivity extends AppCompatActivity {
                     intent.putExtra("isPersonal", true);
                     startActivity(intent);
 
-                    Toast.makeText(MainActivity.this, currentItemFriend.name, Toast.LENGTH_SHORT).show();
                     return true;
                 }
 
