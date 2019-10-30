@@ -46,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
     RetrofitService retrofitService = retrofit.create(RetrofitService.class);
     ChatPeopleData peopleBody;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -128,6 +129,7 @@ public class MainActivity extends AppCompatActivity {
                 String roomKeyValue = getPreferences.getString("school_code", "");
                 intent.putExtra("roomName", schoolRoomNameValue);
                 intent.putExtra("roomKey", roomKeyValue);
+                intent.putExtra("isPersonal", false);
                 startActivity(intent);
             }
         });
@@ -141,6 +143,7 @@ public class MainActivity extends AppCompatActivity {
                 String roomKeyValue = schoolCodeValue + "-" + actualGradeValue + "-" + classValue;
                 intent.putExtra("roomName", classRoomNameValue);
                 intent.putExtra("roomKey", roomKeyValue);
+                intent.putExtra("isPersonal", false);
                 startActivity(intent);
             }
         });
@@ -154,6 +157,7 @@ public class MainActivity extends AppCompatActivity {
                 String roomKeyValue = schoolCodeValue + "-" + actualGradeValue + "-" + classValue + "-" + genderValue;
                 intent.putExtra("roomName", genderRoomNameValue);
                 intent.putExtra("roomKey", roomKeyValue);
+                intent.putExtra("isPersonal", false);
                 startActivity(intent);
             }
         });
@@ -164,18 +168,6 @@ public class MainActivity extends AppCompatActivity {
 
         layoutManager = new LinearLayoutManager(this);
         favoriteFriendsList.setLayoutManager(layoutManager);
-
-            // temporary
-            //TODO 서버 연결 - api 구현
-//        final ArrayList<FriendsData> friendsDataArrayList = new ArrayList<>();
-//        friendsDataArrayList.add(new FriendsData("김준일", 0));
-//        friendsDataArrayList.add(new FriendsData("신일강", 0));
-//        friendsDataArrayList.add(new FriendsData("최연욱", 0));
-//        friendsDataArrayList.add(new FriendsData("한승윤", 0));
-//        friendsDataArrayList.add(new FriendsData("박상범", 0));
-//
-//        mAdapter = new FavoriteFriendsAdapter(friendsDataArrayList);
-//        favoriteFriendsList.setAdapter(mAdapter);
 
         final String userKey = getPreferences.getString("user_key", "");
 
@@ -209,18 +201,13 @@ public class MainActivity extends AppCompatActivity {
         RecyclerView.OnItemTouchListener onItemTouchListener = new RecyclerView.OnItemTouchListener() {
             @Override
             public boolean onInterceptTouchEvent(@NonNull RecyclerView recyclerView, @NonNull MotionEvent motionEvent) {
-                //손으로 터치한 곳의 좌표를 토대로 해당 Item의 View를 가져옴
+
                 View childView = recyclerView.findChildViewUnder(motionEvent.getX(),motionEvent.getY());
 
-                //터치한 곳의 View가 RecyclerView 안의 아이템이고 그 아이템의 View가 null이 아니라
-                //정확한 Item의 View를 가져왔고, gestureDetector에서 한번만 누르면 true를 넘기게 구현했으니
-                //한번만 눌려서 그 값이 true가 넘어왔다면
                 if(childView != null && gestureDetector.onTouchEvent(motionEvent)){
 
-                    //현재 터치된 곳의 position을 가져오고
                     int currentPosition = recyclerView.getChildAdapterPosition(childView);
 
-                    //해당 위치의 Data를 가져옴
                     ChatPeopleData.Result currentItemFriend = peopleBody.results[currentPosition];
 
                     int intUserKey = Integer.parseInt(Objects.requireNonNull(userKey));
@@ -230,9 +217,9 @@ public class MainActivity extends AppCompatActivity {
                     String roomKeyValue = Math.min(intUserKey, intFriendsUserKey) + "-" + Math.max(intUserKey, intFriendsUserKey);
                     intent.putExtra("roomName", currentItemFriend.name);
                     intent.putExtra("roomKey", roomKeyValue);
+                    intent.putExtra("isPersonal", true);
                     startActivity(intent);
 
-                    Toast.makeText(MainActivity.this, currentItemFriend.name, Toast.LENGTH_SHORT).show();
                     return true;
                 }
 

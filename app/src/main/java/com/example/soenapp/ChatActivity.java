@@ -35,7 +35,7 @@ public class ChatActivity extends AppCompatActivity {
     EditText input;
     TextView roomName;
     Button send;
-    ImageButton goPeople;
+    ImageButton showPeople;
 
     RecyclerView recyclerView;
     RecyclerView.Adapter mAdapter;
@@ -56,7 +56,7 @@ public class ChatActivity extends AppCompatActivity {
         // findViewById
 
         roomName = findViewById(R.id.room_name);
-        goPeople = findViewById(R.id.btn_show_people);
+        showPeople = findViewById(R.id.btn_show_people);
 
         recyclerView = findViewById(R.id.chat_recycler_view);
         input = findViewById(R.id.chat_input);
@@ -67,6 +67,7 @@ public class ChatActivity extends AppCompatActivity {
         final Intent intent = getIntent();
         final String roomNameValue = Objects.requireNonNull(intent.getExtras()).getString("roomName");
         final String roomKey = intent.getExtras().getString("roomKey");
+        final boolean isPersonal = intent.getExtras().getBoolean("isPersonal");
 
         // SharedPreferences
         pref = getSharedPreferences("userData", MODE_PRIVATE);
@@ -81,6 +82,12 @@ public class ChatActivity extends AppCompatActivity {
 
         // View room's name
         roomName.setText(roomNameValue);
+
+        // check room's type and enable or disable people button
+        if (isPersonal) {
+            showPeople.setImageResource(0);
+            showPeople.setEnabled(false);
+        }
 
         // Socket Communication
 
@@ -265,7 +272,7 @@ public class ChatActivity extends AppCompatActivity {
 
 
         // 사람 목록 보기
-        goPeople.setOnClickListener(new View.OnClickListener() {
+        showPeople.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 final Intent intent = new Intent(ChatActivity.this, ChatPeopleActivity.class);
