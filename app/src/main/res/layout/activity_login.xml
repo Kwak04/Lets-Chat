@@ -4,13 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorWhite"
     tools:context=".LoginActivity">
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent">
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -31,63 +32,67 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_margin="30dp">
+                android:layout_margin="30dp"
+                android:orientation="vertical">
 
                 <EditText
                     android:id="@+id/ID"
-                    android:layout_gravity="center"
-                    android:layout_marginBottom="10dp"
-                    android:paddingStart="@dimen/paddingStart_rounded_rectangle"
-                    android:paddingEnd="0dp"
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
-                    android:maxLines="1"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="10dp"
+                    android:background="@drawable/white_rounded_rectangle"
                     android:hint="@string/text_id"
+                    android:importantForAutofill="no"
                     android:inputType="text"
-                    android:background="@drawable/white_rounded_rectangle" />
+                    android:maxLines="1"
+                    android:paddingStart="@dimen/paddingStart_rounded_rectangle"
+                    android:paddingEnd="0dp"/>
 
                 <EditText
                     android:id="@+id/PW"
-                    android:layout_gravity="center"
-                    android:paddingStart="@dimen/paddingStart_rounded_rectangle"
-                    android:paddingEnd="0dp"
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
-                    android:maxLines="1"
+                    android:layout_gravity="center"
+                    android:background="@drawable/white_rounded_rectangle"
                     android:hint="@string/text_pw"
+                    android:importantForAutofill="no"
                     android:inputType="textPassword"
-                    android:background="@drawable/white_rounded_rectangle"/>
+                    android:maxLines="1"
+                    android:paddingStart="@dimen/paddingStart_rounded_rectangle"
+                    android:paddingEnd="0dp"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="20dp">
+                    android:layout_marginTop="20dp"
+                    android:orientation="horizontal">
 
                     <Button
+                        android:id="@+id/register_bt"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
-                        android:id="@+id/register_bt"
-                        android:layout_weight="1"
                         android:layout_marginStart="10dp"
                         android:layout_marginEnd="10dp"
+                        android:layout_weight="1"
                         android:background="@drawable/shape_button"
                         android:text="@string/action_sign_up"
+                        android:textColor="@color/colorWhite"
                         android:textSize="20sp"
-                        android:textColor="@color/colorWhite"/>
+                        style="?android:attr/buttonBarButtonStyle"/>
 
                     <Button
                         android:id="@+id/login_bt"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
-                        android:layout_weight="1"
                         android:layout_marginStart="10dp"
                         android:layout_marginEnd="10dp"
+                        android:layout_weight="1"
                         android:background="@drawable/shape_button_accent"
                         android:text="@string/action_sign_in"
+                        android:textColor="@color/colorWhite"
                         android:textSize="20sp"
-                        android:textColor="@color/colorWhite" />
+                        style="?android:attr/buttonBarButtonStyle"/>
 
                 </LinearLayout>
 

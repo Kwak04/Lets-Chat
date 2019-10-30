@@ -2,6 +2,7 @@ package com.example.soenapp;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -49,6 +50,11 @@ public class LoginActivity extends AppCompatActivity {
 
 
         sharedPreferences = getSharedPreferences("userData", MODE_PRIVATE);
+
+        getWindow().setStatusBarColor(getResources().getColor(R.color.colorWhite));
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+        }
 
         login.setOnClickListener(new View.OnClickListener() {
             @Override
