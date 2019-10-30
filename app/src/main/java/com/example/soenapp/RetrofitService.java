@@ -36,5 +36,10 @@ public interface RetrofitService {
 
     // 같은 채팅방에 속해 있는 사람 목록
     @GET("/user/main/chatpeople")
-    Call<ChatPeopleData> showChatPeople(@Query("room_key") String room_key);
+    Call<ChatPeopleData> showChatPeople(@Query("room_key") String room_key, @Query("user_key") String user_key);
+
+    // 즐겨찾기 추가
+    @FormUrlEncoded
+    @POST("/user/main/marking")
+    Call<SimpleMessageData> addFavorite(@FieldMap HashMap<String, Object> param);
 }

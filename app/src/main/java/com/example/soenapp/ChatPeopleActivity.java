@@ -1,6 +1,7 @@
 package com.example.soenapp;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -31,6 +32,9 @@ public class ChatPeopleActivity extends AppCompatActivity {
     RetrofitService retrofitService = retrofit.create(RetrofitService.class);
     ChatPeopleData peopleBody;
 
+    SharedPreferences sharedPreferences;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,16 +54,19 @@ public class ChatPeopleActivity extends AppCompatActivity {
         final String roomKey = Objects.requireNonNull(getIntent.getExtras()).getString("roomKey");
         Log.d(TAG, "roomKey: " + roomKey);
 
+        sharedPreferences = getSharedPreferences("userData", MODE_PRIVATE);
+        final String userKey = sharedPreferences.getString("user_key", "");
+
 
         // People list
 
-        retrofitService.showChatPeople(roomKey).enqueue(new Callback<ChatPeopleData>() {
+        retrofitService.showChatPeople(roomKey, userKey).enqueue(new Callback<ChatPeopleData>() {
             @Override
             public void onResponse(@NonNull Call<ChatPeopleData> call, @NonNull Response<ChatPeopleData> response) {
                 if (response.isSuccessful()) {
                     peopleBody = response.body();
                     if (Objects.requireNonNull(peopleBody).message.equals("success")) {
-                        ChatPeopleAdapter chatPeopleAdapter = new ChatPeopleAdapter(peopleBody);
+                        ChatPeopleAdapter chatPeopleAdapter = new ChatPeopleAdapter(peopleBody, userKey, getApplicationContext());
                         peopleList.setAdapter(chatPeopleAdapter);
                     }
                 }
