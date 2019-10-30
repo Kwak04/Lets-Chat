@@ -269,6 +269,7 @@ public class ChatActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 final Intent intent = new Intent(ChatActivity.this, ChatPeopleActivity.class);
+                intent.putExtra("roomKey", roomKey);
                 startActivity(intent);
                 overridePendingTransition(R.anim.riseup_anim, R.anim.riseup_disappear_anim);
             }

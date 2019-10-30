@@ -2,5 +2,10 @@ package com.example.soenapp;
 
 class ChatPeopleData {
     String message;
-    String name;
+    Result[] results;
+
+    public class Result {
+        String user_key;
+        String name;
+    }
 }

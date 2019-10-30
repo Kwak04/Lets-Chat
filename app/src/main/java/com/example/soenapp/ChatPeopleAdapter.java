@@ -1,6 +1,7 @@
 package com.example.soenapp;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,9 +13,9 @@ import java.util.ArrayList;
 public class ChatPeopleAdapter extends RecyclerView.Adapter<ChatPeopleAdapter.ViewHolder> {
 
     private ChatPeopleData mDataset;
-    private ArrayList<String> mData;
+//    private ArrayList<String> mData;
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    class ViewHolder extends RecyclerView.ViewHolder {
         TextView name;
         ViewHolder(View v) {
             super(v);
@@ -22,10 +23,11 @@ public class ChatPeopleAdapter extends RecyclerView.Adapter<ChatPeopleAdapter.Vi
         }
     }
 
-    ChatPeopleAdapter(ArrayList<String> data) {
-        mData = data;
+    ChatPeopleAdapter(ChatPeopleData data) {
+        mDataset = data;
     }
 
+    @NonNull
     @Override
     public ChatPeopleAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext())
@@ -35,11 +37,11 @@ public class ChatPeopleAdapter extends RecyclerView.Adapter<ChatPeopleAdapter.Vi
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.name.setText(mData.get(position));
+        holder.name.setText(mDataset.results[position].name);
     }
 
     @Override
     public int getItemCount() {
-        return mData.size();
+        return mDataset.results.length;
     }
 }
