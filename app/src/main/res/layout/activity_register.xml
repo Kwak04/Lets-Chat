@@ -5,12 +5,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorWhite"
     tools:context=".RegisterActivity">
 
     <ScrollView
-        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -41,8 +42,8 @@
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginBottom="@dimen/marginBottom_text_above_rounded_rectangle">
+                    android:layout_marginBottom="@dimen/marginBottom_text_above_rounded_rectangle"
+                    android:orientation="horizontal">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -58,13 +59,13 @@
                         android:layout_weight="1"/>
 
                     <TextView
+                        android:id="@+id/invalid_name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/colorRed"
-                        android:text="@string/error_invalid_name"
-                        android:textSize="13sp"
                         android:layout_gravity="center"
-                        android:id="@+id/invalid_name"/>
+                        android:text="@string/error_invalid_name"
+                        android:textColor="@color/colorRed"
+                        android:textSize="13sp"/>
 
                 </LinearLayout>
 
@@ -72,17 +73,19 @@
                     android:id="@+id/newName"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
+                    android:layout_marginBottom="10dp"
                     android:background="@drawable/white_rounded_rectangle"
                     android:hint="@string/text_name"
-                    android:layout_marginBottom="10dp"
+                    android:importantForAutofill="no"
+                    android:inputType="text"
                     android:paddingStart="@dimen/paddingStart_rounded_rectangle"
                     android:paddingEnd="0dp"/>
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginBottom="@dimen/marginBottom_text_above_rounded_rectangle">
+                    android:layout_marginBottom="@dimen/marginBottom_text_above_rounded_rectangle"
+                    android:orientation="horizontal">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -98,13 +101,13 @@
                         android:layout_weight="1"/>
 
                     <TextView
+                        android:id="@+id/invalid_id"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="13sp"
-                        android:textColor="@color/colorRed"
-                        android:text="@string/error_overlapping_id"
                         android:layout_gravity="center"
-                        android:id="@+id/invalid_id"/>
+                        android:text="@string/error_overlapping_id"
+                        android:textColor="@color/colorRed"
+                        android:textSize="13sp"/>
 
                 </LinearLayout>
 
@@ -112,17 +115,19 @@
                     android:id="@+id/newID"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
+                    android:layout_marginBottom="10dp"
                     android:background="@drawable/white_rounded_rectangle"
                     android:hint="@string/text_id"
-                    android:layout_marginBottom="10dp"
+                    android:importantForAutofill="no"
+                    android:inputType="textVisiblePassword"
                     android:paddingStart="@dimen/paddingStart_rounded_rectangle"
                     android:paddingEnd="0dp"/>
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginBottom="@dimen/marginBottom_text_above_rounded_rectangle">
+                    android:layout_marginBottom="@dimen/marginBottom_text_above_rounded_rectangle"
+                    android:orientation="horizontal">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -138,13 +143,13 @@
                         android:layout_weight="1"/>
 
                     <TextView
+                        android:id="@+id/invalid_password"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center"
                         android:text="@string/error_invalid_password"
                         android:textColor="@color/colorRed"
-                        android:textSize="13sp"
-                        android:layout_gravity="center"
-                        android:id="@+id/invalid_password"/>
+                        android:textSize="13sp"/>
 
                 </LinearLayout>
 
@@ -152,27 +157,28 @@
                     android:id="@+id/newPW"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
+                    android:layout_marginBottom="10dp"
                     android:background="@drawable/white_rounded_rectangle"
                     android:hint="@string/text_pw"
+                    android:importantForAutofill="no"
                     android:inputType="textPassword"
-                    android:layout_marginBottom="10dp"
                     android:paddingStart="@dimen/paddingStart_rounded_rectangle"
                     android:paddingEnd="0dp"/>
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginBottom="@dimen/marginBottom_text_above_rounded_rectangle">
+                    android:layout_marginBottom="@dimen/marginBottom_text_above_rounded_rectangle"
+                    android:orientation="horizontal">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/text_pw_check"
+                        android:layout_gravity="center"
                         android:layout_marginStart="@dimen/marginStart_text_above_rounded_rectangle"
+                        android:text="@string/text_pw_check"
                         android:textColor="@android:color/black"
-                        android:textSize="@dimen/textSize_small"
-                        android:layout_gravity="center"/>
+                        android:textSize="@dimen/textSize_small"/>
 
                     <View
                         android:layout_width="0dp"
@@ -180,13 +186,13 @@
                         android:layout_weight="1"/>
 
                     <TextView
+                        android:id="@+id/incorrect_password"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/colorRed"
-                        android:text="@string/error_incorrect_password"
-                        android:textSize="13sp"
                         android:layout_gravity="center"
-                        android:id="@+id/incorrect_password"/>
+                        android:text="@string/error_incorrect_password"
+                        android:textColor="@color/colorRed"
+                        android:textSize="13sp"/>
 
                 </LinearLayout>
 
@@ -194,10 +200,11 @@
                     android:id="@+id/newPW_check"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
+                    android:layout_marginBottom="30dp"
                     android:background="@drawable/white_rounded_rectangle"
                     android:hint="@string/text_pw_check"
+                    android:importantForAutofill="no"
                     android:inputType="textPassword"
-                    android:layout_marginBottom="30dp"
                     android:paddingStart="@dimen/paddingStart_rounded_rectangle"
                     android:paddingEnd="0dp"/>
 
@@ -205,11 +212,11 @@
                     android:id="@+id/next"
                     android:layout_width="130dp"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/shape_button_accent"
-                    android:textColor="#ffffff"
-                    android:textSize="20sp"
                     android:layout_gravity="end"
-                    android:text="@string/action_next" />
+                    android:background="@drawable/shape_button_accent"
+                    android:text="@string/action_next"
+                    android:textColor="#ffffff"
+                    android:textSize="20sp" />
 
             </LinearLayout>
 

@@ -1,6 +1,7 @@
 package com.example.soenapp;
 
 import android.content.Intent;
+import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -10,6 +11,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.Objects;
 import java.util.regex.Pattern;
 
 import retrofit2.Call;
@@ -49,6 +51,12 @@ public class RegisterActivity extends AppCompatActivity {
 
         next = findViewById(R.id.next);
 
+
+        getWindow().setStatusBarColor(getResources().getColor(R.color.colorWhite));
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+        }
+
         nameInvalidError.setText("");
         idInvalidError.setText("");
         pwInvalidError.setText("");
@@ -72,7 +80,7 @@ public class RegisterActivity extends AppCompatActivity {
                     public void onResponse(@NonNull Call<SimpleMessageData> call, @NonNull Response<SimpleMessageData> response) {
                         if (response.isSuccessful()) {
                             resultBody = response.body();
-                            String message = resultBody.message;
+                            String message = Objects.requireNonNull(resultBody).message;
                             if (message.equals("overlapping")) {  // 이미 데이터베이스에 같은 아이디가 있을 경우
                                 idInvalidError.setText(R.string.error_overlapping_id);
                                 isIdOverlapping = true;
