@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -238,7 +239,7 @@ public class ChatActivity extends AppCompatActivity {
                     return;
                 }
 
-                String text = input.getText().toString();
+
                 Date time = new Date();
                 @SuppressLint("SimpleDateFormat") SimpleDateFormat formatActual = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                 @SuppressLint("SimpleDateFormat") SimpleDateFormat formatDisplay = new SimpleDateFormat("HH:mm");
@@ -246,27 +247,34 @@ public class ChatActivity extends AppCompatActivity {
                 String timeActual = formatActual.format(time.getTime());
                 String timeDisplay = formatDisplay.format(time.getTime());
 
+                String text = input.getText().toString();
+                boolean isEmpty;
+                isEmpty = text.equals("");
 
-                // Put chat data to the database
+                if (isEmpty) {
+                    Toast.makeText(getApplicationContext(), "메시지를 입력하세요.", Toast.LENGTH_SHORT).show();
+                } else {
+                    // Put chat data to the database
 
-                JSONObject chatInfo = new JSONObject();
-                try {
-                    chatInfo.put("user_key", myUserKey);
-                    chatInfo.put("user_name", myName);
-                    chatInfo.put("time", timeDisplay);
-                    chatInfo.put("time_detail", timeActual);
-                    chatInfo.put("text", text);
-                    chatInfo.put("room_key", roomKey);
-                } catch (JSONException e) {
-                    e.printStackTrace();
+                    JSONObject chatInfo = new JSONObject();
+                    try {
+                        chatInfo.put("user_key", myUserKey);
+                        chatInfo.put("user_name", myName);
+                        chatInfo.put("time", timeDisplay);
+                        chatInfo.put("time_detail", timeActual);
+                        chatInfo.put("text", text);
+                        chatInfo.put("room_key", roomKey);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    socket.emit("saveChat", chatInfo);
+
+                    mAdapter = new ChatAdapter(chats, myUserKey);
+                    recyclerView.setAdapter(mAdapter);
+
+                    // 입력된 내용 지우기
+                    input.setText(null);
                 }
-                socket.emit("saveChat", chatInfo);
-
-                mAdapter = new ChatAdapter(chats, myUserKey);
-                recyclerView.setAdapter(mAdapter);
-
-                // 입력된 내용 지우기
-                input.setText(null);
             }
         });
 
