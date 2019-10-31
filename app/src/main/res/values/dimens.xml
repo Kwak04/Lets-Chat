@@ -10,6 +10,7 @@
     <dimen name="marginBottom_title">30dp</dimen>
     <dimen name="marginStart_text_above_rounded_rectangle">10.5dp</dimen>
     <dimen name="marginBottom_text_above_rounded_rectangle">5dp</dimen>
+    <dimen name="margin_between_name_time">5dp</dimen>
 
     <!-- padding -->
     <dimen name="paddingStart_rounded_rectangle">10dp</dimen>

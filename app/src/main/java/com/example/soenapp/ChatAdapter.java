@@ -18,7 +18,9 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.MyViewHolder> 
     private List<ChatData> mDataset;
     private String myUserKey;
 
-    static class MyViewHolder extends RecyclerView.ViewHolder{
+    private View myView;
+
+    class MyViewHolder extends RecyclerView.ViewHolder {
 
         TextView chatText, chatPerson, chatTimeRight, chatTimeLeft;
         LinearLayout layoutChatObject, layoutChatContainer,
@@ -26,6 +28,7 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.MyViewHolder> 
 
         MyViewHolder(View v) {
             super(v);
+            myView = v;
             chatText = v.findViewById(R.id.chat_text);
             chatPerson = v.findViewById(R.id.chat_person);
             chatTimeRight = v.findViewById(R.id.chat_time_right);
@@ -57,13 +60,10 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.MyViewHolder> 
 
         holder.chatText.setText(mDataset.get(position).text);
         holder.chatPerson.setText(mDataset.get(position).person);
-//        holder.chatTimeRight.setText(mDataset.get(position).time);
 
-        // myUserKey 가 메시지의 user_key 와 일치할 때
-        // mDataset.user_key 는 서버에서 받아 오는 값임
-        // myUserKey 는 로그인했을 때 SharedPreferences 에 저장되어 있는 값임
         LinearLayout.LayoutParams floor1LayoutParams = (LinearLayout.LayoutParams) holder.layoutChatFloor1.getLayoutParams();
         LinearLayout.LayoutParams floor2LayoutParams = (LinearLayout.LayoutParams) holder.layoutChatFloor2.getLayoutParams();
+        LinearLayout.LayoutParams nameLayoutParams = (LinearLayout.LayoutParams) holder.chatPerson.getLayoutParams();
 
         // 내가 보낸 메시지일 경우
         if (myUserKey.equals(mDataset.get(position).user_key)) {
@@ -75,6 +75,9 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.MyViewHolder> 
             holder.layoutChatFloor1.setLayoutParams(floor1LayoutParams);
             holder.layoutChatFloor2.setLayoutParams(floor2LayoutParams);
 
+            nameLayoutParams.leftMargin = (int) myView.getResources().getDimension(R.dimen.margin_between_name_time);
+            nameLayoutParams.rightMargin = 0;
+            holder.chatPerson.setLayoutParams(nameLayoutParams);
             holder.chatTimeLeft.setText(mDataset.get(position).time);
             holder.chatTimeRight.setText("");
         } else {  // 다른 사람이 보낸 메시지일 경우
@@ -86,6 +89,9 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.MyViewHolder> 
             holder.layoutChatFloor1.setLayoutParams(floor1LayoutParams);
             holder.layoutChatFloor2.setLayoutParams(floor2LayoutParams);
 
+            nameLayoutParams.leftMargin = 0;
+            nameLayoutParams.rightMargin = (int) myView.getResources().getDimension(R.dimen.margin_between_name_time);
+            holder.chatPerson.setLayoutParams(nameLayoutParams);
             holder.chatTimeRight.setText(mDataset.get(position).time);
             holder.chatTimeLeft.setText("");
         }
