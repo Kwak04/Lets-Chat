@@ -131,8 +131,8 @@
 
                         <ImageView
                             style="@style/RoomImage"
-                            app:srcCompat="@drawable/ic_class_black"
-                            android:contentDescription="@string/cd_icon_class"/>
+                            android:contentDescription="@string/cd_icon_class"
+                            app:srcCompat="@drawable/ic_class_black"/>
 
                         <LinearLayout
                             android:layout_width="wrap_content"
@@ -177,8 +177,8 @@
 
                         <ImageView
                             style="@style/RoomImage"
-                            app:srcCompat="@drawable/ic_gender_black"
-                            android:contentDescription="@string/cd_icon_gender" />
+                            android:contentDescription="@string/cd_icon_gender"
+                            app:srcCompat="@drawable/ic_gender_black" />
 
                         <LinearLayout
                             android:layout_width="wrap_content"
@@ -197,6 +197,7 @@
                                 android:id="@+id/my_gender"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:layout_marginStart="2dp"
                                 android:layout_marginEnd="2dp"
                                 android:text="@string/sample_gender"
                                 android:textColor="#000000"
