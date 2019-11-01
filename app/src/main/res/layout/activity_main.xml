@@ -4,9 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorWhite"
     android:orientation="vertical"
-    tools:context=".MainActivity"
-    android:background="@color/colorWhite">
+    tools:context=".MainActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -46,7 +46,7 @@
             android:layout_height="30dp"
             android:layout_gravity="center"
             android:layout_marginEnd="40dp"
-            android:contentDescription="@string/image_main_user"
+            android:contentDescription="@string/cd_main_user"
             app:srcCompat="@drawable/icon_user_black"/>
 
     </LinearLayout>
@@ -83,6 +83,11 @@
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
 
+                        <ImageView
+                            style="@style/RoomImage"
+                            android:contentDescription="@string/cd_icon_school"
+                            app:srcCompat="@drawable/ic_school_black" />
+
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -100,6 +105,7 @@
                                 android:id="@+id/my_school"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:layout_marginStart="2dp"
                                 android:text="@string/sample_school"
                                 android:textColor="#000000"
                                 android:textSize="15sp"/>
@@ -111,22 +117,9 @@
                             android:layout_height="match_parent"
                             android:layout_weight="1"/>
 
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:orientation="horizontal">
-
-                            <Button
-                                android:id="@+id/btn_go_school"
-                                android:layout_width="80dp"
-                                android:layout_height="35dp"
-                                android:background="@android:color/holo_blue_dark"
-                                android:text="@string/action_join"
-                                android:textColor="#FFFFFF"
-                                android:textSize="15sp"/>
-
-                        </LinearLayout>
+                        <Button
+                            android:id="@+id/btn_go_school"
+                            style="@style/JoinButton"/>
 
                     </LinearLayout>
 
@@ -135,6 +128,11 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="15dp"
                         android:orientation="horizontal">
+
+                        <ImageView
+                            style="@style/RoomImage"
+                            android:contentDescription="@string/cd_icon_class"
+                            app:srcCompat="@drawable/ic_class_black"/>
 
                         <LinearLayout
                             android:layout_width="wrap_content"
@@ -153,6 +151,7 @@
                                 android:id="@+id/my_class"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:layout_marginStart="2dp"
                                 android:text="@string/sample_class"
                                 android:textColor="#000000"
                                 android:textSize="15sp"/>
@@ -164,22 +163,9 @@
                             android:layout_height="match_parent"
                             android:layout_weight="1"/>
 
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:orientation="horizontal">
-
                             <Button
                                 android:id="@+id/btn_go_class"
-                                android:layout_width="80dp"
-                                android:layout_height="35dp"
-                                android:background="@android:color/holo_blue_dark"
-                                android:text="@string/action_join"
-                                android:textColor="#FFFFFF"
-                                android:textSize="15sp"/>
-
-                        </LinearLayout>
+                                style="@style/JoinButton"/>
 
                     </LinearLayout>
 
@@ -188,6 +174,11 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="15dp"
                         android:orientation="horizontal">
+
+                        <ImageView
+                            style="@style/RoomImage"
+                            android:contentDescription="@string/cd_icon_gender"
+                            app:srcCompat="@drawable/ic_gender_black" />
 
                         <LinearLayout
                             android:layout_width="wrap_content"
@@ -206,6 +197,8 @@
                                 android:id="@+id/my_gender"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:layout_marginStart="2dp"
+                                android:layout_marginEnd="2dp"
                                 android:text="@string/sample_gender"
                                 android:textColor="#000000"
                                 android:textSize="15sp"/>
@@ -225,12 +218,7 @@
 
                             <Button
                                 android:id="@+id/btn_go_gender"
-                                android:layout_width="80dp"
-                                android:layout_height="35dp"
-                                android:background="@android:color/holo_blue_dark"
-                                android:text="@string/action_join"
-                                android:textColor="#FFFFFF"
-                                android:textSize="15sp"/>
+                                style="@style/JoinButton"/>
 
                         </LinearLayout>
 
