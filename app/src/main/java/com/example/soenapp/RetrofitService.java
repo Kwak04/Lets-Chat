@@ -12,8 +12,10 @@ import retrofit2.http.Query;
 
 public interface RetrofitService {
 
-    String ip = "119.196.210.238";
-    // 집 포트 포워딩 IP = 119.196.210.238  로컬 서버 (에뮬레이터 구동 시) IP = 10.0.2.2
+    String homeIP = "119.196.210.238";  // 집 포트 포워딩 IP
+    String localIP = "10.0.2.2";  // 로컬 서버 (에뮬레이터 구동 시) IP
+
+    String ip = homeIP;
     String URL = "http://" + ip + ":3000/";
 
     // 로그인
