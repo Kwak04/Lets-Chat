@@ -14,7 +14,7 @@
         <layer-list>
             <item>
                 <shape android:shape="oval">
-                    <solid android:color="@color/colorGrey"/>
+                    <solid android:color="@color/colorGray"/>
                 </shape>
             </item>
             <item android:drawable="@drawable/ic_arrow_forward_white"/>
