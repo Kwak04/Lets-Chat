@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".ChatPeopleActivity"
-    android:background="@color/colorGrey">
+    android:background="@color/colorGray">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -17,7 +17,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="70dp"
-            android:background="@color/colorGrey"
+            android:background="@color/colorGray"
             android:orientation="horizontal">
 
             <TextView

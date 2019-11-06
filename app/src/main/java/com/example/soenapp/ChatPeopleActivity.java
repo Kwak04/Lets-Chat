@@ -10,7 +10,6 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.widget.Toast;
 
-import java.util.ArrayList;
 import java.util.Objects;
 
 import retrofit2.Call;
@@ -47,7 +46,7 @@ public class ChatPeopleActivity extends AppCompatActivity {
         peopleList.setLayoutManager(new LinearLayoutManager(this));
 
         // Set status bar's color
-        getWindow().setStatusBarColor(getResources().getColor(R.color.colorGrey));
+        getWindow().setStatusBarColor(getResources().getColor(R.color.colorGray));
 
         // getIntent
         final Intent getIntent = getIntent();

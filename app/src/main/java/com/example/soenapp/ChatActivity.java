@@ -79,7 +79,7 @@ public class ChatActivity extends AppCompatActivity {
 
 
         // Change status bar's color
-        getWindow().setStatusBarColor(getResources().getColor(R.color.colorGrey));
+        getWindow().setStatusBarColor(getResources().getColor(R.color.colorGray));
 
         // View room's name
         roomName.setText(roomNameValue);
