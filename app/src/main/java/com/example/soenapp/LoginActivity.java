@@ -100,6 +100,9 @@ public class LoginActivity extends AppCompatActivity {
                                 editor.putString("school_class", schoolClassValue);
                                 editor.apply();
 
+                                editID.setText(null);
+                                editPW.setText(null);
+
                                 final Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                                 startActivity(intent);
 
